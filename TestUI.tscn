@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TestUI.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Panel" type="Panel"]
+margin_left = 7.0
+margin_top = 3.0
+margin_right = 463.0
+margin_bottom = 261.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 73.1855
+margin_top = 30.7591
+margin_right = 113.185
+margin_bottom = 44.7591
+text = "Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label24" type="Label" parent="."]
+margin_left = 72.8319
+margin_top = 8.83881
+margin_right = 112.831
+margin_bottom = 22.8388
+text = "Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 59.843
+margin_top = 78.29
+margin_right = 123.843
+margin_bottom = 98.29
+text = "Btn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tree" type="Tree" parent="."]
+margin_left = 6.23223
+margin_top = 6.11092
+margin_right = 52.2322
+margin_bottom = 52.1109
+columns = 3
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 159.844, 37.789 )
+scale = Vector2( 0.662523, 0.643503 )
+texture = ExtResource( 2 )
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
