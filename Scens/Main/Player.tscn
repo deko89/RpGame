@@ -2,7 +2,7 @@
 
 [sub_resource type="SphereShape" id=1]
 margin = 0.001
-radius = 0.3
+radius = 0.01
 
 [node name="player" type="KinematicBody"]
 
