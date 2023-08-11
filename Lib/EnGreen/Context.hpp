@@ -7,7 +7,7 @@
 */
 
 #include <stdio.h>
-#include "EnGreen/Base/Meta.hpp"
+#include "EnGreen/Base/Meta.h"
 #include "EnGreen/GUI/Wnd.hpp"
 
 /// Контекст графики.

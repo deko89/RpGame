@@ -29,11 +29,11 @@
 #endif
 
 // Простейшие типы.
-typedef GLfloat		Value;					///< Число
-typedef GLuint		NVal;					///< Натуральное число 0, 1, 2...
-typedef GLsizei		TypeSize;				///< Тип размеров в памяти //GLsizeiptr
-typedef GLushort	TypeInd;				///< Тип индексов вершин (номеров).
-const GLenum ValueId = GL_FLOAT;			///< Код типа чисел (для команд рисования).
-const GLenum TypeIndId = GL_UNSIGNED_SHORT;	///< Код типа индексов вершин (для команд рисования).
+typedef GLfloat		ValT;					///< Число.
+typedef GLuint		ValNT;					///< Натуральное число 0, 1, 2...
+typedef GLsizei		SizeT;					///< Тип размеров в памяти (массивов). //GLsizeiptr
+typedef GLushort	IndT;					///< Тип индексов вершин (номеров).
+const GLenum ValTId = GL_FLOAT;				///< Код типа чисел (для команд рисования).
+const GLenum IndTId = GL_UNSIGNED_SHORT;	///< Код типа индексов вершин (для команд рисования).
 
 #endif
