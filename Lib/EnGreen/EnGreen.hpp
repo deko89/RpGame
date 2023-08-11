@@ -7,7 +7,7 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{	Clear();
+{	//Clear();
 }
 
 bool Engine::Init()

@@ -2,7 +2,7 @@
 #define WND_HPP
 
 #include "SDL.h"
-#include "EnGreen/Meta.hpp"
+#include "EnGreen/Base/Base.hpp"
 
 class Wnd
 {	public:

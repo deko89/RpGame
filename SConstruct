@@ -6,10 +6,10 @@ env = Environment(CC='clang', CXXFLAGS='-O2 -fPIC')
 dirsIncLibExe	= ['/usr/include/SDL2']
 dirsLibExe		= ["/usr/lib/x86_64-linux-gnu"]
 
-# Исполнямые библотеки ()системы).
+# Исполнямые библотеки (системы).
 libsExe = ['dl', 'GL', 'SDL2']
 
-# Исходники бБиблиотек проекта.
+# Исходники библиотек проекта.
 filesLib	=	Glob(	'Lib/imgui-1.89.8/*.cpp') + \
 				Glob(	'Lib/imgui-1.89.8/backends/*.cpp')
 dirsLib		=	[		'Lib',

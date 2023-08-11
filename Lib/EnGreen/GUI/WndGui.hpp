@@ -19,6 +19,7 @@ protected:
     bool show_demo_window = false;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    void UpdateUI();
 };
 
 WndGui::~WndGui()
@@ -81,6 +82,18 @@ void WndGui::ProcessEvent(SDL_Event& event)
 
 void WndGui::Render()
 {
+	UpdateUI();
+	// Rendering
+	glViewport(0, 0, (int)pIO->DisplaySize.x, (int)pIO->DisplaySize.y);
+	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+	glClear(GL_COLOR_BUFFER_BIT);
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	SDL_GL_SwapWindow(pWnd);
+}
+
+void WndGui::UpdateUI()
+{
 	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
@@ -122,14 +135,6 @@ void WndGui::Render()
 		    show_another_window = false;
 		ImGui::End();
 	}
-
-	// Rendering
-	glViewport(0, 0, (int)pIO->DisplaySize.x, (int)pIO->DisplaySize.y);
-	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-	glClear(GL_COLOR_BUFFER_BIT);
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	SDL_GL_SwapWindow(pWnd);
 }
 
 #endif
