@@ -45,7 +45,7 @@ typedef glm::vec3 Angle;	///< Угол (по локальным осям объ�
 typedef glm::vec3 Scale;	///< Масштаб.
 typedef glm::vec3 Vec3;		///< Вектор с 3 числами.
 typedef glm::vec4 Vec4;		///< Вектор с 4 числами.
-typedef glm::mat4 Mat4;		///< Матрица
+typedef glm::mat4 Mat4;		///< Матрица 4х4.
 
 // Константы.
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
