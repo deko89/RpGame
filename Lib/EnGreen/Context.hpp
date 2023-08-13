@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include "EnGreen/Base/Meta.h"
-#include "EnGreen/GUI/Wnd.hpp"
+#include "EnGreen/View/GUI/Wnd.hpp"
 
 /// Контекст графики.
 class Context
