@@ -17,7 +17,7 @@ class Context
 	void Clear();
 	SDL_GLContext& NativeContext();
 private:
-	SDL_GLContext gl_context;
+	SDL_GLContext gl_context = 0;
 };
 
 /// Получить текущий контекст.
@@ -26,8 +26,6 @@ Context& GetContext(); // Реализовано в Engine.hpp
 Context::~Context()
 {	Clear();
 }
-
-
 
 void Context::Create(Wnd& wnd)
 {
@@ -38,7 +36,10 @@ void Context::Create(Wnd& wnd)
 }
 
 void Context::Clear()
-{   SDL_GL_DeleteContext(gl_context);
+{	if (gl_context)
+	{	SDL_GL_DeleteContext(gl_context);
+		gl_context = 0;
+	}
 }
 
 SDL_GLContext& Context::NativeContext()

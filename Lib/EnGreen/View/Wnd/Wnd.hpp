@@ -14,7 +14,7 @@ protected:
 };
 
 Wnd::~Wnd()
-{	SDL_DestroyWindow(pWnd);
+{	Clear();
 }
 
 void Wnd::Create(const str& name)
@@ -27,8 +27,10 @@ void Wnd::Create(const str& name)
 }
 
 void Wnd::Clear()
-{	SDL_DestroyWindow(pWnd);
-	pWnd = nullptr;
+{	if (pWnd)
+	{	SDL_DestroyWindow(pWnd);
+		pWnd = nullptr;
+	}
 }
 
 SDL_Window* Wnd::NativeWnd() const

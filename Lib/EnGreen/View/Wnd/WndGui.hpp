@@ -70,10 +70,13 @@ void WndGui::CreateGui()
 
 void WndGui::ClearGui()
 {
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
-    pIO = nullptr;
+	if (pIO)
+	{
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplSDL2_Shutdown();
+		ImGui::DestroyContext();
+		pIO = nullptr;
+	}
 }
 
 void WndGui::ProcessEvent(SDL_Event& event)
