@@ -12,7 +12,7 @@ Engine::~Engine()
 
 bool Engine::Init()
 {
-	if ( !context.Init() ) return false;
+	if ( !Context::Init() ) return false;
     wnd.Create("RpGame");
     context.Create(wnd);
 	wnd.CreateGui();

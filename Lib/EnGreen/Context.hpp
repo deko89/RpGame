@@ -14,7 +14,7 @@
 class Context
 {	public:
 	~Context();
-	bool Init();			///< Инициализация.
+	static bool Init();			///< Инициализация.
 	void Create(Wnd& wnd);	///< Создание (требует окно).
 	void Clear();
 	SDL_GLContext& NativeContext();
