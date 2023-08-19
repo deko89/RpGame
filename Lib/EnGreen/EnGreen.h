@@ -1,7 +1,7 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
-#include "EnGreen/View/GUI/WndGui.hpp"
+#include "EnGreen/View/Wnd/WndGui.hpp"
 
 /// Движок.
 class Engine
