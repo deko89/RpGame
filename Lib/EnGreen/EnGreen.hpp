@@ -53,7 +53,7 @@ void Engine::Clear()
 	wnd.ClearGui();
 	context.Clear();
 	wnd.Clear();
-    SDL_Quit();
+    Context::DeInit();
 }
 
 Context& GetContext()
