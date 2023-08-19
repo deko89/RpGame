@@ -4,7 +4,7 @@
 #include "EnGreen/View/Wnd/WndGui.hpp"
 
 /// Движок.
-class Engine
+class Engine : public Environment
 {	public:
     Engine();
     ~Engine();

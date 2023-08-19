@@ -7,12 +7,12 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{	//Clear();
+{
 }
 
 bool Engine::Init()
 {
-	if ( !Context::Init() ) return false;
+	if ( !IsEnvironment() ) return false;
     wnd.Create("RpGame");
     context.Create(wnd);
 	wnd.CreateGui();
@@ -53,7 +53,6 @@ void Engine::Clear()
 	wnd.ClearGui();
 	context.Clear();
 	wnd.Clear();
-    Context::DeInit();
 }
 
 Context& GetContext()

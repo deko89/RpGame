@@ -1,8 +1,7 @@
 #ifndef WND_HPP
 #define WND_HPP
 
-#include "SDL.h"
-#include "EnGreen/Base/Base.h"
+#include "EnGreen/Base/Environment.hpp"
 
 class Wnd
 {	public:
