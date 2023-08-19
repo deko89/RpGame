@@ -2,6 +2,7 @@
 
 Engine eng;
 
+// Engine ///////////////////////////////////////////////////////////
 Engine::Engine()
 {
 }
@@ -14,9 +15,12 @@ bool Engine::Init()
 {
 	if ( !IsEnvironment() ) return false;
     wnd.Create("RpGame");
-    context.Create(wnd);
-	wnd.CreateGui();
 	return true;
+}
+
+void Engine::Clear()
+{
+	wnd.Clear();
 }
 
 int Engine::Execute()
@@ -48,13 +52,6 @@ int Engine::Execute()
     return 0;
 }
 
-void Engine::Clear()
-{
-	wnd.ClearGui();
-	context.Clear();
-	wnd.Clear();
-}
-
 Context& GetContext()
-{	return eng.context;
+{	return eng.wnd.context;
 }
