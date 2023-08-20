@@ -5,6 +5,9 @@
 #include "SDL.h"
 #include "EnGreen/Base/Base.h"
 
+// Константы.
+Str gAppPathS;	///< Путь до приложения (с разделителем).
+
 /// Среда - в которой работает движок.
 class Environment
 {	public:
@@ -47,6 +50,11 @@ Environment::Environment()
 	#ifdef SDL_HINT_IME_SHOW_UI
 	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 	#endif
+
+	// Путь до приложения.
+	char* cPath = SDL_GetBasePath();
+	gAppPathS = cPath;
+	SDL_free(cPath);
 }
 Environment::~Environment()
 {
