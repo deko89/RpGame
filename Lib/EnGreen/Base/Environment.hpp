@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include "SDL.h"
-#include "EnGreen/Base/Base.h"
+#include "Std/Base.h"
 
 // Константы.
 Str gAppPathS;	///< Путь до приложения (с разделителем).
