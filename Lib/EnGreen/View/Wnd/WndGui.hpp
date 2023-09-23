@@ -9,7 +9,7 @@
 class WndGui : public WndG
 {	public:
 	~WndGui();
-	void Create(const str& name);	///< Создать.
+	void Create(const Str& name);	///< Создать.
 	void Clear();					///< Очистить.
 	void ProcessEvent(SDL_Event& event); ///< Обработка события.
 	void Render(); ///< Рисование.
@@ -28,7 +28,7 @@ WndGui::~WndGui()
 {	ClearGui();
 }
 
-void WndGui::Create(const str& name)
+void WndGui::Create(const Str& name)
 {
     WndG::Create(name);
     CreateGui();

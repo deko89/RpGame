@@ -15,7 +15,6 @@
 #define ToStr(x) std::to_string(x)
 
 // Строки.
-typedef std::string str; // Устарело.
 typedef std::string Str;
 typedef char Sym;
 

@@ -6,7 +6,7 @@
 class Wnd
 {	public:
 	~Wnd();
-	void Create(const str& name);
+	void Create(const Str& name);
 	void Clear();
 	SDL_Window* NativeWnd() const;
 protected:
@@ -17,7 +17,7 @@ Wnd::~Wnd()
 {	Clear();
 }
 
-void Wnd::Create(const str& name)
+void Wnd::Create(const Str& name)
 {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);

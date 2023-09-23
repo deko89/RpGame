@@ -8,13 +8,13 @@
 class WndG : public Wnd
 {	public:
 	Context context;
-	void Create(const str& name);	///< Создать.
+	void Create(const Str& name);	///< Создать.
 	void Clear();					///< Очистить.
 	void Draw();					///< Рисование.
 protected:
 };
 
-void WndG::Create(const str& name)
+void WndG::Create(const Str& name)
 {
     Wnd::Create(name);
     context.Create(*this);
