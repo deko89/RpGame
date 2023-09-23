@@ -27,12 +27,13 @@ int Engine::Execute()
 {
     bRun = true;
 	SDL_Event event;
+	// Главный цикл.
 #ifdef __EMSCRIPTEN__
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
     while (bRun)
 #endif
-    {
+    {	// Обработка списка событий.
 		while ( SDL_PollEvent(&event) )
 		{	wnd.ProcessEvent(event);
 			// Событие выхода.
@@ -43,12 +44,12 @@ int Engine::Execute()
 			{	bRun = false;
 			}
 		}
+		// Рисование.
         wnd.Render();
     }
 #ifdef __EMSCRIPTEN__
     EMSCRIPTEN_MAINLOOP_END;
 #endif
-
     return 0;
 }
 
