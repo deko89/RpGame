@@ -6,7 +6,7 @@
 	Основные структуры: устройство OpenGl, ввод и т.п.
 */
 
-#include "EnGreen/Base/Meta.h"
+#include "EnGreen/Base/Meta/Meta.h"
 #include "EnGreen/View/Wnd/Wnd.hpp"
 
 /// Контекст графики.
