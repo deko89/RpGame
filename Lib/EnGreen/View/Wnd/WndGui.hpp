@@ -4,13 +4,16 @@
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_opengl3.h"
-#include "EnGreen/View/Wnd/WndG.hpp"
+#include "EnGreen/View/Wnd/Wnd.hpp"
+#include "EnGreen/Context.hpp"
 
-class WndGui : public WndG
+class WndGui : public Wnd
 {	public:
 	~WndGui();
 	void Create(const Str& name);	///< Создать.
 	void Clear();					///< Очистить.
+	void CreateGui();	///< Создать интерфейс.
+	void ClearGui();	///< Удалить интерфейс.
 	void ProcessEvent(SDL_Event& event); ///< Обработка события.
 	void Render(); ///< Рисование.
 protected:
@@ -19,8 +22,6 @@ protected:
     bool show_demo_window = false;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	void CreateGui();	///< Создать интерфейс.
-	void ClearGui();	///< Удалить интерфейс.
     void UpdateUI();
 };
 
@@ -30,13 +31,14 @@ WndGui::~WndGui()
 
 void WndGui::Create(const Str& name)
 {
-    WndG::Create(name);
+    Wnd::Create(name);
     CreateGui();
 }
+
 void WndGui::Clear()
 {
 	ClearGui();
-	WndG::Clear();
+	Wnd::Clear();
 }
 
 void WndGui::CreateGui()

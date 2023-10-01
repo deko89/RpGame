@@ -14,6 +14,7 @@ class Engine : public Environment
 protected:
 	// Переменные.
     bool bRun = false;	///< Запущен ли.
+    Context context;
     WndGui wnd;
     friend Context& GetContext();
 };
