@@ -9,6 +9,18 @@
 #include "EnGreen/Base/Meta/Meta.h"
 #include "EnGreen/View/Wnd/Wnd.hpp"
 
+/// Версия.
+#if defined(IMGUI_IMPL_OPENGL_ES2)
+    // GL ES 2.0 + GLSL 100
+    const char* glsl_version = "#version 100";
+#elif defined(__APPLE__)
+    // GL 3.2 Core + GLSL 150
+    const char* glsl_version = "#version 150";
+#else
+    // GL 3.0 + GLSL 130
+    const char* glsl_version = "#version 130";
+#endif
+
 /// Контекст графики.
 class Context
 {	public:
