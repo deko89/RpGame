@@ -1,4 +1,4 @@
-#include "EnGreen/EnGreen.hpp"
+#include "EnGreen/EnGreen.cpp"
 
 int main()
 {
