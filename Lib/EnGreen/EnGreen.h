@@ -1,7 +1,7 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
-#include "EnGreen/Context.hpp"
+#include "EnGreen/Context.h"
 #include "EnGreen/View/Wnd/WndGui.h"
 
 /// Движок.
