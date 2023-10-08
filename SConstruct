@@ -1,6 +1,6 @@
 # Переменные.
-env = Environment()
 env = Environment(CC='clang-15', CXX='clang-15', CXXFLAGS='-O2 -fPIC')
+env.Append(CPPDEFINES=['One_Translation_Unit'])
 
 # Пути системных библиотек.
 dirsIncLibSys = [

@@ -1,4 +1,8 @@
-#include "EnGreen/EnGreen.cpp"
+#include "EnGreen/EnGreen.h"
+
+#ifdef One_Translation_Unit
+	#include "EnGreen/EnGreen.cpp"
+#endif
 
 int main()
 {

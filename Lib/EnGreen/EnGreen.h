@@ -1,7 +1,8 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
-#include "EnGreen/View/Wnd/WndGui.cpp"
+#include "EnGreen/Context.hpp"
+#include "EnGreen/View/Wnd/WndGui.h"
 
 /// Движок.
 class Engine : public Environment

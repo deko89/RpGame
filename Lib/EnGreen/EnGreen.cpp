@@ -1,5 +1,9 @@
 #include "EnGreen/EnGreen.h"
 
+#ifdef One_Translation_Unit
+	#include "View/Wnd/WndGui.cpp"
+#endif
+
 Engine eng;
 
 // Engine ///////////////////////////////////////////////////////////
