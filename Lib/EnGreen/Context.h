@@ -1,5 +1,5 @@
-#ifndef CONTEXT_HPP
-#define CONTEXT_HPP
+#ifndef CONTEXT_H
+#define CONTEXT_H
 
 /** \file
 	\brief Контекст.
@@ -33,6 +33,6 @@ private:
 };
 
 /// Получить текущий контекст.
-Context& GetContext(); // Реализовано в Engine.hpp
+Context& GetContext(); // Реализовано в Engine.cpp
 
 #endif
