@@ -45,3 +45,23 @@ class Mesh
 	void MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY);
 	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 };
+
+/// Координаты текстуры. Предполагается что каждая координата будет соответствовать отдельной вершине.
+class PlaceTex: public vector<PosTex>
+{	public:
+	typedef vector<PosTex> Base;
+
+	/// Квадрат.
+	void SetQuad();
+
+	/** Плоскость.
+		param[in] sgmX, sgmY - количество сегментов по осям X, Y.
+		param[in] u, v - число повторений текстуры по осям X, Y. */
+	void SetPlane(ValN sgmX, ValN sgmY, Val u, Val v);
+
+	/** Цилиндр.
+		param[in] sgmC - количество сегментов в круге. Должен быть чётным.
+		param[in] sgmH - количество сегментов по высоте.
+		param[in] u, v - число повторений текстуры. */
+	void SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v);
+};

@@ -124,3 +124,53 @@ void Mesh::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBo
 		}
 	}
 }
+// PlaceTex /////////////////////////////////////////////////////////
+void PlaceTex::SetQuad()
+{	*(Base*) this =	{	{0, 0},
+						{1, 0},
+						{0, 1},
+						{1, 1}
+					};
+}
+void PlaceTex::SetPlane(ValN sgmX, ValN sgmY, Val u, Val v)
+{	const ValN	nVertX = sgmX + 1,
+				nVertY = sgmY + 1;
+	resize(nVertX * nVertY);
+	PosTex* pPos = data();
+	const Val	uStep = u / sgmX,
+				vStep = v / sgmY;
+	Val uPos, vPos = 0;
+	// Вершины.
+	for (ValN y = 0; y < nVertY; ++y, vPos += vStep)
+	{	uPos = 0;
+		for (ValN x = 0; x < nVertX; ++x, uPos += uStep, ++pPos)
+		{	pPos->u = uPos;
+			pPos->v = vPos;
+		}
+	}
+}
+void PlaceTex::SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v)
+{	assert(sgmC % 2 == 0);
+	resize(sgmC * (sgmH + 1));
+	PosTex* pPos = data();
+	const PosTex *pEndC = pPos + sgmC,
+				 *pEndH = pPos + sgmC / 2,
+				 *pEnd  = pPos + size();
+	// Цикл по сегментам окружности.
+	const Val	uStep = u / sgmC, // Шаг u.
+				vStep = v / sgmH; // Шаг v.
+	u = 0;
+	for (; pPos < pEndC; ++pPos)
+	{	// Позиция внизу (на остальных уровнях будет аналогично).
+		pPos->u = u;
+		pPos->v = 0;
+		// Устанавливаем данные по вертикали (на уровнях выше).
+		v = vStep;
+		for (PosTex* pPosH = pPos + sgmC; pPosH < pEnd; pPosH += sgmC, v += vStep)
+		{	pPosH->u = u;
+			pPosH->v = v;
+		}
+		// После середины зеркалим текстуру, чтобы к последней вершине u была 0 (первая и последняя это одна и та же вершина).
+		u = pPos < pEndH ? u + uStep : u - uStep;
+	}
+}
