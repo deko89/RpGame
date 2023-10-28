@@ -31,6 +31,14 @@ typedef GLushort	Ind;				///< Тип индексов вершин (номеро
 const GLenum ValId = GL_FLOAT;			///< Код типа чисел (для команд рисования).
 const GLenum IndId = GL_UNSIGNED_SHORT;	///< Код типа индексов вершин (для команд рисования).
 
+// Простые 2d типы.
+	/// Координата текстуры.
+struct PosTex
+{	Val u, v;
+};
+
+//typedef SDL_Rect	Rect;
+
 // Простые 3d типы.
 typedef glm::vec3 Pos;		///< Позиция.
 typedef glm::vec3 Angle;	///< Угол (по локальным осям объекта yaw, pitch, roll).
