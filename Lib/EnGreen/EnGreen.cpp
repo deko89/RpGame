@@ -19,7 +19,7 @@ Engine::~Engine()
 bool Engine::Init()
 {
 	if ( !IsEnvironment() ) return false;
-    wnd.Wnd::Create("RpGame");
+    wnd.Wnd::Create("RpGame", SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	context.Create(wnd);
 	wnd.CreateGui();
 	return true;
