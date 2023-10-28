@@ -9,7 +9,9 @@
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 	#include <SDL_opengles2.h>
 #else
+	#define GL_GLEXT_PROTOTYPES
 	#include <SDL_opengl.h>
+	#include "SDL_opengl_glext.h"
 #endif
 
 #include "glm/glm.hpp"

@@ -1,6 +1,7 @@
 #ifndef WNDGUI_H
 #define WNDGUI_H
 
+#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #include "imgui.h"
 #include "EnGreen/View/Wnd/Wnd.hpp"
 
