@@ -1,6 +1,7 @@
 #include "EnGreen/EnGreen.h"
 
 #ifdef One_Translation_Unit
+	#include "Base/Meta/Model.cpp"
 	#include "Base/Types.cpp"
 	#include "Context.cpp"
 	#include "View/Wnd/WndGui.cpp"
