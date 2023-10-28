@@ -4,6 +4,9 @@
 	Без привязки к библиотекам (OpenGL, Vulcan, ...).
 */
 
+#ifndef Types_H
+#define Types_H
+
 #include <vector>
 #include "EnGreen/Base/Meta/Meta.h"
 
@@ -65,3 +68,5 @@ class PlaceTex: public vector<PosTex>
 		param[in] u, v - число повторений текстуры. */
 	void SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v);
 };
+
+#endif
