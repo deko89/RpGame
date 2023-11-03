@@ -7,6 +7,9 @@
 	#include "View/Wnd/WndGui.cpp"
 #endif
 
+namespace EnG
+{
+
 Engine eng;
 
 // Engine ///////////////////////////////////////////////////////////
@@ -66,4 +69,6 @@ int Engine::Execute()
 
 Context& GetContext()
 {	return eng.context;
+}
+
 }

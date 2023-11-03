@@ -3,6 +3,9 @@
 
 #include "EnGreen/Base/Types.h"
 
+namespace EnG
+{
+
 /// Базовый 3d объект.
 class Model
 {	public:
@@ -24,5 +27,7 @@ protected:
 	GLuint vb, ib;	///< Буфер вершин, и индексы порядка рисования.
 	GLsizei nInd;	///< Число индексов.
 };
+
+}
 
 #endif

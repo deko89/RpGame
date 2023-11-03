@@ -4,6 +4,8 @@
 	#include "EnGreen/EnGreen.cpp"
 #endif
 
+using namespace EnG;
+
 int main()
 {
 	if (eng.Init() == false)

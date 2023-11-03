@@ -1,5 +1,8 @@
 #include "Model.h"
 
+namespace EnG
+{
+
 // ModelVi //////////////////////////////////////////////////////////
 ModelVi::ModelVi()
 {	glGenVertexArrays(1, &vao);
@@ -44,4 +47,6 @@ void ModelVi::Make(const Mesh& mesh, const PlaceTex& placeTex)
 void ModelVi::Draw() const
 {	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, nInd, IndId, 0);
+}
+
 }

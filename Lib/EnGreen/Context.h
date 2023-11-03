@@ -9,6 +9,9 @@
 #include "EnGreen/Base/Meta/Meta.h"
 #include "EnGreen/View/Wnd/Wnd.hpp"
 
+namespace EnG
+{
+
 /// Версия.
 #if defined(IMGUI_IMPL_OPENGL_ES2)
     // GL ES 2.0 + GLSL 100
@@ -34,5 +37,7 @@ private:
 
 /// Получить текущий контекст.
 Context& GetContext(); // Реализовано в Engine.cpp
+
+}
 
 #endif

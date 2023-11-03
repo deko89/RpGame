@@ -5,6 +5,9 @@
 #include "imgui.h"
 #include "EnGreen/View/Wnd/Wnd.hpp"
 
+namespace EnG
+{
+
 class WndGui : public Wnd
 {	public:
 	~WndGui();
@@ -22,5 +25,7 @@ protected:
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     void UpdateUI();
 };
+
+}
 
 #endif

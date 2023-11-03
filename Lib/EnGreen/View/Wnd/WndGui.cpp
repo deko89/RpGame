@@ -3,6 +3,9 @@
 #include "imgui_impl_opengl3.h"
 #include "EnGreen/Context.h"
 
+namespace EnG
+{
+
 WndGui::~WndGui()
 {	ClearGui();
 }
@@ -131,4 +134,6 @@ void WndGui::UpdateUI()
 		    show_another_window = false;
 		ImGui::End();
 	}
+}
+
 }

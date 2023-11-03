@@ -3,6 +3,9 @@
 
 #include "EnGreen/Base/Environment.hpp"
 
+namespace EnG
+{
+
 class Wnd
 {	public:
 	~Wnd();
@@ -32,6 +35,8 @@ void Wnd::Clear()
 SDL_Window* Wnd::NativeWnd() const
 {
 	return pWnd;
+}
+
 }
 
 #endif

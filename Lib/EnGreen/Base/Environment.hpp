@@ -5,6 +5,9 @@
 #include "SDL.h"
 #include "Std/Base.h"
 
+namespace EnG
+{
+
 // Константы.
 Str gAppPathS;	///< Путь до приложения (с разделителем).
 
@@ -46,6 +49,8 @@ Environment::~Environment()
 }
 bool Environment::IsEnvironment()
 {	return SDL_WasInit(0) != 0;
+}
+
 }
 
 #endif

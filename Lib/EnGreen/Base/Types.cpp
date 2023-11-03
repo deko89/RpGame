@@ -1,6 +1,9 @@
 #include "Types.h"
 #include <cmath>
 
+namespace EnG
+{
+
 // Points ///////////////////////////////////////////////////////////
 void Points::MakeQuad(Val szX, Val szY)
 {	*(Base*) this =	{	{0,		0,		0},
@@ -173,4 +176,6 @@ void PlaceTex::SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v)
 		// После середины зеркалим текстуру, чтобы к последней вершине u была 0 (первая и последняя это одна и та же вершина).
 		u = pPos < pEndH ? u + uStep : u - uStep;
 	}
+}
+
 }

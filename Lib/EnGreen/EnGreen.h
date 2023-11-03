@@ -4,6 +4,9 @@
 #include "EnGreen/Context.h"
 #include "EnGreen/View/Wnd/WndGui.h"
 
+namespace EnG
+{
+
 /// Движок.
 class Engine : public Environment
 {	public:
@@ -21,5 +24,7 @@ protected:
 };
 
 extern Engine eng;
+
+}
 
 #endif

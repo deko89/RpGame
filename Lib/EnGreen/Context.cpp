@@ -1,5 +1,8 @@
 #include "Context.h"
 
+namespace EnG
+{
+
 Context::~Context()
 {	Clear();
 }
@@ -42,4 +45,6 @@ void Context::Clear()
 
 SDL_GLContext& Context::NativeContext()
 {	return gl_context;
+}
+
 }

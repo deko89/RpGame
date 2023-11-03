@@ -16,8 +16,10 @@
 
 #include "glm/glm.hpp"
 
-// Системные константы.
+namespace EnG
+{
 
+// Системные константы.
 #ifdef __linux__
 	const char* cPathFont = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
 //#elif __WINDOWS__
@@ -49,5 +51,7 @@ typedef glm::mat4 Mat4;		///< Матрица 4х4.
 
 // Константы.
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
+
+}
 
 #endif
