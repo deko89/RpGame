@@ -30,6 +30,10 @@ typedef GLfloat		Val;				///< Число.
 typedef GLuint		ValN;				///< Натуральное число 0, 1, 2...
 typedef GLsizei		Size;				///< Тип размеров в памяти (массивов). //GLsizeiptr
 typedef GLushort	Ind;				///< Тип индексов вершин (номеров).
+typedef GLchar*		GStr;				///< Строка (для видеокарты).
+
+// Специализированные типы.
+typedef GLuint		SlotMemG;			///< Слот глобальной памяти (uniform bufer).
 const GLenum ValId = GL_FLOAT;			///< Код типа чисел (для команд рисования).
 const GLenum IndId = GL_UNSIGNED_SHORT;	///< Код типа индексов вершин (для команд рисования).
 
