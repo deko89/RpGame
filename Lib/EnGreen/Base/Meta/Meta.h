@@ -1,5 +1,5 @@
-#ifndef META_HPP
-#define META_HPP
+#ifndef META_H
+#define META_H
 
 /** \file
 	\brief Абстрактные типы и данные.
