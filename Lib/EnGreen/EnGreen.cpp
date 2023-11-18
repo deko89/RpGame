@@ -9,6 +9,7 @@
 	#include "Base/Environment.cpp"
 	#include "Base/Types.cpp"
 	#include "Context.cpp"
+	#include "View/Camera.cpp"
 	#include "View/Wnd/WndGui.cpp"
 #endif
 
