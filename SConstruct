@@ -33,6 +33,7 @@ libsAll = Split("""
     libc
     libc++
     SDL2
+    SDL2_image
 """)
 
 # Исходники библиотек проекта.

@@ -1,6 +1,7 @@
 #include "EnGreen/EnGreen.h"
 
 #ifdef One_Translation_Unit
+    #include "Std/Media/Image.cpp"
 	#include "Base/Meta/Shader.cpp"
 	#include "Base/Meta/MemG.cpp"
 	#include "Base/Meta/Model.cpp"

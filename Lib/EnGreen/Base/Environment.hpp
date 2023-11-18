@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "SDL.h"
+#include "Std/Media/Image.h"
 #include "Std/Base.h"
 
 namespace EnG
@@ -28,6 +29,8 @@ Environment::Environment()
 		return;
 	}
 
+	Image::Init();
+
 	// Параметры окна.
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -45,6 +48,7 @@ Environment::Environment()
 }
 Environment::~Environment()
 {
+	Image::DeInit();
 	SDL_Quit();
 }
 bool Environment::IsEnvironment()
