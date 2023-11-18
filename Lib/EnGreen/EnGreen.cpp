@@ -10,6 +10,7 @@
 	#include "Base/Types.cpp"
 	#include "Context.cpp"
 	#include "World/Models.cpp"
+	#include "View/Wnd/Wnd.cpp"
 	#include "View/Camera.cpp"
 	#include "View/Wnd/WndGui.cpp"
 #endif

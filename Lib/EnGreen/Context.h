@@ -7,7 +7,7 @@
 */
 
 #include "EnGreen/Base/Meta/Meta.h"
-#include "EnGreen/View/Wnd/Wnd.hpp"
+#include "EnGreen/View/Wnd/Wnd.h"
 
 namespace EnG
 {

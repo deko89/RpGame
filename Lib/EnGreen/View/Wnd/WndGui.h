@@ -3,7 +3,7 @@
 
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #include "imgui.h"
-#include "EnGreen/View/Wnd/Wnd.hpp"
+#include "EnGreen/View/Wnd/Wnd.h"
 
 namespace EnG
 {

@@ -1,20 +1,7 @@
-#ifndef WND_HPP
-#define WND_HPP
-
-#include "EnGreen/Base/Environment.h"
+#include "Wnd.h"
 
 namespace EnG
 {
-
-class Wnd
-{	public:
-	~Wnd();
-	void Create(const Str& name, uint32_t flag = 0);
-	void Clear();
-	SDL_Window* NativeWnd() const;
-protected:
-	SDL_Window* pWnd = nullptr;
-};
 
 Wnd::~Wnd()
 {	Clear();
@@ -38,5 +25,3 @@ SDL_Window* Wnd::NativeWnd() const
 }
 
 }
-
-#endif
