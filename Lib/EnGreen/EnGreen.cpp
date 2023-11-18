@@ -69,7 +69,7 @@ int Engine::Execute()
 			}
 		}
 		// Рисование.
-        wnd.Render();
+        wnd.Draw();
     }
 #ifdef __EMSCRIPTEN__
     EMSCRIPTEN_MAINLOOP_END;

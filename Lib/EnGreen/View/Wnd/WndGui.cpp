@@ -79,7 +79,7 @@ void WndGui::ProcessEvent(SDL_Event& event)
 {	ImGui_ImplSDL2_ProcessEvent(&event);
 }
 
-void WndGui::Render()
+void WndGui::Draw()
 {
 	UpdateUI();
 	// Rendering

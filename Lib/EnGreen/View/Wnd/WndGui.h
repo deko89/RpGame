@@ -16,7 +16,7 @@ class WndGui : public WndG
 	void CreateGui();	///< Создать интерфейс.
 	void ClearGui();	///< Удалить интерфейс.
 	void ProcessEvent(SDL_Event& event); ///< Обработка события.
-	void Render(); ///< Рисование.
+	void Draw(); ///< Рисование.
 protected:
 	ImGuiIO* pIO = nullptr;
     // Our state
