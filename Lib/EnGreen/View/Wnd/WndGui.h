@@ -3,12 +3,12 @@
 
 #define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #include "imgui.h"
-#include "EnGreen/View/Wnd/Wnd.h"
+#include "EnGreen/View/Wnd/WndG.h"
 
 namespace EnG
 {
 
-class WndGui : public Wnd
+class WndGui : public WndG
 {	public:
 	~WndGui();
 	void Create(const Str& name);	///< Создать.

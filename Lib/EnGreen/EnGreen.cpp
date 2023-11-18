@@ -13,6 +13,7 @@
 	#include "View/Wnd/Wnd.cpp"
 	#include "View/Camera.cpp"
 	#include "View/View.cpp"
+	#include "View/Wnd/WndG.cpp"
 	#include "View/Wnd/WndGui.cpp"
 #endif
 
