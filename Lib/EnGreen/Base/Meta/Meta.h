@@ -27,6 +27,7 @@ namespace EnG
 
 // Простейшие типы.
 typedef GLfloat		Val;				///< Число.
+typedef GLint       ValI;				///< Целое число.
 typedef GLuint		ValN;				///< Натуральное число 0, 1, 2...
 typedef GLsizei		Size;				///< Тип размеров в памяти (массивов). //GLsizeiptr
 typedef GLushort	Ind;				///< Тип индексов вершин (номеров).
@@ -43,7 +44,11 @@ struct PosTex
 {	Val u, v;
 };
 
-//typedef SDL_Rect	Rect;
+    /// Прямоугольник.
+struct RectI
+{   ValI x, y;  ///< Позиция.
+    Size w, h;  ///< Ширина, высота.
+};
 
 // Простые 3d типы.
 typedef glm::vec3 Pos;		///< Позиция.
