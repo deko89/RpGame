@@ -6,6 +6,7 @@
 	#include "Base/Meta/MemG.cpp"
 	#include "Base/Meta/Model.cpp"
 	#include "Base/Meta/Texture.cpp"
+	#include "Base/Environment.cpp"
 	#include "Base/Types.cpp"
 	#include "Context.cpp"
 	#include "View/Wnd/WndGui.cpp"

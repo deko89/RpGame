@@ -1,26 +1,10 @@
-#ifndef ENVIRONMENT_HPP
-#define ENVIRONMENT_HPP
-
+#include "Environment.h"
 #include <stdio.h>
-#include "SDL.h"
-#include "Std/Media/Image.h"
-#include "Std/Base.h"
 
+// Environment //////////////////////////////////////////////////////
 namespace EnG
 {
 
-// Константы.
-Str gAppPathS;	///< Путь до приложения (с разделителем).
-
-/// Среда - в которой работает движок.
-class Environment
-{	public:
-	Environment();
-	~Environment();
-	bool IsEnvironment(); ///< Создана ли среда?
-};
-
-// Environment //////////////////////////////////////////////////////
 Environment::Environment()
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
@@ -56,5 +40,3 @@ bool Environment::IsEnvironment()
 }
 
 }
-
-#endif

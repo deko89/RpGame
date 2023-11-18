@@ -1,7 +1,7 @@
 #ifndef WND_HPP
 #define WND_HPP
 
-#include "EnGreen/Base/Environment.hpp"
+#include "EnGreen/Base/Environment.h"
 
 namespace EnG
 {
