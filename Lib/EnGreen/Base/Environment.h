@@ -2,7 +2,6 @@
 #define ENVIRONMENT_H
 
 #include "SDL.h"
-#include "Std/Media/Image.h"
 #include "Std/Base.h"
 
 namespace EnG

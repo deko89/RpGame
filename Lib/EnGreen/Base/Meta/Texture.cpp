@@ -1,4 +1,5 @@
 #include "Texture.h"
+#include "Std/Media/Image.h"
 
 namespace EnG
 {

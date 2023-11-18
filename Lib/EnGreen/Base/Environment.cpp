@@ -1,5 +1,6 @@
 #include "Environment.h"
 #include <stdio.h>
+#include "Std/Media/Image.h"
 
 // Environment //////////////////////////////////////////////////////
 namespace EnG
