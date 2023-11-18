@@ -3,6 +3,7 @@
 
 #include "EnGreen/Context.h"
 #include "EnGreen/View/Wnd/WndGui.h"
+#include "EnGreen/World/World.h"
 
 namespace EnG
 {
@@ -19,6 +20,7 @@ protected:
 	// Переменные.
     bool bRun = false;	///< Запущен ли.
     Context context;
+    MassivPtr<World> aWorld;
     WndGui wnd;
     friend Context& GetContext();
 };
