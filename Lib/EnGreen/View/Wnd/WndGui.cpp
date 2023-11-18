@@ -86,6 +86,7 @@ void WndGui::Draw()
 	glViewport(0, 0, (int)pIO->DisplaySize.x, (int)pIO->DisplaySize.y);
 	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
 	glClear(GL_COLOR_BUFFER_BIT);
+	WndG::Draw();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	SDL_GL_SwapWindow(pWnd);
