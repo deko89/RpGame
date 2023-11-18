@@ -1,3 +1,6 @@
+#ifndef MemG_H
+#define MemG_H
+
 #include "Meta.h"
 
 namespace EnG
@@ -32,3 +35,5 @@ private:
 };
 
 }
+
+#endif
