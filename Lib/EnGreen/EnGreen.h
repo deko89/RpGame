@@ -16,6 +16,7 @@ class Engine : public Environment
     bool Init();	///< Инициализация.
 	void Clear();	///< Очистка.
 	int Execute();	///< Запуск.
+
 protected:
 	// Переменные.
     bool bRun = false;	///< Запущен ли.
@@ -23,6 +24,7 @@ protected:
     MassivPtr<World> aWorld;
     WndGui wnd;
     friend Context& GetContext();
+    friend SlotMemG GetFreeCamSlot();
 };
 
 extern Engine eng;

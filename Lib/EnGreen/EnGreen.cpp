@@ -1,4 +1,5 @@
 #include "EnGreen/EnGreen.h"
+#include <set>
 
 #ifdef One_Translation_Unit
     #include "Std/Media/Image.cpp"
@@ -79,6 +80,21 @@ int Engine::Execute()
 
 Context& GetContext()
 {	return eng.context;
+}
+SlotMemG GetFreeCamSlot()
+{   // Сбор всех слотов.
+    std::set<SlotMemG> sUsingSlot;
+    for (const View* v : eng.wnd.aView)
+    {   SlotMemG slot = v->cam.mem.GetSlot();
+        sUsingSlot.insert(slot);
+    }
+    // Поиск свободного.
+    SlotMemG slot = 0;
+    for (SlotMemG s : sUsingSlot)
+    {   if (s != slot) break;
+        ++slot;
+    }
+    return slot;
 }
 
 }

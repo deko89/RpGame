@@ -34,8 +34,8 @@ class Shaders
     Shader posTex,      ///< Позиция (x,y,z) + текстура (u,v).
            posTexA;     ///< Позиция (x,y,z) + прозрачная текстура (u,v).
 	/** Собрать.
-		param[in] uCamPoint - точка привязки камеры. */
-    void Compile(SlotMemG uCamPoint);
+		param[in] uCamSlot - точка привязки камеры. */
+    void Compile(SlotMemG uCamSlot);
 };
 
 }

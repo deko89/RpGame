@@ -80,12 +80,12 @@ void main()
 	color = colorTex;
 }
 )";
-void Shaders::Compile(SlotMemG uCamPoint)
+void Shaders::Compile(SlotMemG uCamSlot)
 {
     posTex.Compile(codePosTexVert, 0, codePosTexFrag);
-    posTex.LinkMemG("uCam", uCamPoint);
+    posTex.LinkMemG("uCam", uCamSlot);
     posTexA.Compile(codePosTexVert, 0, codePosTexFragA);
-    posTexA.LinkMemG("uCam", uCamPoint);
+    posTexA.LinkMemG("uCam", uCamSlot);
 }
 
 }
