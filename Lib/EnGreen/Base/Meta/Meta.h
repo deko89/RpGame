@@ -26,12 +26,12 @@ namespace EnG
 #endif
 
 // Простейшие типы.
-typedef GLfloat		Val;				///< Число.
-typedef GLint       ValI;				///< Целое число.
-typedef GLuint		ValN;				///< Натуральное число 0, 1, 2...
-typedef GLsizei		Size;				///< Тип размеров в памяти (массивов). //GLsizeiptr
-typedef GLushort	Ind;				///< Тип индексов вершин (номеров).
-typedef GLchar*		GStr;				///< Строка (для видеокарты).
+typedef GLfloat         Val;            ///< Число.
+typedef GLint           ValI;           ///< Целое число.
+typedef GLuint          ValN;           ///< Натуральное число 0, 1, 2...
+typedef GLsizei         Size;           ///< Тип размеров в памяти (массивов). //GLsizeiptr
+typedef GLushort        Ind;            ///< Тип индексов вершин (номеров).
+typedef const GLchar*   StrCG;          ///< Строка (для видеокарты).
 
 // Специализированные типы.
 typedef GLuint		SlotMemG;			///< Слот глобальной памяти (uniform bufer).
@@ -60,6 +60,9 @@ typedef glm::mat4 Mat4;		///< Матрица 4х4.
 
 // Константы.
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
+
+static_assert( sizeof(Val) == 4, "" );
+static_assert( sizeof(PosTex) == 8, "" );
 
 }
 

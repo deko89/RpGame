@@ -9,25 +9,33 @@ namespace EnG
 /// Программа рисования для видеокарты.
 class Shader
 {	public:
-	static void Init();
-
-	/// Конструктор считывает и собирает шейдер.
-	void Create(const GStr sVertexShader, const GStr sGeometryShader, const GStr sFragmentShader);
+	/// Конструктор считывает и собирает шейдер. 0 - нет шейдера.
+	void Compile(StrCG sVertexShader, StrCG sGeometryShader, StrCG sFragmentShader);
 
 	~Shader();
 
 	void Use() const; ///< Использование программы.
 
 	/** Привязать к глобальной памяти.
-		param[in] uLinkPoint - точка привзяки. К ней же должен быть привязан и сам буфер (ubo).
-		param[in] blockName - блок переменных в шейдере (uniform). */
-	void LinkMemG(SlotMemG uLinkPoint, const GStr blockName);
+    	param[in] blockName - блок переменных в шейдере (uniform).
+		param[in] uLinkPoint - точка привзяки. К ней же должен быть привязан и сам буфер (ubo). */
+	void LinkMemG(StrCG blockName, SlotMemG uLinkPoint);
 protected:
 	GLuint id = 0; ///< Идентификатор программы.
 
 	/** Собрать.
 		param[in] typeShader - тип шейжера (GL_VERTEX_SHADER, ...). */
-	bool CompileShader(const GStr pCode, GLenum const typeShader);
+	bool CompileShader(StrCG pCode, GLenum const typeShader);
+};
+
+/// Стандартные шейдеры.
+class Shaders
+{   public:
+    Shader posTex,      ///< Позиция (x,y,z) + текстура (u,v).
+           posTexA;     ///< Позиция (x,y,z) + прозрачная текстура (u,v).
+	/** Собрать.
+		param[in] uCamPoint - точка привязки камеры. */
+    void Compile(SlotMemG uCamPoint);
 };
 
 }

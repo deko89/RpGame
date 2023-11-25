@@ -5,10 +5,7 @@ namespace EnG
 {
 
 // Shader ///////////////////////////////////////////////////////////
-void Shader::Init()
-{
-}
-void Shader::Create(const GStr sVertexShader, const GStr sGeometryShader, const GStr sFragmentShader)
+void Shader::Compile(StrCG sVertexShader, StrCG sGeometryShader, StrCG sFragmentShader)
 {	id = glCreateProgram();
 	CompileShader(sVertexShader,   GL_VERTEX_SHADER);
 	CompileShader(sGeometryShader, GL_GEOMETRY_SHADER);
@@ -26,11 +23,11 @@ Shader::~Shader()
 {	glDeleteProgram(id);
 }
 void Shader::Use() const { glUseProgram(id); }
-void Shader::LinkMemG(SlotMemG uLinkPoint, const GStr blockName)
+void Shader::LinkMemG(StrCG blockName, SlotMemG uLinkPoint)
 {	GLuint uBlockId = glGetUniformBlockIndex(id, blockName);
 	glUniformBlockBinding(id, uBlockId, uLinkPoint);
 }
-bool Shader::CompileShader(const GStr pCode, GLenum const typeShader)
+bool Shader::CompileShader(StrCG pCode, GLenum const typeShader)
 {	if (!pCode) return 1;
 	GLuint uShader = glCreateShader(typeShader);
 	glShaderSource(uShader, 1, &pCode, NULL);
@@ -46,6 +43,49 @@ bool Shader::CompileShader(const GStr pCode, GLenum const typeShader)
 	}
 	glDeleteShader(uShader); // Удаляем - больше не нужен.
 	return iRes != 0;
+}
+// Shaders //////////////////////////////////////////////////////////
+const char* codePosTexVert = R"(
+#version 330 core
+layout (location = 0) in vec3 pos;
+layout (location = 1) in vec2 posTexIn;
+layout (std140) uniform uCam
+{	mat4 mCamera;
+};
+out vec2 posTex;
+void main()
+{	gl_Position = mCamera * vec4(pos, 1.0);
+	posTex = posTexIn;
+}
+)";
+
+const char* codePosTexFrag = R"(
+#version 330 core
+uniform sampler2D tex;
+in vec2 posTex;
+out vec4 color;
+void main()
+{	color = texture(tex, posTex);
+}
+)";
+
+const char* codePosTexFragA = R"(
+#version 330 core
+uniform sampler2D tex;
+in vec2 posTex;
+out vec4 color;
+void main()
+{	vec4 colorTex = texture(tex, posTex);
+	if (colorTex.a < 0.4) discard;
+	color = colorTex;
+}
+)";
+void Shaders::Compile(SlotMemG uCamPoint)
+{
+    posTex.Compile(codePosTexVert, 0, codePosTexFrag);
+    posTex.LinkMemG("uCam", uCamPoint);
+    posTexA.Compile(codePosTexVert, 0, codePosTexFragA);
+    posTexA.LinkMemG("uCam", uCamPoint);
 }
 
 }
