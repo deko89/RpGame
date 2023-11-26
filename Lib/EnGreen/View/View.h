@@ -14,7 +14,7 @@ class View
 	World* world = nullptr; ///< Отображаемый мир.
 	Camera cam;             ///< Камера.
 	Shaders shaders;        ///< Шейдеры.
-	View();
+	View(World* w, const RectI& pos);
 	const RectI& GetPos() const;
 	void SetPos(const RectI& r);
 	void Draw() const;

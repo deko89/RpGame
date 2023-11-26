@@ -3,7 +3,9 @@
 namespace EnG
 {
 
-View::View()
+View::View(World* w, const RectI& pos) :
+    world(w),
+    pos(pos)
 {   SlotMemG uCamSlot = GetFreeCamSlot();
     cam.Create(uCamSlot);
     shaders.Compile(uCamSlot);
