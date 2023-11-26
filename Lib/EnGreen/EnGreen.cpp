@@ -81,6 +81,10 @@ int Engine::Execute()
     return 0;
 }
 
+WndGui& Engine::GetWnd()
+{   return wnd;
+}
+
 Context& GetContext()
 {	return eng.context;
 }

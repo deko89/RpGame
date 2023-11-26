@@ -13,10 +13,10 @@ class Engine : public Environment
 {	public:
     Engine();
     ~Engine();
-    bool Init();	///< Инициализация.
-	void Clear();	///< Очистка.
-	int Execute();	///< Запуск.
-
+    bool Init();                ///< Инициализация.
+    void Clear();               ///< Очистка.
+    int Execute();              ///< Запуск.
+    WndGui& GetWnd();           ///< Получить активное окно.
 protected:
 	// Переменные.
     bool bRun = false;	///< Запущен ли.
