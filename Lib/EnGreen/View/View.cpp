@@ -3,6 +3,11 @@
 namespace EnG
 {
 
+View::View()
+{   SlotMemG uCamSlot = GetFreeCamSlot();
+    cam.Create(uCamSlot);
+    shaders.Compile(uCamSlot);
+}
 const RectI& View::GetPos() const
 {   return pos;
 }
