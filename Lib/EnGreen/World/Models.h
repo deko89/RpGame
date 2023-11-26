@@ -10,7 +10,8 @@ namespace EnG
 /// Модели.
 class Models : public MassivPtr<Model>
 {	public:
-    Model* Add();
+    typedef MassivPtr<Model> Base;
+    void Draw() const;
 };
 
 }

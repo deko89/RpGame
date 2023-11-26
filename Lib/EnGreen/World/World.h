@@ -10,6 +10,7 @@ namespace EnG
 class World
 {	public:
     Models models; ///< Модели.
+    void Draw() const;
 };
 
 }

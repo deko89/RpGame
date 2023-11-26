@@ -4,9 +4,9 @@ namespace EnG
 {
 
 // BaseEngine ///////////////////////////////////////////////////////
-Model* Models::Add()
-{
-    return nullptr;
+void Models::Draw() const
+{   for (Model* m : *this)
+        m->Draw();
 }
 
 }
