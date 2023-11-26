@@ -11,7 +11,6 @@ namespace EnG
 class WndGui : public WndG
 {	public:
 	~WndGui();
-	void Create(const Str& name);	///< Создать.
 	void Clear();					///< Очистить.
 	void CreateGui();	///< Создать интерфейс.
 	void ClearGui();	///< Удалить интерфейс.

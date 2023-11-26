@@ -7,9 +7,9 @@ Wnd::~Wnd()
 {	Clear();
 }
 
-void Wnd::Create(const Str& name, uint32_t flag)
+void Wnd::Create(const Str& name, const RectI& pos, uint32_t flag)
 {
-    pWnd = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, flag);
+    pWnd = SDL_CreateWindow(name.c_str(), pos.x, pos.y, pos.w, pos.h, flag);
 }
 
 void Wnd::Clear()

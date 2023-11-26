@@ -37,7 +37,8 @@ Engine::~Engine()
 bool Engine::Init()
 {
 	if ( !IsEnvironment() ) return false;
-    wnd.Wnd::Create("RpGame", SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+	RectI posWnd {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gSzWndDef.x, gSzWndDef.y};
+    wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	context.Create(wnd);
 	wnd.CreateGui();
 	return true;

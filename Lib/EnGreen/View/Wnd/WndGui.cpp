@@ -10,12 +10,6 @@ WndGui::~WndGui()
 {	ClearGui();
 }
 
-void WndGui::Create(const Str& name)
-{
-    Wnd::Create(name);
-    CreateGui();
-}
-
 void WndGui::Clear()
 {
 	ClearGui();
