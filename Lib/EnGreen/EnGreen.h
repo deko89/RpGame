@@ -14,6 +14,7 @@ class Engine : public Environment
     Engine();
     ~Engine();
     bool Init();                ///< Инициализация.
+    View* CreateViewWorld();    ///< Создать мир и вид по умолчанию.
     void Clear();               ///< Очистка.
     int Execute();              ///< Запуск.
     WndGui& GetWnd();           ///< Получить активное окно.

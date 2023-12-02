@@ -36,12 +36,24 @@ Engine::~Engine()
 
 bool Engine::Init()
 {
+    // Инициализация.
 	if ( !IsEnvironment() ) return false;
 	RectI posWnd {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gSzWndDef.x, gSzWndDef.y};
     wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	context.Create(wnd);
+    // Создание окна.
 	wnd.CreateGui();
 	return true;
+}
+
+View* Engine::CreateViewWorld()
+{
+    // Создание мира.
+    World* world = aWorld.Add();
+    // Создание вида.
+    RectI posView {0, 0, gSzWndDef.x, gSzWndDef.y};
+    View* view = wnd.aView.Emplace(world, posView);
+    return view;
 }
 
 void Engine::Clear()
