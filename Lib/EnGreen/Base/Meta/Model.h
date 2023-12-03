@@ -20,7 +20,7 @@ class ModelVi: public Model
 {	public:
 	ModelVi();
 	virtual ~ModelVi() override;
-	void Make(const Mesh& mesh, const PlaceTex& placeTex);
+	void Make(const Mesh& mesh, const PlaceTex& placeTex = PlaceTex());
 	virtual void Draw() const override;
 protected:
 	GLuint vao;		///< Установщик атрибутов объекта перед рисованием.
