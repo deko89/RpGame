@@ -14,10 +14,11 @@ class Image
 	~Image();
 	void Load(const Str& path); ///< Загрузить из файла.
 	void Clear();
-    void* Get() const;  ///< Получить пиксели.
+    uint8_t* Get() const;       ///< Получить пиксели.
     size_t X() const;   ///< Ширина.
     size_t Y() const;   ///< Высота.
 private:
+    void MirrorY();     ///< Отразить по вертикали.
 	SDL_Surface* pSurf = nullptr;
 };
 
