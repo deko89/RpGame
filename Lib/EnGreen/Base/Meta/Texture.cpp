@@ -80,7 +80,7 @@ void Texture::Load(const Str& path, const TexPar& par)
 	// Освобождение памяти.
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
-void Texture::LoadArray(const Str& pathBase, const Str& ext, size_t count, const TexPar& par)
+void Texture::LoadArray(const Str& pathF, size_t count, const TexPar& par)
 {	// Подготовка текстуры.
 	glBindTexture(GL_TEXTURE_2D_ARRAY, id); // Использование своей текстуры.
 	par.Set();
@@ -89,7 +89,7 @@ void Texture::LoadArray(const Str& pathBase, const Str& ext, size_t count, const
     GLenum formatImg = par.alpha? GL_RGBA: GL_RGB;
 	for (size_t i = 0; i < count; ++i)
 	{	// Загрузка изображения.
-    	Str path = pathBase + std::to_string(i) + '.' + ext;
+	    Str path = PrintF(pathF, i);
 	    Image img(path);
 		// Создание текстуры.
 		glTexSubImage3D( GL_TEXTURE_2D_ARRAY,
@@ -104,7 +104,7 @@ void Texture::LoadArray(const Str& pathBase, const Str& ext, size_t count, const
 	// Освобождение памяти.
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 }
-void Texture::LoadCube(const Str& pathBase, const Str& ext, const TexPar& par)
+void Texture::LoadCube(const Str& pathF, const TexPar& par)
 {	// Подготовка текстуры.
 	glBindTexture(GL_TEXTURE_CUBE_MAP, id); // Использование своей текстуры.
 	par.Set();
@@ -113,7 +113,7 @@ void Texture::LoadCube(const Str& pathBase, const Str& ext, const TexPar& par)
     GLenum formatImg = par.alpha? GL_RGBA: GL_RGB;
 	for (size_t i = 0; i < 6; ++i)
 	{	// Загрузка изображения.
-    	Str path = pathBase + std::to_string(i) + '.' + ext;
+	    Str path = PrintF(pathF, i);
 	    Image img(path);
 		// Создание текстуры.
 	    glTexImage2D( GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,

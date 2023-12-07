@@ -61,13 +61,12 @@ class Texture
 	    @details Для загрузки прозрачной текстуры надо установить alpha в 1.
 При этом изображение должно быть в формате RGBA. Иначе в RGB.
 		param[in] path - путь полный.
-		param[in] pathBase - путь базовый. Далее номера текстур 0..count, точка и расширение.
-		param[in] ext - расширение.
+		param[in] pathF - шаблон пути нумерованных текстур. Формат: "<Path>/<Name>%zu.<Ext>".
 		param[in] count - число текстур.
 		param[in] par - параметры создания текстуры. */
 	void Load(const Str& path, const TexPar& par = texPar);
-    void LoadArray(const Str& pathBase, const Str& ext, size_t count, const TexPar& par = texParArray);
-    void LoadCube(const Str& pathBase, const Str& ext, const TexPar& par = texParCube);
+    void LoadArray(const Str& pathF, size_t count, const TexPar& par = texParArray);
+    void LoadCube(const Str& pathF, const TexPar& par = texParCube);
 
     /// Сделать текстуру активной.
 	void Use(TexType type = TexType::Img) const;
