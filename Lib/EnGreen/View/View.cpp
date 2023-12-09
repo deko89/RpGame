@@ -18,7 +18,7 @@ void View::SetPos(const RectI& r)
 }
 void View::Draw() const
 {   glViewport(pos.x, pos.y, pos.w, pos.h);
-    world->Draw();
+    world->models.Draw();
 }
 
 }
