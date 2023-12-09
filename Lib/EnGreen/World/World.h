@@ -2,6 +2,7 @@
 #define World_H
 
 #include "Models.h"
+#include "SkyBox.h"
 
 namespace EnG
 {
@@ -10,6 +11,7 @@ namespace EnG
 class World
 {	public:
     Models models; ///< Модели.
+    SkyBox sky;    ///< Небо.
 };
 
 }
