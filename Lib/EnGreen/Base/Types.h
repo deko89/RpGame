@@ -28,6 +28,10 @@ class Points : public vector<Pos>
 		param[in] sgmX, sgmY - число сегментов. */
 	void MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY);
 
+	/** Создать куб.
+		param[in] s - размер. */
+	void MakeCube(Val s);
+
 	/** Создать цилиндр
 		param[in] rad, height - радиус и высота;
 		param[in] sgmC, sgmH - количество сегментов в круге, и по высоте;
@@ -49,6 +53,7 @@ class Mesh
 	/// Создание фигур, см Points.
 	void MakeQuad(Val szX, Val szY);
 	void MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY);
+	void MakeCubeIn(Val s); ///< Создать куб, который виден изнутри.
 	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 };
 

@@ -12,6 +12,10 @@ void Points::MakeQuad(Val szX, Val szY)
 						{szX,	szY,	0}
 					};
 }
+void Points::MakeCube(Val s)
+{   *(Base*) this = {   {-s,-s,-s},  { s,-s,-s},  {s, s,-s},  {-s,s,-s},     // Низ.
+                        {-s,-s, s},  { s,-s, s},  {s, s, s},  {-s,s, s}   }; // Верх.
+}
 void Points::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 {	// Вычисление размера и выделение памяти.
 	Ind nVertX = sgmX + 1, nVertY = sgmY + 1;
@@ -69,6 +73,14 @@ void Mesh::MakeQuad(Val szX, Val szY)
 {
 	aVert.MakeQuad(szX, szY);
 	aInd = {0, 1, 2, 1, 3, 2};
+}
+void Mesh::MakeCubeIn(Val s)
+{
+    aVert.MakeCube(s);
+    aInd =  {   0,1,2, 0,2,3,  4,6,5, 4,7,6,    // Низ, верх.
+                3,2,7, 2,6,7,  0,4,1, 1,4,5,    // Вперёд, назад
+                0,3,4, 3,7,4,  1,6,2, 1,5,6,    // Лево, право.
+            };
 }
 void Mesh::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 {
