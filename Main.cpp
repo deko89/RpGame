@@ -20,7 +20,7 @@ int main()
     view->cam.Update();
     // Создание текстуры.
     static Texture tex;
-    tex.Load("SkyBox/0.jpg");
+    tex.Load("SkyBox/clouds1_0.jpg");
     tex.Use();
     // Создание модели.
     Mesh mesh;
