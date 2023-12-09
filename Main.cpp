@@ -13,7 +13,6 @@ int main()
 
     // Настройка.
     View* view = eng.CreateViewWorld();
-    view->shaders.posTex.Use();
     // Установка камеры.
     view->cam.pos = {0, -3, 1};
     view->cam.angle = {0, 0, pi/2};
