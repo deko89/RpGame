@@ -13,6 +13,7 @@
 	#include "Context.cpp"
 	#include "World/Models.cpp"
 	#include "World/World.cpp"
+	#include "World/SkyBox.cpp"
 	#include "View/Wnd/Wnd.cpp"
 	#include "View/Camera.cpp"
 	#include "View/View.cpp"
