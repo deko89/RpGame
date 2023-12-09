@@ -79,7 +79,7 @@ void WndGui::Draw()
 	// Rendering
 	glViewport(0, 0, (int)pIO->DisplaySize.x, (int)pIO->DisplaySize.y);
 	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	WndG::Draw();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
