@@ -32,7 +32,8 @@ protected:
 class Shaders
 {   public:
     Shader posTex,      ///< Позиция (x,y,z) + текстура (u,v).
-           posTexA;     ///< Позиция (x,y,z) + прозрачная текстура (u,v).
+           posTexA,     ///< Позиция (x,y,z) + прозрачная текстура (u,v).
+           cubeIn;      ///< Куб изнутри (заднего плана, неба).
 	/** Собрать.
 		param[in] uCamSlot - точка привязки камеры. */
     void Compile(SlotMemG uCamSlot);

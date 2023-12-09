@@ -80,12 +80,38 @@ void main()
 	color = colorTex;
 }
 )";
+
+const char* codeCubeInVert = R"(
+#version 330 core
+layout (location = 0) in vec3 vPos;
+layout (std140) uniform uCam
+{	mat4 mCamera;
+};
+out vec3 posTex;
+void main()
+{   posTex = vPos;
+    gl_Position = mCamera * vec4(vPos*1.0e+15, 1.0);
+}
+)";
+
+const char* codeCubeInFrag = R"(
+#version 330 core
+uniform samplerCube tex;
+in vec3 posTex;
+out vec4 color;
+void main()
+{   color = texture(tex, posTex);
+}
+)";
+
 void Shaders::Compile(SlotMemG uCamSlot)
 {
     posTex.Compile(codePosTexVert, 0, codePosTexFrag);
     posTex.LinkMemG("uCam", uCamSlot);
     posTexA.Compile(codePosTexVert, 0, codePosTexFragA);
     posTexA.LinkMemG("uCam", uCamSlot);
+	cubeIn.Compile(codeCubeInVert, 0, codeCubeInFrag);
+	cubeIn.LinkMemG("uCam", uCamSlot);
 }
 
 }
