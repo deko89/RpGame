@@ -1,7 +1,7 @@
 #include "WndGui.h"
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_opengl3.h"
-#include "EnGreen/Context.h"
+#include "EnGreen/Base/Context.h"
 
 namespace EnG
 {

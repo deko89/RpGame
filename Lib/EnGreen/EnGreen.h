@@ -1,7 +1,7 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
-#include "EnGreen/Context.h"
+#include "EnGreen/Base/Context.h"
 #include "EnGreen/View/Wnd/WndGui.h"
 #include "EnGreen/World/World.h"
 
