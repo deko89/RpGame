@@ -59,7 +59,7 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 	}
 	// Создание дна.
 	if (bCloseBottom)
-	{	pVert = data() + ((size() - bCloseUp)? 2: 1);
+	{	pVert = data() + (size() - (bCloseUp? 2: 1));
 		pVert->x = 0; pVert->y = 0; pVert->z = 0;
 	}
 	// Создание крышки.
