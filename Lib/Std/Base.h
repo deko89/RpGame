@@ -23,6 +23,16 @@ typedef char Sym;
 const Sym gSep = '/';	///< Разделитель путей.
 
 // Функции.
+
+template<class C> void Limit(C& cVal, const C cMin, const C cMax)
+{   if (cVal < cMin)        cVal = cMin;
+    else if (cVal > cMax)   cVal = cMax;
+}
+
+template<class C> C Max(C a, C b)
+{   return a > b ? a : b;
+}
+
 /// Печать в строку (обёртка printf).
 template<typename... Arg> Str PrintF(const Str& fmt, Arg... arg)
 {

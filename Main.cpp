@@ -23,9 +23,9 @@ int main()
     tex.Use();
     // Создание модели.
     Mesh mesh;
-    mesh.MakeCylinder(0.3, 2, 8, 1);
+    mesh.MakeCylinder(0.3, 2, 8, 4);
     PlaceTex plTex;
-    plTex.SetCylinder(8, 1, 2, 1);
+    plTex.SetCylinder(8, 4, 2, 1);
     ModelVi* mod = new ModelVi;
     mod->Make(mesh, plTex);
     view->world->models.Add(mod);
