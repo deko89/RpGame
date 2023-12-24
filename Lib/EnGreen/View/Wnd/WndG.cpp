@@ -3,7 +3,7 @@
 namespace EnG
 {
 
-void WndG::Draw() const
+void WndG::Draw()
 {
     for (const View* v : aView)
     {   v->Draw();

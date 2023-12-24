@@ -16,7 +16,7 @@ const RectI& View::GetPos() const
 void View::SetPos(const RectI& r)
 {   pos = r;
 }
-void View::Draw() const
+void View::Draw()
 {   glViewport(pos.x, pos.y, pos.w, pos.h);
     shaders.cubeIn.Use();
     world->sky.Draw();

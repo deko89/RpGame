@@ -17,7 +17,7 @@ class View
 	View(World* w, const RectI& pos);
 	const RectI& GetPos() const;
 	void SetPos(const RectI& r);
-	void Draw() const;
+	void Draw();
 private:
 	RectI pos;              ///< Позиция в окне.
 };

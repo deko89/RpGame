@@ -12,7 +12,7 @@ namespace EnG
 class WndG : public Wnd
 {	public:
     MassivPtr<View> aView;
-    void Draw() const; ///< Рисование.
+    void Draw(); ///< Рисование.
 };
 
 }
