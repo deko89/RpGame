@@ -6,6 +6,8 @@
 	Обобщение типов, переменных и т.д. для разных платформ.
 */
 
+#include <chrono>
+
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 	#include <SDL_opengles2.h>
 #else
@@ -18,6 +20,8 @@
 
 namespace EnG
 {
+
+using namespace std::chrono;
 
 // Системные константы.
 #ifdef __linux__
@@ -32,6 +36,8 @@ typedef GLuint          ValN;           ///< Натуральное число 0
 typedef GLsizei         Size;           ///< Тип размеров в памяти (массивов). //GLsizeiptr
 typedef GLushort        Ind;            ///< Тип индексов вершин (номеров).
 typedef const GLchar*   StrCG;          ///< Строка (для видеокарты).
+typedef time_point<system_clock> Time;  ///< Время.
+
 
 // Специализированные типы.
 typedef GLuint		SlotMemG;			///< Слот глобальной памяти (uniform bufer).
