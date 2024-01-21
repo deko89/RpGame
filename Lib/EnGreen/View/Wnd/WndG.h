@@ -11,7 +11,8 @@ namespace EnG
 /// Окно с графикой.
 class WndG : public Wnd
 {	public:
-    MassivPtr<View> aView;
+    MassivPtr<View> aView;      ///< Области.
+    View* view = nullptr;       ///< Активная область.
     void Draw(); ///< Рисование.
 };
 
