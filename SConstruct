@@ -37,12 +37,15 @@ libsAll = Split("""
 """)
 
 # Исходники библиотек проекта.
-filesSrcLibProj =	Glob(	'Lib/imgui-1.89.8/*.cpp') + \
-                    Glob(	'Lib/imgui-1.89.8/backends/*.cpp')
+filesSrcLibProj =	Glob(	'Lib/imgui-1.90.1/*.cpp') + \
+					Split("""
+						Lib/imgui-1.90.1/backends/imgui_impl_opengl3.cpp
+						Lib/imgui-1.90.1/backends/imgui_impl_sdl2.cpp
+					""")
 dirsIncLibProj  = [
     'Lib',
-    'Lib/imgui-1.89.8',
-    'Lib/imgui-1.89.8/backends'
+    'Lib/imgui-1.90.1',
+    'Lib/imgui-1.90.1/backends'
 ]
 
 # Файлы кода.
