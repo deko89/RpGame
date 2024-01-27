@@ -14,6 +14,19 @@ void Camera::Update()
 	UpdateLook();
 	UpdateMemG();
 }
+void Camera::ProcessStateInput(Val timeDelta)
+{
+	// Обновление позиции.
+	Val dist = 1.0f * timeDelta;
+	const Uint8* keys = SDL_GetKeyboardState(nullptr);
+	if (keys[SDL_SCANCODE_RSHIFT])      dist *= 10;
+	if (keys[SDL_SCANCODE_UP])          pos += vLook * dist;
+	if (keys[SDL_SCANCODE_DOWN])        pos -= vLook * dist;
+	if (keys[SDL_SCANCODE_RIGHT])       pos += glm::cross(vLook, vUp) * dist;
+	if (keys[SDL_SCANCODE_LEFT])        pos -= glm::cross(vLook, vUp) * dist;
+	if (keys[SDL_SCANCODE_PAGEUP])      pos += vUp * dist;
+	if (keys[SDL_SCANCODE_PAGEDOWN])    pos -= vUp * dist;
+}
 void Camera::UpdateLook()
 {
     float cosX = cos(angle.x);

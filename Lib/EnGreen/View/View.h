@@ -17,7 +17,9 @@ class View
 	View(World* w, const RectI& pos);
 	const RectI& GetPos() const;
 	void SetPos(const RectI& r);
+	void Update(Val timeDelta); ///< Обновить.
 	void Draw();
+	void ProcessStateInput(Val timeDelta); ///< Обработка состояния клавиатуры / мыши.
 private:
 	RectI pos;              ///< Позиция в окне.
 };

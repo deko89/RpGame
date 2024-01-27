@@ -15,9 +15,13 @@ void WndG::Draw()
 	duration<Val> dur = timeNow - timePrev;
 	timePrev = timeNow;
 	Val timeDelta = dur.count();
+	// Обновление активного вида.
+	if (view)
+		view->ProcessStateInput(timeDelta);
 	// Рисование
 	for (View* v : aView)
 	{
+		v->Update(timeDelta);
 		v->Draw();
 	}
 }
