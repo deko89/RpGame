@@ -6,7 +6,13 @@
 	Обобщение типов, переменных и т.д. для разных платформ.
 */
 
+#define _USE_MATH_DEFINES
+
 #include <chrono>
+
+#ifdef __WINDOWS__
+	#include "Galogen/gl.h"
+#endif
 
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 	#include <SDL_opengles2.h>
@@ -26,7 +32,8 @@ using namespace std::chrono;
 // Системные константы.
 #ifdef __linux__
 	const char* cPathFont = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
-//#elif __WINDOWS__
+#elif __WINDOWS__
+	const char* cPathFont = "C:\\Windows\\Fonts\\Arial.ttf";
 #endif
 
 // Простейшие типы.
