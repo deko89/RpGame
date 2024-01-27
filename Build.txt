@@ -1,3 +1,25 @@
+Cборка в Linux.
+
+Возможно, придётся поменять пути до системных библиотек вашей ОС в файле SConstruct.
+
+В терминале перейти в каталог с исходниками, и выполнить:
+
+1. Установка зависимостей (в Linux Mint 21.2 Cinnamon).
+sudo apt install clang-15 libc++-15-dev libc++abi-15-dev libsdl2-dev libsdl2-image-dev scons
+
+2. Сборка.
+scons
+
+3. Запуск.
+./RpGame
+
+4. Очистка (при пересборке).
+scons -c
+
+
+
+
+
 Cборка в Windows.
 
 1. Скачать и установить msys2:
