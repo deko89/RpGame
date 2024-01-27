@@ -10,13 +10,20 @@ void Camera::Create(SlotMemG slot)
     mem.SetSlot(slot);
 }
 void Camera::Update()
-{	// Обновление векторов.
-	float cosX = cos(angle.x);
-	vLook.x = cosX * cos(angle.z);
-	vLook.y = cosX * sin(angle.z);
-	vLook.z = sin(angle.x);
-	glm::normalize(vLook);
-	// Обновление матрицы в видеокарте.
+{
+	UpdateLook();
+	UpdateMemG();
+}
+void Camera::UpdateLook()
+{
+    float cosX = cos(angle.x);
+    vLook.x = cosX * cos(angle.z);
+    vLook.y = cosX * sin(angle.z);
+    vLook.z = sin(angle.x);
+    glm::normalize(vLook);
+}
+void Camera::UpdateMemG()
+{
 	Mat4 mCam = glm::perspective(fFov, fAspect, fNear, fFar) *
 				glm::lookAt(pos, pos + vLook, vUp);
 	mem.Copy(mCam);
