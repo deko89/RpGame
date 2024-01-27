@@ -14,6 +14,19 @@ void Camera::Update()
 	UpdateLook();
 	UpdateMemG();
 }
+void Camera::ProcessEventInput(SDL_Event& event)
+{
+//    if (event.type == SDL_KEYDOWN)
+//    {   if (event.key.keysym.sym == SDLK_RIGHT)
+//    }
+    if (event.type == SDL_MOUSEMOTION)
+    {
+		GLfloat sensitivity = 0.01f;
+		angle.z -= event.motion.xrel * sensitivity;
+		angle.x -= event.motion.yrel * sensitivity;
+		Limit(angle.x, -(pi2 - 0.001f), pi2 - 0.001f);
+    }
+}
 void Camera::ProcessStateInput(Val timeDelta)
 {
 	// Обновление позиции.

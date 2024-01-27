@@ -26,6 +26,10 @@ void View::Draw()
     shaders.posTex.Use(); //db
     world->models.Draw();
 }
+void View::ProcessEventInput(SDL_Event& event)
+{
+    cam.ProcessEventInput(event);
+}
 void View::ProcessStateInput(Val timeDelta)
 {
     cam.ProcessStateInput(timeDelta);

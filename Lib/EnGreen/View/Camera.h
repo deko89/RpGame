@@ -16,6 +16,7 @@ class Camera
 		param[in] slot - слот глобальной видеопамяти, где будут данные. */
 	void Create(SlotMemG slot);
 	void Update();  ///< Полное обновление данных в видеокарте.
+	void ProcessEventInput(SDL_Event& event); /// Обработка событий клавиатуры / мыши.
 	void ProcessStateInput(Val timeDelta); ///< Обработка состояния клавиатуры / мыши.
 private:
 	const Vec3 vUp = {0.0f, 0.0f, 1.0f};    ///< Мировая ось вверх.

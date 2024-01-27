@@ -8,6 +8,11 @@ WndG::WndG()
     timePrev = system_clock::now();
 }
 
+void WndG::ProcessEvent(SDL_Event& event)
+{	if (view)
+		view->ProcessEventInput(event);
+}
+
 void WndG::Draw()
 {
 	// Прошедшее время.

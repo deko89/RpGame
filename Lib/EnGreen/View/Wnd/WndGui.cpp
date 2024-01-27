@@ -70,7 +70,9 @@ void WndGui::ClearGui()
 }
 
 void WndGui::ProcessEvent(SDL_Event& event)
-{	ImGui_ImplSDL2_ProcessEvent(&event);
+{
+	WndG::ProcessEvent(event);
+	ImGui_ImplSDL2_ProcessEvent(&event);
 }
 
 void WndGui::Draw()
