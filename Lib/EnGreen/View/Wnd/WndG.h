@@ -13,7 +13,10 @@ class WndG : public Wnd
 {	public:
     MassivPtr<View> aView;      ///< Области.
     View* view = nullptr;       ///< Активная область.
+    WndG();
     void Draw(); ///< Рисование.
+private:
+    Time timePrev;          ///< Время последнего рисования.
 };
 
 }
