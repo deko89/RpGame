@@ -28,12 +28,19 @@ protected:
 	bool CompileShader(StrCG pCode, GLenum const typeShader);
 };
 
-/// Стандартные шейдеры.
-class Shaders
+/// Тип шейдера.
+enum ShaderType
+{
+	shPosTex,		///< Позиция (x,y,z) + текстура (u,v).
+	shPosTexA,		///< Позиция (x,y,z) + прозрачная текстура (u,v).
+	shCubeIn,		///< Куб изнутри (заднего плана, неба).
+};
+
+const size_t gShaderCount = 3; ///< Число шейдеров.
+
+/// Стандартные шейдеры. Последовательность в массиве соответствует ShaderType.
+class Shaders : public std::array<Shader, gShaderCount>
 {   public:
-    Shader posTex,      ///< Позиция (x,y,z) + текстура (u,v).
-           posTexA,     ///< Позиция (x,y,z) + прозрачная текстура (u,v).
-           cubeIn;      ///< Куб изнутри (заднего плана, неба).
 	/** Собрать.
 		param[in] uCamSlot - точка привязки камеры. */
     void Compile(SlotMemG uCamSlot);

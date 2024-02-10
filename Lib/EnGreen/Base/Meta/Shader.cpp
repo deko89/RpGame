@@ -106,12 +106,15 @@ void main()
 
 void Shaders::Compile(SlotMemG uCamSlot)
 {
-    posTex.Compile(codePosTexVert, 0, codePosTexFrag);
-    posTex.LinkMemG("uCam", uCamSlot);
-    posTexA.Compile(codePosTexVert, 0, codePosTexFragA);
-    posTexA.LinkMemG("uCam", uCamSlot);
-	cubeIn.Compile(codeCubeInVert, 0, codeCubeInFrag);
-	cubeIn.LinkMemG("uCam", uCamSlot);
+	Shader* sh = data() + shPosTex;
+	sh->Compile(codePosTexVert, 0, codePosTexFrag);
+	sh->LinkMemG("uCam", uCamSlot);
+	sh = data() + shPosTexA;
+	sh->Compile(codePosTexVert, 0, codePosTexFragA);
+	sh->LinkMemG("uCam", uCamSlot);
+	sh = data() + shCubeIn;
+	sh->Compile(codeCubeInVert, 0, codeCubeInFrag);
+	sh->LinkMemG("uCam", uCamSlot);
 }
 
 }

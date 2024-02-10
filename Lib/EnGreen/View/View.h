@@ -13,7 +13,7 @@ class View
 {	public:
 	World* world = nullptr; ///< Отображаемый мир.
 	Camera cam;             ///< Камера.
-	Shaders shaders;        ///< Шейдеры.
+	Shaders shaders;        ///< Шейдеры. Им нужна глобальная позиция камеры (иначе каждый шейдер будет хранит её). Чтобы иметь возможность рендерить параллельно, и не переписывать её, они у каждого вида.
 	View(World* w, const RectI& pos);
 	const RectI& GetPos() const;
 	void SetPos(const RectI& r);

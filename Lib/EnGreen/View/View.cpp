@@ -21,9 +21,9 @@ void View::Update(Val timeDelta)
 }
 void View::Draw()
 {   glViewport(pos.x, pos.y, pos.w, pos.h);
-    shaders.cubeIn.Use();
+    shaders[shCubeIn].Use();
     world->sky.Draw();
-    shaders.posTex.Use(); //db
+    shaders[shPosTex].Use(); //tmp
     world->models.Draw();
 }
 void View::ProcessEventInput(SDL_Event& event)
