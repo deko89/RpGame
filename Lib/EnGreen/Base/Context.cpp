@@ -32,7 +32,7 @@ void Context::Create(Wnd& wnd)
 
 	SDL_Window* pWnd = wnd.NativeWnd();
 	gl_context = SDL_GL_CreateContext(pWnd);
-	SDL_GL_MakeCurrent(pWnd, gl_context);
+	//SDL_GL_MakeCurrent(pWnd, gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
 }
 
