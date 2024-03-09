@@ -1,6 +1,7 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
+#include "EnGreen/Base/Meta/Shader.h"
 #include "EnGreen/Base/Context.h"
 #include "EnGreen/View/Wnd/WndGui.h"
 #include "EnGreen/World/World.h"
@@ -22,10 +23,11 @@ protected:
 	// Переменные.
     bool bRun = false;	///< Запущен ли.
     Context context;
+    Shaders shaders;	///< Шейдеры.
     MassivPtr<World> aWorld;
     WndGui wnd;
     friend Context& GetContext();
-    friend SlotMemG GetFreeCamSlot();
+    friend Shaders& GetShaders();
 };
 
 extern Engine eng;

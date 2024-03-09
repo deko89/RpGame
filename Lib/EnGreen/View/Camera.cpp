@@ -7,14 +7,11 @@ namespace EnG
 GLfloat sensitivityMouse = 0.005f;
 
 // Camera ///////////////////////////////////////////////////////////
-void Camera::Create(SlotMemG slot)
-{	mem.Create( sizeof(Mat4) );
-    mem.SetSlot(slot);
-}
-void Camera::Update()
+Mat4 Camera::GetMatrix() const
 {
-	UpdateLook();
-	UpdateMemG();
+	Mat4 mCam = glm::perspective(fFov, fAspect, fNear, fFar) *
+				glm::lookAt(pos, pos + vLook, vUp);
+	return mCam;
 }
 void Camera::ProcessEventInput(SDL_Event& event)
 {
@@ -26,6 +23,7 @@ void Camera::ProcessEventInput(SDL_Event& event)
 		angle.z -= event.motion.xrel * sensitivityMouse;
 		angle.x -= event.motion.yrel * sensitivityMouse;
 		Limit(angle.x, -(pi2 - 0.001f), pi2 - 0.001f);
+		UpdateLook();
     }
 }
 void Camera::ProcessStateInput(Val timeDelta)
@@ -39,6 +37,7 @@ void Camera::ProcessStateInput(Val timeDelta)
 	if (keys[SDL_SCANCODE_LEFT])        angle.z += 5 * sensitivityMouse;
 	if (keys[SDL_SCANCODE_RIGHT])       angle.z -= 5 * sensitivityMouse;
 	Limit(angle.x, -(pi2 - 0.001f), pi2 - 0.001f);
+	UpdateLook();
 
 	if (keys[SDL_SCANCODE_LSHIFT] ||
 		keys[SDL_SCANCODE_RSHIFT])		dist *= 10;
@@ -56,12 +55,6 @@ void Camera::UpdateLook()
     vLook.y = cosX * sin(angle.z);
     vLook.z = sin(angle.x);
     glm::normalize(vLook);
-}
-void Camera::UpdateMemG()
-{
-	Mat4 mCam = glm::perspective(fFov, fAspect, fNear, fFar) *
-				glm::lookAt(pos, pos + vLook, vUp);
-	mem.Copy(mCam);
 }
 
 }

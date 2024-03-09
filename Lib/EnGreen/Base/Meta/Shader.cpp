@@ -104,8 +104,12 @@ void main()
 }
 )";
 
-void Shaders::Compile(SlotMemG uCamSlot)
+void Shaders::Compile()
 {
+	const SlotMemG uCamSlot = 0;
+	memCam.Create( sizeof(Mat4) );
+	memCam.SetSlot(uCamSlot);
+
 	Shader* sh = data() + shPosTex;
 	sh->Compile(codePosTexVert, 0, codePosTexFrag);
 	sh->LinkMemG("uCam", uCamSlot);

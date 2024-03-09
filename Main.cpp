@@ -16,7 +16,6 @@ int main()
     // Установка камеры.
     view->cam.pos = {0, -3, 1};
     view->cam.angle = {0, 0, pi/2};
-    view->cam.Update();
     // Создание текстуры.
     static Texture tex;
     tex.Load("SkyBox/clouds1_0.jpg");

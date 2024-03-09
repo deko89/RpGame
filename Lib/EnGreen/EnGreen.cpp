@@ -42,6 +42,7 @@ bool Engine::Init()
 	RectI posWnd {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gSzWndDef.x, gSzWndDef.y};
     wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	context.Create(wnd);
+	shaders.Compile();
     // Создание окна.
 	wnd.CreateGui();
 	return true;
@@ -102,20 +103,9 @@ WndGui& Engine::GetWnd()
 Context& GetContext()
 {	return eng.context;
 }
-SlotMemG GetFreeCamSlot()
-{   // Сбор всех слотов.
-    std::set<SlotMemG> sUsingSlot;
-    for (const View* v : eng.wnd.aView)
-    {   SlotMemG slot = v->cam.mem.GetSlot();
-        sUsingSlot.insert(slot);
-    }
-    // Поиск свободного.
-    SlotMemG slot = 0;
-    for (SlotMemG s : sUsingSlot)
-    {   if (s != slot) break;
-        ++slot;
-    }
-    return slot;
+
+Shaders& GetShaders()
+{	return eng.shaders;
 }
 
 }

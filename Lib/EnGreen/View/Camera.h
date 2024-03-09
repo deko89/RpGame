@@ -11,11 +11,7 @@ class Camera
 {	public:
 	Pos     pos;    ///< Позиция.
 	Angle   angle;	///< Углы последовательного поворота x, y, z.
-	MemG    mem;    ///< Видеопамять, где хранятся данные.
-	/** Создать.
-		param[in] slot - слот глобальной видеопамяти, где будут данные. */
-	void Create(SlotMemG slot);
-	void Update();  ///< Полное обновление данных в видеокарте.
+	Mat4 GetMatrix() const;	///< Получить матрицу положения камеры.
 	void ProcessEventInput(SDL_Event& event); /// Обработка событий клавиатуры / мыши.
 	void ProcessStateInput(Val timeDelta); ///< Обработка состояния клавиатуры / мыши.
 private:
@@ -26,10 +22,7 @@ private:
 		  fFar = 512;                       ///< Дальнее отсечение.
 	Vec3 vLook; ///< Направление куда смотрит камера. Вычисляется из angle.
 	void UpdateLook(); ///< Обновление вектора направления.
-	void UpdateMemG(); ///< Обновление данных в видеокарте.
 };
-
-SlotMemG GetFreeCamSlot(); ///< Найти свободный слот видеопамяти для камеры.
 
 }
 

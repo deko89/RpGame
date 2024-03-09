@@ -1,7 +1,8 @@
 #ifndef Shader_H
 #define Shader_H
 
-#include "EnGreen/Base/Meta/Meta.h"
+#include <array>
+#include "EnGreen/Base/Meta/MemG.h"
 
 namespace EnG
 {
@@ -41,10 +42,13 @@ const size_t gShaderCount = 3; ///< Число шейдеров.
 /// Стандартные шейдеры. Последовательность в массиве соответствует ShaderType.
 class Shaders : public std::array<Shader, gShaderCount>
 {   public:
-	/** Собрать.
-		param[in] uCamSlot - точка привязки камеры. */
-    void Compile(SlotMemG uCamSlot);
+	MemG	memCam;	///< Видеопамять камеры (позиция).
+	/** Собрать. */
+	void Compile();
 };
+
+/// Получить шейдеры.
+Shaders& GetShaders(); // Реализовано в Engine.cpp
 
 }
 
