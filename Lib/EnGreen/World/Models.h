@@ -19,6 +19,17 @@ protected:
 	TextureRef texture;
 };
 
+/// Модель цилинда.
+class ModelCylinder : public ModelStd
+{	public:
+	ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
+protected:
+	Val rad;	///< Радиус.
+	Val height;	///< Высота.
+	ValN sgmC;	///< Число сегментов в окружности.
+	ValN sgmH;	///< Число сигментов по высоте.
+};
+
 /// Модели.
 class Models : public MassivPtr<Model>
 {	public:

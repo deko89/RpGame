@@ -19,14 +19,9 @@ int main()
     // Создание текстуры.
     static Texture tex;
     tex.Load("SkyBox/clouds1_0.jpg");
-    tex.Use();
     // Создание модели.
-    Mesh mesh;
-    mesh.MakeCylinder(0.3, 2, 8, 4);
-    PlaceTex plTex;
-    plTex.SetCylinder(8, 4, 2, 1);
-    ModelVi* mod = new ModelVi;
-    mod->Make(mesh, plTex);
+    ModelCylinder* mod = new ModelCylinder(0.3, 2, 8, 4);
+    mod->SetTexture(tex);
     view->world->models.Add(mod);
 
 	eng.Execute();

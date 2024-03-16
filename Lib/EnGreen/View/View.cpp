@@ -25,7 +25,6 @@ void View::Draw()
 	// Рисование.
     shaders[shCubeIn].Use();
     world->sky.Draw();
-    shaders[shPosTex].Use(); //tmp
     world->models.Draw();
 }
 void View::ProcessEventInput(SDL_Event& event)
