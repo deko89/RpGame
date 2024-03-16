@@ -13,7 +13,7 @@ void SkyBox::Create(const Str& path)
 
 void SkyBox::Draw() const
 {
-	tex.Use(TexType::Cube);
+	tex.Use();
 	glEnable(GL_DEPTH_CLAMP);   // Отключить отсечение по расстоянию от камеры.
 	glDisable(GL_DEPTH_TEST);   // Отключить тест глубины.
 	model.Draw();

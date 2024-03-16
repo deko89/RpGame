@@ -69,9 +69,10 @@ class Texture
     void LoadCube(const Str& pathF, const TexPar& par = texParCube);
 
     /// Сделать текстуру активной.
-	void Use(TexType type = TexType::Img) const;
+	void Use() const;
 protected:
-	GLuint id = 0; ///< Идентификатор.
+	GLenum texType = GL_TEXTURE_2D; ///< Тип текстуры.
+	GLuint id = 0; ///< Идентификатор текустуры.
     Texture& operator=(const Texture& t) = delete;
 };
 

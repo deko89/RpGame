@@ -61,6 +61,7 @@ Texture::~Texture()
 }
 void Texture::Load(const Str& path, const TexPar& par)
 {	// Подготовка текстуры.
+	texType = GL_TEXTURE_2D;
 	glBindTexture(GL_TEXTURE_2D, id); // Использование своей текстуры.
 	par.Set();
 
@@ -82,6 +83,7 @@ void Texture::Load(const Str& path, const TexPar& par)
 }
 void Texture::LoadArray(const Str& pathF, size_t count, const TexPar& par)
 {	// Подготовка текстуры.
+	texType = GL_TEXTURE_2D_ARRAY;
 	glBindTexture(GL_TEXTURE_2D_ARRAY, id); // Использование своей текстуры.
 	par.Set();
 
@@ -106,6 +108,7 @@ void Texture::LoadArray(const Str& pathF, size_t count, const TexPar& par)
 }
 void Texture::LoadCube(const Str& pathF, const TexPar& par)
 {	// Подготовка текстуры.
+	texType = GL_TEXTURE_CUBE_MAP;
 	glBindTexture(GL_TEXTURE_CUBE_MAP, id); // Использование своей текстуры.
 	par.Set();
 
@@ -128,8 +131,8 @@ void Texture::LoadCube(const Str& pathF, const TexPar& par)
 	// Освобождение памяти.
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
-void Texture::Use(TexType type) const
-{	GLenum texType = typeGl[(size_t)type];
+void Texture::Use() const
+{
     glBindTexture(texType, id);
 }
 
