@@ -76,6 +76,18 @@ protected:
     Texture& operator=(const Texture& t) = delete;
 };
 
+/// Ссылка на текстуру.
+class TextureRef
+{	public:
+	TextureRef(Texture& texture);
+	/// Установить.
+	void Set(Texture& texture);
+	/// Сделать текстуру активной.
+	void Use() const;
+protected:
+	Texture* pTex = nullptr;
+};
+
 }
 
 #endif

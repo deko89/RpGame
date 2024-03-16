@@ -135,5 +135,18 @@ void Texture::Use() const
 {
     glBindTexture(texType, id);
 }
+// TextureRef ////////////////////////////////////////////////////////
+TextureRef::TextureRef(Texture& texture)
+{
+	pTex = &texture;
+}
+void TextureRef::Set(Texture& texture)
+{
+	pTex = &texture;
+}
+void TextureRef::Use() const
+{
+	pTex->Use();
+}
 
 }
