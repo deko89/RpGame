@@ -9,6 +9,10 @@ ModelStd::ModelStd(ShaderType shT, Texture& tex) :
 	texture(tex)
 {
 }
+void ModelStd::SetTexture(Texture& tex)
+{
+	texture.Set(tex);
+}
 void ModelStd::Draw() const
 {
 	shader.Use();

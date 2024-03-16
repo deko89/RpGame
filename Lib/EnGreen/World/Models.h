@@ -11,7 +11,8 @@ namespace EnG
 /// Стандартная модель.
 class ModelStd: public ModelVi
 {	public:
-	ModelStd(ShaderType shT, Texture& tex);
+	ModelStd(ShaderType shT = shPosTex, Texture& tex = gTex0);
+	void SetTexture(Texture& tex);
 	virtual void Draw() const override;
 protected:
 	ShaderRef shader;
