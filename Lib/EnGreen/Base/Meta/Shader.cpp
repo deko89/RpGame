@@ -121,6 +121,10 @@ void Shaders::Compile()
 	sh->LinkMemG("uCam", uCamSlot);
 }
 // ShaderRef /////////////////////////////////////////////////////////
+ShaderRef::ShaderRef(ShaderType shT)
+{
+	t = shT;
+}
 void ShaderRef::Set(ShaderType shT)
 {
 	t = shT;

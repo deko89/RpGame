@@ -53,12 +53,13 @@ Shaders& GetShaders(); // Реализовано в Engine.cpp
 /// Сссылка на шеёдер.
 class ShaderRef
 {	public:
+	ShaderRef(ShaderType shT = shPosTex);
 	/// Установить.
 	void Set(ShaderType shT);
 	/// Сделать активным.
 	void Use() const;
 protected:
-	ShaderType t = shPosTex;
+	ShaderType t;
 };
 
 }
