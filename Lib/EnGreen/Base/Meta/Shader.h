@@ -50,6 +50,17 @@ class Shaders : public std::array<Shader, gShaderCount>
 /// Получить шейдеры.
 Shaders& GetShaders(); // Реализовано в Engine.cpp
 
+/// Сссылка на шеёдер.
+class ShaderRef
+{	public:
+	/// Установить.
+	void Set(ShaderType shT);
+	/// Сделать активным.
+	void Use() const;
+protected:
+	ShaderType t = shPosTex;
+};
+
 }
 
 #endif

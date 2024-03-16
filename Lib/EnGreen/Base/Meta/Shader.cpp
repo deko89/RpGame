@@ -120,5 +120,15 @@ void Shaders::Compile()
 	sh->Compile(codeCubeInVert, 0, codeCubeInFrag);
 	sh->LinkMemG("uCam", uCamSlot);
 }
+// ShaderRef /////////////////////////////////////////////////////////
+void ShaderRef::Set(ShaderType shT)
+{
+	t = shT;
+}
+void ShaderRef::Use() const
+{
+	Shaders& shaders = GetShaders();
+	shaders[t].Use();
+}
 
 }
