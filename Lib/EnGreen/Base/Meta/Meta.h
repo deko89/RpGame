@@ -8,6 +8,7 @@
 
 #define _USE_MATH_DEFINES
 
+#include <ostream>
 #include <chrono>
 
 #ifdef __WINDOWS__
@@ -76,6 +77,10 @@ typedef glm::vec3 Scale;	///< Масштаб.
 typedef glm::vec3 Vec3;		///< Вектор с 3 числами.
 typedef glm::vec4 Vec4;		///< Вектор с 4 числами.
 typedef glm::mat4 Mat4;		///< Матрица 4х4.
+
+std::ostream& operator<<(std::ostream& os, const Vec3& v);
+std::ostream& operator<<(std::ostream& os, const Vec4& v);
+std::ostream& operator<<(std::ostream& os, const Mat4& m);
 
 // Константы.
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
