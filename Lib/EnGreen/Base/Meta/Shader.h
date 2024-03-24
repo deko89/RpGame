@@ -60,6 +60,7 @@ class ShaderRef
 	void Use() const;
 protected:
 	ShaderType t;
+	Shader& Get() const;
 };
 
 }

@@ -131,8 +131,12 @@ void ShaderRef::Set(ShaderType shT)
 }
 void ShaderRef::Use() const
 {
+	Get().Use();
+}
+Shader& ShaderRef::Get() const
+{
 	Shaders& shaders = GetShaders();
-	shaders[t].Use();
+	return shaders[t];
 }
 
 }
