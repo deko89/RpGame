@@ -19,10 +19,22 @@ int main()
     // Создание текстуры.
     static Texture tex;
     tex.Load("SkyBox/clouds1_0.jpg");
-    // Создание модели.
-    ModelCylinder* mod = new ModelCylinder(0.3, 2, 8, 4);
-    mod->SetTexture(tex);
-    view->world->models.Add(mod);
+	ModelCylinder* mod = new ModelCylinder(0.1, 1, 16, 4);
+	mod->SetTexture(tex);
+	mod->SetPos( Pos(3, 3, 1) );
+	mod->SetAngle( Angle(glm::radians(90.0), glm::radians(90.0), glm::radians(45.0)) );
+	mod->SetScale( Scale(0.5, 0.5, 3) );
+	view->world->models.Add(mod);
+	mod->Print();
+
+	for (int x = 0; x < 5; ++x)
+	{
+		mod = new ModelCylinder(0.1, 1, 16, 4);
+		mod->SetPos( Pos(x, 0, 0) );
+		mod->SetTexture(tex);
+		view->world->models.Add(mod);
+		mod->Print();
+	}
 
 	eng.Execute();
 
