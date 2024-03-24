@@ -21,6 +21,7 @@ class ModelStd: public ModelVi
 	virtual void  SetScale(const Scale& s) override;		///< Установить масштаб.
 	void SetTexture(Texture& tex);
 	virtual void Draw() const override;
+	void Print() const;
 protected:
 	Pos pos = Pos(0, 0, 0);
 	Angle angle = Angle(0, 0, 0);

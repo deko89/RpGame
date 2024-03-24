@@ -47,6 +47,10 @@ void ModelStd::Draw() const
 	texture.Use();
 	ModelVi::Draw();
 }
+void ModelStd::Print() const
+{
+	std::cout << "ModelStd " << this << ": pos " << pos << ", angle " << angle << ", scale " << scale << std::endl;
+}
 Mat4 ModelStd::GetMatTrans() const
 {
 	Mat4 mat(1);
