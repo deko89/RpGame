@@ -44,6 +44,7 @@ void ModelStd::SetTexture(Texture& tex)
 void ModelStd::Draw() const
 {
 	shader.Use();
+	shader.SetTrans( GetMatTrans() );
 	texture.Use();
 	ModelVi::Draw();
 }
