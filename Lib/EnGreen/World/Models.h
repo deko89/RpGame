@@ -12,11 +12,22 @@ namespace EnG
 class ModelStd: public ModelVi
 {	public:
 	ModelStd(ShaderType shT = shPosTex, Texture& tex = gTex0);
+	virtual Pos   GetPos() const override;					///< Получить позицию.
+	virtual void  SetPos(const Pos& p) override;			///< Установить позицию.
+	virtual void  Move(const Vec3& v) override;				///< Передвинуть.
+	virtual Angle GetAngle() const override;				///< Получить углы.
+	virtual void  SetAngle(const Angle& a) override;		///< Установить углы.
+	virtual Scale GetScale() const override;				///< Получить масштаб.
+	virtual void  SetScale(const Scale& s) override;		///< Установить масштаб.
 	void SetTexture(Texture& tex);
 	virtual void Draw() const override;
 protected:
+	Pos pos = Pos(0, 0, 0);
+	Angle angle = Angle(0, 0, 0);
+	Scale scale = Scale(1, 1, 1);
 	ShaderRef shader;
 	TextureRef texture;
+	Mat4 GetMatTrans() const; ///< Получить матрицу трансформации.
 };
 
 /// Модель цилинда.

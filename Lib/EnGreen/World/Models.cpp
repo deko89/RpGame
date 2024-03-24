@@ -9,6 +9,34 @@ ModelStd::ModelStd(ShaderType shT, Texture& tex) :
 	texture(tex)
 {
 }
+Pos ModelStd::GetPos() const
+{
+	return pos;
+}
+void ModelStd::SetPos(const Pos& p)
+{
+	pos = p;
+}
+void ModelStd::Move(const Pos& p)
+{
+	pos += p;
+}
+Angle  ModelStd::GetAngle() const
+{
+	return angle;
+}
+void ModelStd::SetAngle(const Angle& a)
+{
+	angle = a;
+}
+Scale ModelStd::GetScale() const
+{
+	return scale;
+}
+void ModelStd::SetScale(const Scale& s)
+{
+	scale = s;
+}
 void ModelStd::SetTexture(Texture& tex)
 {
 	texture.Set(tex);
@@ -18,6 +46,16 @@ void ModelStd::Draw() const
 	shader.Use();
 	texture.Use();
 	ModelVi::Draw();
+}
+Mat4 ModelStd::GetMatTrans() const
+{
+	Mat4 mat(1);
+	mat = glm::translate(mat, pos);
+	mat = glm::rotate(mat, angle.z, Vec3(0, 0, 1));
+	mat = glm::rotate(mat, angle.y, Vec3(0, 1, 0));
+	mat = glm::rotate(mat, angle.x, Vec3(1, 0, 0));
+	mat = glm::scale(mat, scale);
+	return mat;
 }
 // ModelCylinder /////////////////////////////////////////////////////
 ModelCylinder::ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom, bool bCloseUp) :

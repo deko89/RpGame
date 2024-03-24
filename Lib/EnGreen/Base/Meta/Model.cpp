@@ -44,6 +44,12 @@ void ModelVi::Make(const Mesh& mesh, const PlaceTex& placeTex)
 	// Не отвязываем VAO. Чтобы можно было использовать дальше другим функциям. Отвяжется сам, при установке нового.
 	// Отвязка делается так: glBindVertexArray(0);
 }
+//void ModelVi::UpdateVert(const Points& aVert)
+//{
+//	glBindVertexArray(vao);
+//	glBindBuffer(GL_ARRAY_BUFFER, vb);
+//	glBufferSubData(GL_ARRAY_BUFFER, 0, aVert.size() * sizeof(Pos), aVert.data());
+//}
 void ModelVi::Draw() const
 {	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, nInd, IndId, 0);
