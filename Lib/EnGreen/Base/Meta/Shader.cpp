@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include <iostream> // Потоковый вывод (cout).
+#include "glm/gtc/type_ptr.hpp"
 
 namespace EnG
 {
@@ -17,7 +18,10 @@ void Shader::Compile(StrCG sVertexShader, StrCG sGeometryShader, StrCG sFragment
 	{	GLchar infoLog[512];
 		glGetProgramInfoLog(id, 512, NULL, infoLog);
 		std::cout << "Error: Shader program link fail\n" << infoLog << std::endl;
+		return;
 	}
+	// Поиск переменных.
+	iMatTrans = glGetUniformLocation(id, "matTrans");
 }
 Shader::~Shader()
 {	glDeleteProgram(id);
@@ -26,6 +30,11 @@ void Shader::Use() const { glUseProgram(id); }
 void Shader::LinkMemG(StrCG blockName, SlotMemG uLinkPoint)
 {	GLuint uBlockId = glGetUniformBlockIndex(id, blockName);
 	glUniformBlockBinding(id, uBlockId, uLinkPoint);
+}
+void Shader::SetTrans(const Mat4& mat) const
+{
+	assert(iMatTrans != -1);
+	glUniformMatrix4fv(iMatTrans, 1, GL_FALSE, glm::value_ptr(mat));
 }
 bool Shader::CompileShader(StrCG pCode, GLenum const typeShader)
 {	if (!pCode) return 1;
@@ -52,9 +61,10 @@ layout (location = 1) in vec2 posTexIn;
 layout (std140) uniform uCam
 {	mat4 mCamera;
 };
+uniform mat4 matTrans;
 out vec2 posTex;
 void main()
-{	gl_Position = mCamera * vec4(pos, 1.0);
+{	gl_Position = mCamera * matTrans * vec4(pos, 1.0);
 	posTex = posTexIn;
 }
 )";
@@ -132,6 +142,10 @@ void ShaderRef::Set(ShaderType shT)
 void ShaderRef::Use() const
 {
 	Get().Use();
+}
+void ShaderRef::SetTrans(const Mat4& mat) const
+{
+	Get().SetTrans(mat);
 }
 Shader& ShaderRef::Get() const
 {

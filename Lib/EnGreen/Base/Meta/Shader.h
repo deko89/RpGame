@@ -21,8 +21,13 @@ class Shader
     	param[in] blockName - блок переменных в шейдере (uniform).
 		param[in] uLinkPoint - точка привзяки. К ней же должен быть привязан и сам буфер (ubo). */
 	void LinkMemG(StrCG blockName, SlotMemG uLinkPoint);
+
+	/// Установить трансформацию (программа должна быть активной).
+	void SetTrans(const Mat4& mat) const;
 protected:
 	GLuint id = 0; ///< Идентификатор программы.
+	// Переменные.
+	GLint iMatTrans = -1;	///< Переменная (uniform) - матрица трансформации.
 
 	/** Собрать.
 		param[in] typeShader - тип шейжера (GL_VERTEX_SHADER, ...). */
@@ -58,6 +63,7 @@ class ShaderRef
 	void Set(ShaderType shT);
 	/// Сделать активным.
 	void Use() const;
+	void SetTrans(const Mat4& mat) const; ///< Установить трансформацию (программа должна быть активной).
 protected:
 	ShaderType t;
 	Shader& Get() const;
