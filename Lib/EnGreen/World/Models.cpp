@@ -64,7 +64,7 @@ Mat4 ModelStd::GetMatTrans() const
 }
 // ModelCylinder /////////////////////////////////////////////////////
 ModelCylinder::ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom, bool bCloseUp) :
-	rad(rad), height(height), sgmC(sgmC), sgmH(sgmH)
+	rad(rad), height(height), sgmC(sgmC), sgmH(sgmH), bCloseBottom(bCloseBottom), bCloseUp(bCloseUp)
 {
     Mesh mesh;
     mesh.MakeCylinder(rad, height, sgmC, sgmH, bCloseBottom, bCloseUp);

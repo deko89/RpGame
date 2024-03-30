@@ -38,6 +38,8 @@ class ModelCylinder : public ModelStd
 	Val height = 1;	///< Высота.
 	ValN sgmC = 16;	///< Число сегментов в окружности.
 	ValN sgmH = 1;	///< Число сигментов по высоте.
+	bool bCloseBottom = 1;	///< Закрыто снизу.
+	bool bCloseUp = 1;		///< Закрыто сверху.
 	ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 protected:
 };
