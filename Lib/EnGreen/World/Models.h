@@ -34,12 +34,12 @@ protected:
 /// Модель цилинда.
 class ModelCylinder : public ModelStd
 {	public:
+	Val rad = 0.1;	///< Радиус.
+	Val height = 1;	///< Высота.
+	ValN sgmC = 16;	///< Число сегментов в окружности.
+	ValN sgmH = 1;	///< Число сигментов по высоте.
 	ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 protected:
-	Val rad;	///< Радиус.
-	Val height;	///< Высота.
-	ValN sgmC;	///< Число сегментов в окружности.
-	ValN sgmH;	///< Число сигментов по высоте.
 };
 
 /// Модели.
