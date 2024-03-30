@@ -5,6 +5,10 @@ namespace EnG
 {
 
 // Points ///////////////////////////////////////////////////////////
+	// Data //////////////////////////////////////////////////////////
+Points::Data::Data(Points& p) :
+	points(&p)
+{}
 void Points::MakeQuad(Val szX, Val szY)
 {	*(Base*) this =	{	{0,		0,		0},
 						{szX,	0,		0},

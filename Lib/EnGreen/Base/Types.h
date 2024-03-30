@@ -20,6 +20,14 @@ class Points : public vector<Pos>
 {	public:
 	typedef vector<Pos> Base;
 
+	/// Данные точек.
+	struct Data
+	{
+		Points* points = nullptr;
+		Vec3 size; ///< Размер.
+		Data(Points& p);
+	};
+
 	/// Создать прямоугольник.
 	void MakeQuad(Val szX, Val szY);
 
