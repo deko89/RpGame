@@ -40,6 +40,7 @@ class ModelCylinder : public ModelStd
 	ValN sgmH = 1;	///< Число сигментов по высоте.
 	bool bCloseBottom = 1;	///< Закрыто снизу.
 	bool bCloseUp = 1;		///< Закрыто сверху.
+	Points::Modifs modif;	///< Модификаторы.
 	ModelCylinder() {}
 	ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 	void Update(); ///< Обновить модель (применить параметры, модификаторы).

@@ -73,6 +73,10 @@ void ModelCylinder::Update()
     Mesh mesh;
     mesh.MakeCylinder(rad, height, sgmC, sgmH, bCloseBottom, bCloseUp);
 
+    Points::Data pointsData(mesh.aVert);
+    pointsData.size = {rad, rad, height};
+    modif.Set(pointsData);
+
     PlaceTex plTex;
     plTex.SetCylinder(sgmC, sgmH, 2, 1);
 
