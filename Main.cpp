@@ -29,10 +29,12 @@ int main()
 
 	for (int x = 0; x < 5; ++x)
 	{
-		mod = new ModelCylinder(0.1, 1, 16, 4);
+		mod = view->world->models.Make<ModelCylinder>();
+		mod->rad = 0.2;
+		mod->modif.Make<Points::Modifs::Taper>(x / 5.0);
 		mod->SetPos( Pos(x, 0, 0) );
 		mod->SetTexture(tex);
-		view->world->models.Add(mod);
+		mod->Update();
 		mod->Print();
 	}
 
