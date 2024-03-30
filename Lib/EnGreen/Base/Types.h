@@ -37,6 +37,12 @@ class Points : public vector<Pos>
 		param[in] sgmC, sgmH - количество сегментов в круге, и по высоте;
 		param[in] bCloseBottom, bCloseUp - закрыть кругом снизу, и сверху. */
 	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
+
+	// Модификаторы.
+	/** Заострение (по оси Z).
+		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное.
+		param[in] height - высота фигуры */
+	void Taper(Val t, Val height);
 };
 
 /// Индексы (например точек).

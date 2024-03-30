@@ -68,6 +68,17 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 		pVert->x = 0; pVert->y = 0; pVert->z = height;
 	}
 }
+void Points::Taper(Val t, Val height)
+{
+	Val dist = 1 - t; // Общая дистанция (на сколько всего уменьшаем).
+	for (Pos& point: *this)
+	{
+		Val m = point.z / height; // Пройденная дистанция (коэф.).
+		Val sz = 1 - m * dist; // Коэф. размера.
+		point.x *= sz;
+		point.y *= sz;
+	}
+}
 // Mesh /////////////////////////////////////////////////////////////
 void Mesh::MakeQuad(Val szX, Val szY)
 {
