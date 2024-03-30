@@ -8,6 +8,7 @@
 #define Types_H
 
 #include <vector>
+#include "Std/MassivPtr.h"
 #include "EnGreen/Base/Meta/Meta.h"
 
 namespace EnG
@@ -26,6 +27,29 @@ class Points : public vector<Pos>
 		Points* points = nullptr;
 		Vec3 size; ///< Размер.
 		Data(Points& p);
+	};
+
+	/// Базовый модификатор точек.
+	struct Modif
+	{
+		virtual ~Modif() {}
+		/// Применить к точкам.
+		virtual void Set(Points::Data& pData) = 0;
+	};
+
+	/// Модификаторы точек.
+	struct Modifs : public MassivPtr<Modif>
+	{
+		/// Заострение.
+		struct Taper : public Modif
+		{
+			Val taper = 0; ///< Коэф. заострения. 1 - нет, 0 - максимальное.
+			Taper(Val taper);
+			virtual void Set(Points::Data& pData) override;
+		};
+
+		/// Применить модификаторы.
+		void Set(Points::Data& pData);
 	};
 
 	/// Создать прямоугольник.

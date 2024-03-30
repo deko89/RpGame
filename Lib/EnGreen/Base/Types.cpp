@@ -9,6 +9,22 @@ namespace EnG
 Points::Data::Data(Points& p) :
 	points(&p)
 {}
+	// Modifs ////////////////////////////////////////////////////////
+		// Taper /////////////////////////////////////////////////////
+Points::Modifs::Taper::Taper(Val taper) :
+	taper(taper)
+{}
+void Points::Modifs::Taper::Set(Points::Data& pData)
+{
+	pData.points->Taper(taper, pData.size.z);
+}
+		// ~Taper ////////////////////////////////////////////////////
+void Points::Modifs::Set(Points::Data& pData)
+{
+	for (Modif* m : *this)
+		m->Set(pData);
+}
+	// ~Modifs ///////////////////////////////////////////////////////
 void Points::MakeQuad(Val szX, Val szY)
 {	*(Base*) this =	{	{0,		0,		0},
 						{szX,	0,		0},
