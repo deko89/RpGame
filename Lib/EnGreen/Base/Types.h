@@ -37,7 +37,7 @@ class Points : public vector<Pos>
 		virtual void Set(Points::Data& pData) = 0;
 	};
 
-	/// Модификаторы точек.
+	/// Модификаторы точек. Обёртки преобразований, хранящие значения преобразований. Что позволяет знать и менять их.
 	struct Modifs : public MassivPtr<Modif>
 	{
 		/// Заострение.
@@ -70,7 +70,7 @@ class Points : public vector<Pos>
 		param[in] bCloseBottom, bCloseUp - закрыть кругом снизу, и сверху. */
 	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 
-	// Модификаторы.
+	// Модификаторы. Собственно выполняют преобразование своих точек.
 	/** Заострение (по оси Z).
 		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное.
 		param[in] height - высота фигуры */
