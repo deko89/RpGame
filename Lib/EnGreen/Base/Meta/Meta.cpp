@@ -8,6 +8,11 @@ Val Vec2I::Ratio() const
 {   return ( (Val) x ) / y;
 }
 
+std::ostream& operator<<(std::ostream& os, const Vec2& v)
+{
+	return os << glm::to_string(v);
+}
+
 std::ostream& operator<<(std::ostream& os, const Vec3& v)
 {
 	return os << glm::to_string(v); //v.x << " " << v.y << " " << v.z;

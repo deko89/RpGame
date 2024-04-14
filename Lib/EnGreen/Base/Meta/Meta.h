@@ -58,6 +58,7 @@ struct Vec2I : public glm::ivec2
 {   using glm::ivec2::ivec2;
     Val Ratio() const;      ///< Соотношение x / y.
 };
+typedef glm::vec2 Vec2;		///< Вектор с 2 числами.
 
     /// Прямоугольник.
 struct RectI
@@ -77,13 +78,18 @@ typedef glm::vec3 Scale;	///< Масштаб.
 typedef glm::vec3 Vec3;		///< Вектор с 3 числами.
 typedef glm::vec4 Vec4;		///< Вектор с 4 числами.
 typedef glm::mat4 Mat4;		///< Матрица 4х4.
+typedef glm::vec3::length_type OsType;	///< Тип индекса оси (X, Y, Z).
 
+std::ostream& operator<<(std::ostream& os, const Vec2& v);
 std::ostream& operator<<(std::ostream& os, const Vec3& v);
 std::ostream& operator<<(std::ostream& os, const Vec4& v);
 std::ostream& operator<<(std::ostream& os, const Mat4& m);
 
 // Константы.
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
+
+// Оси.
+enum Os : OsType {osX, osY, osZ};
 
 static_assert( sizeof(Val) == 4, "" );
 static_assert( sizeof(PosTex) == 8, "" );
