@@ -71,6 +71,9 @@ class Points : public vector<Pos>
 	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
 
 	// Модификаторы. Собственно выполняют преобразование своих точек.
+	/// Поворот.
+	void Rotate(const Angle& angle);
+
 	/** Заострение (по оси Z).
 		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное.
 		param[in] height - высота фигуры */

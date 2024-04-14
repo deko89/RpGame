@@ -88,6 +88,16 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 		pVert->x = 0; pVert->y = 0; pVert->z = height;
 	}
 }
+void Points::Rotate(const Angle& angle)
+{
+	Mat4 mat(1);
+	mat = glm::rotate(mat, angle.z, Vec3(0, 0, 1));
+	mat = glm::rotate(mat, angle.y, Vec3(0, 1, 0));
+	mat = glm::rotate(mat, angle.x, Vec3(1, 0, 0));
+
+	for (Pos& point: *this)
+		point = mat * Vec4(point, 1.0);
+}
 void Points::Taper(Val t, Val height)
 {
 	Val dist = 1 - t; // Общая дистанция (на сколько всего уменьшаем).
