@@ -10,6 +10,14 @@ Points::Data::Data(Points& p) :
 	points(&p)
 {}
 	// Modifs ////////////////////////////////////////////////////////
+		// Rotate /////////////////////////////////////////////////////
+Points::Modifs::Rotate::Rotate(const Angle& angle) :
+	angle(angle)
+{}
+void Points::Modifs::Rotate::Set(Points::Data& pData)
+{
+	pData.points->Rotate(angle);
+}
 		// Taper /////////////////////////////////////////////////////
 Points::Modifs::Taper::Taper(Val taper) :
 	taper(taper)

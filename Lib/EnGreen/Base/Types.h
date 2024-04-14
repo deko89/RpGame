@@ -40,6 +40,14 @@ class Points : public vector<Pos>
 	/// Модификаторы точек. Обёртки преобразований, хранящие значения преобразований. Что позволяет знать и менять их.
 	struct Modifs : public MassivPtr<Modif>
 	{
+		/// Поворот.
+		struct Rotate : public Modif
+		{
+			Angle angle = Angle(0, 0, 0);
+			Rotate(const Angle& angle);
+			virtual void Set(Points::Data& pData) override;
+		};
+
 		/// Заострение.
 		struct Taper : public Modif
 		{
