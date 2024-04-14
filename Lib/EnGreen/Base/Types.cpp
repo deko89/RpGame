@@ -7,7 +7,7 @@ namespace EnG
 // Points ///////////////////////////////////////////////////////////
 	// Data //////////////////////////////////////////////////////////
 Points::Data::Data(Points& p) :
-	points(&p)
+	aPoint(&p)
 {}
 	// Modifs ////////////////////////////////////////////////////////
 		// Rotate /////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ Points::Modifs::Rotate::Rotate(const Angle& angle) :
 {}
 void Points::Modifs::Rotate::Set(Points::Data& pData)
 {
-	pData.points->Rotate(angle);
+	pData.aPoint->Rotate(angle);
 }
 		// Taper /////////////////////////////////////////////////////
 Points::Modifs::Taper::Taper(Val taper) :
@@ -24,7 +24,7 @@ Points::Modifs::Taper::Taper(Val taper) :
 {}
 void Points::Modifs::Taper::Set(Points::Data& pData)
 {
-	pData.points->Taper(taper, pData.size.z);
+	pData.aPoint->Taper(taper, pData.size.z);
 }
 		// ~Taper ////////////////////////////////////////////////////
 void Points::Modifs::Set(Points::Data& pData)
