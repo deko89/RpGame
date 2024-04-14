@@ -117,6 +117,114 @@ void Points::Taper(Val t, Val height)
 		point.y *= sz;
 	}
 }
+/// Вычисление и построение сплайна (в 3d).
+struct SplineMake
+{
+	const bool bPrint = 1;	///< Печать отладочной информации.
+
+	SplineMake(vector<Pos>& aVert, const vector<Pos>& aKey) :
+		aVert(aVert), aKey(aKey)
+	{
+		aDer.resize( aKey.size() );
+	}
+
+	/// Проверить на возможность вычисления.
+	bool Check()
+	{
+		return aKey.size() > 1;
+	}
+
+	/** Рассчитать производные (в условной плоскости XY). */
+	void CalcDer()
+	{
+		if (bPrint) std::cout << "CalcDer oX = " << oX << ", oY = " << oY << std::endl;
+		// Производная №0 (самая первая).
+		const Vec2 k0( aKey[0][oX],	aKey[0][oY]	);
+		const Vec2 k1( aKey[1][oX],	aKey[1][oY]	);
+		aDer[0] = (k1.y - k0.y) / (k1.x - k0.x);
+		if (bPrint) std::cout << "Der 0 = " << aDer[0] << std::endl;
+		// Производная №1+ (стандартные).
+		for (size_t i = 1; i < aKey.size() - 1; ++i)
+		{
+			// Ближайшие ключевые точки.
+			const Vec2 k0( aKey[i - 1][oX],	aKey[i - 1][oY]	);
+			const Vec2 k1( aKey[i    ][oX],	aKey[i    ][oY]	);
+			const Vec2 k2( aKey[i + 1][oX],	aKey[i + 1][oY]	);
+			// Прилежащие вектора.
+			Vec2 v1 = k1 - k0; // До.
+			Vec2 v2 = k2 - k1; // После.
+			if (bPrint)
+			{
+				std::cout << "Calc Der " << i << std::endl;
+				std::cout << "\tk0 " << k0 << "; k1 " << k1 << "; k2 " << k2
+						  << "\n\tv1 " << v1 << "; v2 " << v2 << std::endl;
+			}
+			// Нормализация, нужно для нахождения среднего по углу.
+			v1 = normalize(v1);
+			v2 = normalize(v2);
+			// Нахождение среднего вектора.
+			Vec2 v = v1 + v2;
+			if (bPrint)
+				std::cout << "\tnormalize v1: " << v1 << "; normalize v2: " << v2
+						  << "\n\tv: " << v << std::endl;
+			// Средняя производная (между ней и ключевыми отрезками равные углы).
+			aDer[i] = v.y / v.x;
+			if (bPrint)
+				std::cout << "Der " << i << " = " << aDer[i] <<
+				" (простая " << (k2.y - k0.y) / (k2.x - k0.x) << ")" << std::endl;
+		}
+		// Производная №N (самая последняя).
+		const size_t p = aKey.size() - 2;
+		const size_t l = p + 1;
+		const Vec2 kp( aKey[p][oX],	aKey[p][oY]	);
+		const Vec2 kl( aKey[l][oX],	aKey[l][oY]	);
+		aDer[l] = (kl.y - kp.y) / (kl.x - kp.x);
+		if (bPrint) std::cout << "Der " << l << " = " << aDer[l] << std::endl;
+	}
+
+private:
+	vector<Pos>& aVert;			///< Обрабатываемые вершины.
+	const vector<Pos>& aKey;	///< Ключевые точки.
+	Os oX = osX, oY = osY;		///< Условные оси X, Y - относительно которых сейчас строится сплайн.
+	vector<Val> aDer;			///< Производные в ключевых точках (в текущей условной плоскости XY).
+	size_t iVert = 0;			///< Текущая вершина.
+	/// Переменные в текущем отрезке. Для формулы.
+	Val x0, lineLen, k0, k1, d0, d1;
+
+	/// Установить подходящий отрезок.
+	bool SelectLine()
+	{
+		Pos& vert = aVert[iVert];
+
+		// Текущая первая ключевая точка (и отрезок сплайна).
+		size_t iKey = 0;
+		for (iKey = 1; iKey < aKey.size(); ++iKey)
+			if ( vert[oX] <= aKey[iKey][oX] )
+				break;
+
+		if ( iKey >= aKey.size() )
+		{
+			if (bPrint)
+				std::cout << "Не найден отрезок: iVert = " << iVert << " vert[oX] = " << vert[oX]
+						  << " X_back = " << aKey.back()[oX] << std::endl;
+			iKey = aKey.size() - 2;
+			//return false;
+		} else
+			--iKey;
+
+		// Переменные отрезка.
+		x0      = aKey[iKey][oX];
+		Val x1  = aKey[iKey + 1][oX];
+		lineLen = x1 - x0;
+
+		k0 = aKey[iKey][oY];
+		k1 = aKey[iKey + 1][oY];
+		d0 = aDer[iKey];
+		d1 = aDer[iKey + 1];
+
+		return true;
+	}
+};
 // Mesh /////////////////////////////////////////////////////////////
 void Mesh::MakeQuad(Val szX, Val szY)
 {
