@@ -6,11 +6,17 @@ namespace EnG
 WndG::WndG()
 {
     timePrev = system_clock::now();
+    SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void WndG::ProcessEvent(SDL_Event& event)
 {	if (view && event.type == SDL_MOUSEMOTION)
 		view->ProcessEventInput(event);
+    if (event.type == SDL_KEYDOWN)
+    {
+    	if (event.key.keysym.scancode == SDL_SCANCODE_LCTRL)
+    		SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode()? SDL_FALSE: SDL_TRUE);
+    }
 }
 
 void WndG::Draw()

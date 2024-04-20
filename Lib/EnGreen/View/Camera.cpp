@@ -15,10 +15,7 @@ Mat4 Camera::GetMatrix() const
 }
 void Camera::ProcessEventInput(SDL_Event& event)
 {
-//    if (event.type == SDL_KEYDOWN)
-//    {   if (event.key.keysym.sym == SDLK_RIGHT)
-//    }
-    if (event.type == SDL_MOUSEMOTION)
+    if (event.type == SDL_MOUSEMOTION && SDL_GetRelativeMouseMode())
     {
 		angle.z -= event.motion.xrel * sensitivityMouse;
 		angle.x -= event.motion.yrel * sensitivityMouse;
