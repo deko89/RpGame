@@ -56,6 +56,15 @@ class Points : public vector<Pos>
 			virtual void Set(Points::Data& pData) override;
 		};
 
+		/*	@brief Сплайн - плавная кривая линия.
+			Строится из цилиндра по оси X: устанавливаются координаты вершин по y, z (по x - не трогаются). */
+		struct Spline : public Modif
+		{
+			vector<Pos> aKey; ///< Ключевые точки, через которые проходит линия.
+			Spline(const vector<Pos>& aKey);
+			virtual void Set(Points::Data& pData) override;
+		};
+
 		/// Применить модификаторы.
 		void Set(Points::Data& pData);
 	};

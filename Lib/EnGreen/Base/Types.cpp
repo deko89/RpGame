@@ -26,7 +26,15 @@ void Points::Modifs::Taper::Set(Points::Data& pData)
 {
 	pData.aPoint->Taper(taper, pData.size.z);
 }
-		// ~Taper ////////////////////////////////////////////////////
+		// Spline ////////////////////////////////////////////////////
+Points::Modifs::Spline::Spline(const vector<Pos>& aKey) :
+	aKey(aKey)
+{}
+void Points::Modifs::Spline::Set(Points::Data& pData)
+{
+	pData.aPoint->Spline(aKey);
+}
+		// ~Spline ///////////////////////////////////////////////////
 void Points::Modifs::Set(Points::Data& pData)
 {
 	for (Modif* m : *this)
