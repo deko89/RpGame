@@ -264,8 +264,8 @@ private:
 
 		k0 = aKey[iKey][oY];
 		k1 = aKey[iKey + 1][oY];
-		d0 = aDer[iKey];
-		d1 = aDer[iKey + 1];
+		d0 = aDer[iKey] * lineLen;
+		d1 = aDer[iKey + 1] * lineLen;
 
 		return true;
 	}
