@@ -182,6 +182,36 @@ struct SplineMake
 		if (bPrint) std::cout << "Der " << l << " = " << aDer[l] << std::endl;
 	}
 
+	/// Установить вершины по сплайну.
+	void MoveVert()
+	{
+		for (iVert = 0; iVert < aVert.size(); ++iVert)
+		{
+			SelectLine();
+			Pos& vert = aVert[iVert];
+			Val r = vert[oY];
+			// Смещение.
+			Val w = (vert[oX] - x0) / lineLen,
+				w2 = w * w, w3 = w2 * w;
+			vert[oY] =	k0 * (2*w3 - 3*w2 + 1) +
+						k1 * (-2*w3 + 3*w2) +
+						d0 * (w3 - 2*w2 + w) +
+						d1 * (w3 - w2);
+			// Поворот по углу касательной.
+				// Производная за w.
+			Val d = 	k0 * (6*w2 - 6*w) +
+						k1 * (-6*w2 + 6*w) +
+						d0 * (3*w2 - 4*w + 1) +
+						d1 * (3*w2 - 2*w);
+			d /= lineLen; // Приводим к обычной производной за 1.
+			Val a = atan(d);
+			Val cosA = cos(a);
+			Val sinA = cosA * d;
+			//if (bPrint) std::cout << "iVert = " << iVert << " a = " << glm::degrees(a) << " cosA = " << cosA << " sinA = " << sinA << " r = " << r << std::endl;
+			vert[oX] -= sinA * r;
+			vert[oY] += cosA * r;
+		}
+	}
 private:
 	vector<Pos>& aVert;			///< Обрабатываемые вершины.
 	const vector<Pos>& aKey;	///< Ключевые точки.
