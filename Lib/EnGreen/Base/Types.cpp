@@ -120,7 +120,7 @@ void Points::Taper(Val t, Val height)
 /// Вычисление и построение сплайна (в 3d).
 struct SplineMake
 {
-	const bool bPrint = 1;	///< Печать отладочной информации.
+	const bool bPrint = 0;	///< Печать отладочной информации.
 
 	SplineMake(vector<Pos>& aVert, const vector<Pos>& aKey) :
 		aVert(aVert), aKey(aKey)
@@ -270,6 +270,11 @@ private:
 		return true;
 	}
 };
+void Points::Spline(const vector<Pos>& aKey)
+{
+	SplineMake splineMake(*this, aKey);
+	splineMake.Do();
+}
 // Mesh /////////////////////////////////////////////////////////////
 void Mesh::MakeQuad(Val szX, Val szY)
 {
