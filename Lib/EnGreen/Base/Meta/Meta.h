@@ -91,6 +91,9 @@ const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
 // Оси.
 enum Os : OsType {osX, osY, osZ};
 
+enum class PolygonMode {Point, Line, Fill};
+void SetPolygonMode(PolygonMode mode);
+
 static_assert( sizeof(Val) == 4, "" );
 static_assert( sizeof(PosTex) == 8, "" );
 

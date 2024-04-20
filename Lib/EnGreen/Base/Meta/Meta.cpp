@@ -28,4 +28,15 @@ std::ostream& operator<<(std::ostream& os, const Mat4& m)
 	return os << glm::to_string(m);
 }
 
+void SetPolygonMode(PolygonMode mode)
+{
+	GLenum m;
+	switch (mode)
+	{	case PolygonMode::Point:	m = GL_POINT;	break;
+		case PolygonMode::Line:		m = GL_LINE;	break;
+		case PolygonMode::Fill:		m = GL_FILL;	break;
+	}
+	glPolygonMode(GL_FRONT_AND_BACK, m);
+}
+
 }
