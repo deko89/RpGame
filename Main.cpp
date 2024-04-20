@@ -14,7 +14,7 @@ int main()
     // Настройка.
     View* view = eng.CreateViewWorld();
     // Установка камеры.
-    view->cam.pos = {0, -3, 1};
+    view->cam.pos = {10, -20, 0};
     view->cam.angle = {0, 0, pi/2};
     // Создание текстуры.
     static Texture tex;
@@ -25,18 +25,26 @@ int main()
 	mod->SetAngle( Angle(glm::radians(90.0), glm::radians(90.0), glm::radians(45.0)) );
 	mod->SetScale( Scale(0.5, 0.5, 3) );
 	view->world->models.Add(mod);
-	mod->Print();
 
-	for (int x = 0; x < 5; ++x)
-	{
-		mod = view->world->models.Make<ModelCylinder>();
-		mod->rad = 0.2;
-		mod->modif.Make<Points::Modifs::Taper>(x / 5.0);
-		mod->SetPos( Pos(x, 0, 0) );
-		mod->SetTexture(tex);
-		mod->Update();
-		mod->Print();
-	}
+	mod = view->world->models.Make<ModelCylinder>();
+	mod->rad = 0.03;
+	mod->height = 25;
+	mod->SetAngle( Angle(0, glm::radians(90.0), 0) );
+	mod->SetTexture(tex);
+	mod->Update();
+
+	// Spline
+	mod = view->world->models.Make<ModelCylinder>();
+	mod->rad = 0.3;
+	mod->height = 25;
+	mod->sgmC = 6;
+	mod->sgmH = 64;
+	mod->modif.Make<Points::Modifs::Taper>(0.1);
+	mod->modif.Make<Points::Modifs::Rotate>( Angle{0, glm::radians(90.0), 0} );
+	vector<Pos> aKeySpline { {0,0,0}, {5,0.0,5.0}, {10,0.0,0.0}, {15,0.0,0.2}, {20,0.0,0.5}, {25,0.0,0.0}  };
+	mod->modif.Make<Points::Modifs::Spline>(aKeySpline);
+	mod->SetTexture(tex);
+	mod->Update();
 
 	eng.Execute();
 
