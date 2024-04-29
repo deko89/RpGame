@@ -74,7 +74,7 @@ void ModelCylinder::Update()
     mesh.MakeCylinder(rad, height, sgmC, sgmH, bCloseBottom, bCloseUp);
 
     Points::Data pointsData(mesh.aVert);
-    pointsData.size = {rad, rad, height};
+    pointsData.size = {rad, rad, height}; //TODO Должен быть размер диаметра.
     modif.Set(pointsData);
 
     PlaceTex plTex;

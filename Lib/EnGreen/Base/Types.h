@@ -101,6 +101,8 @@ class Points : public vector<Pos>
 	void Spline(const vector<Pos>& aKey);
 };
 
+typedef Points::Modifs Modifs;
+
 /// Индексы (например точек).
 typedef vector<Ind> Indexes;
 

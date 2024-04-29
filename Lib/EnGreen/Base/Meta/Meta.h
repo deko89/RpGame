@@ -94,6 +94,10 @@ enum Os : OsType {osX, osY, osZ};
 enum class PolygonMode {Point, Line, Fill};
 void SetPolygonMode(PolygonMode mode);
 
+// Функции (из glm/geometric.hpp).
+//glm::length(Vec v) ///< Длина вектора.
+//glm::distance(Vec v0, Vec v1) ///< length(v0 - v1).
+
 static_assert( sizeof(Val) == 4, "" );
 static_assert( sizeof(PosTex) == 8, "" );
 
