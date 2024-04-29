@@ -14,8 +14,22 @@ void WndG::ProcessEvent(SDL_Event& event)
 		view->ProcessEventInput(event);
     if (event.type == SDL_KEYDOWN)
     {
-    	if (event.key.keysym.scancode == SDL_SCANCODE_LCTRL)
-    		SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode()? SDL_FALSE: SDL_TRUE);
+    	switch (event.key.keysym.scancode)
+    	{
+    		case SDL_SCANCODE_LCTRL:
+    			SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode()? SDL_FALSE: SDL_TRUE);
+	    		break;
+    		case SDL_SCANCODE_F2:
+    			SetPolygonMode(PolygonMode::Point);
+	    		break;
+    		case SDL_SCANCODE_F3:
+    			SetPolygonMode(PolygonMode::Line);
+	    		break;
+    		case SDL_SCANCODE_F4:
+    			SetPolygonMode(PolygonMode::Fill);
+	    		break;
+	    	default: ;
+    	}
     }
 }
 
