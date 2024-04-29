@@ -12,6 +12,7 @@
 	#include "Base/Context.cpp"
 	#include "Base/Types.cpp"
 	#include "World/Models.cpp"
+	#include "World/Plant.cpp"
 	#include "World/World.cpp"
 	#include "World/SkyBox.cpp"
 	#include "View/Wnd/Wnd.cpp"
