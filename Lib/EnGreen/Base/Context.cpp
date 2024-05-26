@@ -34,6 +34,9 @@ void Context::Create(Wnd& wnd)
 	gl_context = SDL_GL_CreateContext(pWnd);
 	//SDL_GL_MakeCurrent(pWnd, gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
+
+	glEnable(GL_DEPTH_TEST);    // Включить тест глубины.
+	glDisable(GL_DEPTH_CLAMP);  // Включить отсечение по расстоянию от камеры.
 }
 
 void Context::Clear()
