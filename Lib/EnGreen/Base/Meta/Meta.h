@@ -94,9 +94,15 @@ enum Os : OsType {osX, osY, osZ};
 enum class PolygonMode {Point, Line, Fill};
 void SetPolygonMode(PolygonMode mode);
 
-// Функции (из glm/geometric.hpp).
-//glm::length(Vec v) ///< Длина вектора.
-//glm::distance(Vec v0, Vec v1) ///< length(v0 - v1).
+// Функции glm.
+//#include "glm/geometric.hpp"
+//	glm::length(Vec v) ///< Длина вектора.
+//	glm::distance(Vec v0, Vec v1) ///< length(v0 - v1).
+//#include "glm/gtx/rotate_vector.hpp"
+//	glm::rotate(Vec v, angle) ///< Вращение вектора.
+//#include "glm/trigonometric.hpp"
+//	glm::radians(Val) ///< Преобразование градусов в радианы.
+//	glm::degrees(Val) ///< Преобразование радиан в градусы.
 
 static_assert( sizeof(Val) == 4, "" );
 static_assert( sizeof(PosTex) == 8, "" );
