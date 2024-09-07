@@ -14,7 +14,7 @@ struct SplineCalc
 {
 	const bool bPrint = 0;	///< Печать отладочной информации.
 	/** @brief Конструктор.
-		param[in] aKey - ключевые точки сплайна.
+		param[in] aKey - ключевые точки сплайна. Каждая следующая должна быть больше по X.
 		param[in] osMain - основная ось, вдоль которой идёт цилиндр для сплайна. */
 	SplineCalc(const vector<Pos>& aKey, Os osMain = osX);
 	bool Check() const;		///< Проверить (правильные ли параметры на входе).
@@ -105,6 +105,40 @@ void SplineCalc::SetPlaneXZ()
 		case osY: oY = osX; break;
 		case osZ: oY = osY; break;
 	}
+}
+bool SplineCalc::SelectLine(Val x)
+{
+	// Поиск начальной ключевой точки (отрезка сплайна).
+	for (iKey = 1; iKey < aKey.size(); ++iKey)
+		if ( x <= aKey[iKey][oX] )
+			break;
+
+	if ( iKey >= aKey.size() )
+	{
+		if (bPrint)
+			std::cout << "Не найден отрезок: x = " << x
+					  << " X_back = " << aKey.back()[oX] << std::endl;
+		iKey = aKey.size() - 2;
+		//return false;
+	} else
+		--iKey;
+
+	// Переменные отрезка.
+	x0      = aKey[iKey][oX];
+	Val x1  = aKey[iKey + 1][oX];
+	lineLen = x1 - x0;
+
+	GetKD();
+
+	return true;
+}
+void SplineCalc::GetKD()
+{
+	k0 = aKey[iKey][oY];
+	k1 = aKey[iKey + 1][oY];
+	vector<Val>& aDer = bXZ? aDerZ: aDerY;
+	d0 = aDer[iKey] * lineLen;
+	d1 = aDer[iKey + 1] * lineLen;
 }
 
 }
