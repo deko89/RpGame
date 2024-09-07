@@ -53,3 +53,36 @@ private:
 }
 
 #endif
+
+
+
+#ifdef Include_cpp
+
+#include <cmath>
+#include "glm/gtx/rotate_vector.hpp"
+
+namespace EnG
+{
+
+// SplineCalc ////////////////////////////////////////////////////////
+SplineCalc::SplineCalc(const vector<Pos>& aKey, Os osMain) :
+	aKey(aKey)
+{
+	aDerY.resize( aKey.size() );
+	aDerZ.resize( aKey.size() );
+	// Установка осей.
+	oX = osMain;
+	switch (osMain)
+	{	case osX:	oX = osY;	break;
+		case osY:	oY = osZ;	break;
+		case osZ:	oY = osX;	break;
+	}
+}
+bool SplineCalc::Check() const
+{
+	return aKey.size() > 1;
+}
+
+}
+
+#endif
