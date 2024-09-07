@@ -82,6 +82,10 @@ bool SplineCalc::Check() const
 {
 	return aKey.size() > 1;
 }
+Val SplineCalc::GetLen()
+{
+	return aKey.back()[oX];
+}
 
 }
 
