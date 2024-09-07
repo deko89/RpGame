@@ -34,7 +34,7 @@ private:
 	/// По факту их можно менять местами XYZ, YZX, ZXY. При этом совершенно ничего не меняется, всё остаётся также как будто XYZ.
 	/// Можно просто думать что всегда "XYZ" = XYZ, всё так же.
 	Os oX = osX, oY = osY;
-	bool bXZ = 0;				///< 0 - установлена плоскость XY, 1 - XZ.
+	bool bXZ = 0;				///< 0 - установлена плоскость XY, 1 - XZ. См. SetPlaneXY.
 	vector<Val> aDerY, aDerZ;	///< Производные в ключевых точках (в условных плоскостях "XY", "XZ").
 	size_t iKey = 0;			///< Текущая ключевая точка начала отрезка.
 	size_t iVert = 0;			///< Текущая вершина.
@@ -85,6 +85,26 @@ bool SplineCalc::Check() const
 Val SplineCalc::GetLen()
 {
 	return aKey.back()[oX];
+}
+void SplineCalc::SetPlaneXY()
+{
+	bXZ = 0;
+	switch (oX)
+	{
+		case osX: oY = osY; break;
+		case osY: oY = osZ; break;
+		case osZ: oY = osX; break;
+	}
+}
+void SplineCalc::SetPlaneXZ()
+{
+	bXZ = 1;
+	switch (oX)
+	{
+		case osX: oY = osZ; break;
+		case osY: oY = osX; break;
+		case osZ: oY = osY; break;
+	}
 }
 
 }
