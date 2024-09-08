@@ -82,6 +82,16 @@ bool SplineCalc::Check() const
 {
 	return aKey.size() > 1;
 }
+void SplineCalc::Calc()
+{
+	// Расчёт производных в ключевых точках.
+		// Плоскость "XY".
+	SetPlaneXY();
+	CalcDer();
+		// Плоскость "XZ".
+	SetPlaneXZ();
+	CalcDer();
+}
 Val SplineCalc::GetLen()
 {
 	return aKey.back()[oX];
