@@ -51,7 +51,7 @@ void Camera::UpdateLook()
     vLook.x = cosX * cos(angle.z);
     vLook.y = cosX * sin(angle.z);
     vLook.z = sin(angle.x);
-    glm::normalize(vLook);
+    vLook = glm::normalize(vLook);
 }
 
 }
