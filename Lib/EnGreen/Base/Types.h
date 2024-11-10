@@ -10,6 +10,7 @@
 #include <vector>
 #include "Std/MassivPtr.h"
 #include "EnGreen/Base/Meta/Meta.h"
+#include "EnGreen/Base/Math.hpp"
 
 namespace EnG
 {
