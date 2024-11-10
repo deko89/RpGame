@@ -98,6 +98,9 @@ void SetPolygonMode(PolygonMode mode);
 //#include "glm/geometric.hpp"
 //	glm::length(Vec v) ///< Длина вектора.
 //	glm::distance(Vec v0, Vec v1) ///< length(v0 - v1).
+//	normalize(vec)	///< Нормализация вектора (то же направление, длина 1).
+//	float f = glm::dot(v1, v2);		///< Скалярное произведение.
+//	vec3  v = glm::cross(v1, v2);	///< Векторное произведение
 //#include "glm/gtx/rotate_vector.hpp"
 //	glm::rotate(Vec v, angle) ///< Вращение вектора.
 //#include "glm/trigonometric.hpp"
