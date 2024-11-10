@@ -23,22 +23,23 @@ int main()
 	ModelCylinder* mod;
 
 	mod = view->world->models.Make<ModelCylinder>();
-	mod->rad = 0.01;
-	mod->height = 1;
+	mod->rad = 0.001;
+	mod->height = 2;
+	mod->SetPos( Pos(0, 0, -1) );
 	mod->SetTexture(tex);
 	mod->Update();
 
 	mod = view->world->models.Make<ModelCylinder>();
-	mod->rad = 0.01;
-	mod->height = 1;
+	mod->rad = 0.001;
+	mod->height = 2;
+	mod->SetPos( Pos(-1, 0, 0) );
 	mod->SetAngle( Angle(0, glm::radians(90.0), 0) );
 	mod->SetTexture(tex);
 	mod->Update();
 
 	// Spline
-	vector<Pos> aVetv { {0,0,0}, {0.1,0.0,0.4}, {0.15,-0.1,0.8}, {0.1,0.0,1.2}, {0.03,0.1,1.6}, {0.1,0.0,2.0} };
+	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {0.0,0.0,2}, {0.0,0.0,3}, {0.00,0.0,4}, {0.0,0.0,5} };
 	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetAngle( Angle(0, glm::radians(90.0), 0) );
 	mod->SetTexture(tex);
 
 	mod = view->world->models.Make<ModelStvol>(aVetv);
