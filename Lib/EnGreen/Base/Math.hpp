@@ -4,6 +4,18 @@
 #include <vector>
 #include "EnGreen/Base/Meta/Meta.h"
 
+namespace glm
+{
+	/// Вращение 2d вектора на 90°.
+	template<typename T, qualifier Q>
+	GLM_FUNC_QUALIFIER void Rotate90(vec<2, T, Q>& v)
+	{
+		T x = v.x;
+		v.x = -v.y;
+		v.y = x;
+	}
+}
+
 namespace EnG
 {
 
@@ -21,10 +33,11 @@ struct SplineCalc
 	void Calc();			///< Рассчитать необходимые общие параметры.
 	Val GetLen();			///< Получить длину (по текущей оси X).
 	/** @brief Получить позицию.
-		@details Общая идея. Вдоль оси X есть цилиндр для сплайна.
-			Сперва рассчитывается позиция центральной точки. По двум плоскостям.
-			Затем позиция смещённой точки, представив что это вершина сегмента цилиндра.
-			Сегмент (кольцо) сперва вращается по Y, затем по Z. Размеры сегмента не меняются, только вращение.
+		@details Общая идея. Вдоль оси (X) есть цилиндр для сплайна.
+1. Сперва рассчитываются позиция центральной линии сплайна. По двум плоскостям.
+2. Затем смещения вершин цилиндра. Сегмент цилиндра (кольцо) поворачивается под
+угол направления (согласно производным в этой точке).
+Размеры сегмента не меняются, он только вращается.
 		param[in,out] vert - начальная позиция точки. В неё же запишется конечная позиция. */
 	void CalcPos(Pos& vert);
 private:
@@ -33,7 +46,7 @@ private:
 	/// Функции всегда думают что работают с осям XY.
 	/// По факту их можно менять местами XYZ, YZX, ZXY. При этом совершенно ничего не меняется, всё остаётся также как будто XYZ.
 	/// Можно просто думать что всегда "XYZ" = XYZ, всё так же.
-	Os oX = osX, oY = osY;
+	Os oX = osX, oY = osY, oZ = osZ;
 	bool bXZ = 0;				///< 0 - установлена плоскость XY, 1 - XZ. См. SetPlaneXY.
 	vector<Val> aDerY, aDerZ;	///< Производные в ключевых точках (в условных плоскостях "XY", "XZ").
 	size_t iKey = 0;			///< Текущая ключевая точка начала отрезка.
@@ -59,7 +72,6 @@ private:
 #ifdef Include_cpp
 
 #include <cmath>
-#include "glm/gtx/rotate_vector.hpp"
 
 namespace EnG
 {
@@ -72,11 +84,7 @@ SplineCalc::SplineCalc(const vector<Pos>& aKey, Os osMain) :
 	aDerZ.resize( aKey.size() );
 	// Установка осей.
 	oX = osMain;
-	switch (osMain)
-	{	case osX:	oX = osY;	break;
-		case osY:	oY = osZ;	break;
-		case osZ:	oY = osX;	break;
-	}
+	SetPlaneXY();
 }
 bool SplineCalc::Check() const
 {
@@ -96,14 +104,60 @@ Val SplineCalc::GetLen()
 {
 	return aKey.back()[oX];
 }
+void SplineCalc::CalcPos(Pos& vert)
+{
+	const Pos v = vert;
+	if (bPrint) std::cout << "vert (begin) = " << vert << std::endl;
+	// 1. Расчёт центра (и заодно производных).
+	// 1.1. По оси Y (при "XYZ" = ZXY это X).
+	SetPlaneXY(); // (При ZXY - это плоскость ZX.)
+	SelectLine(v[oX]); // Полный поиск отрезка.
+	const Val w = (v[oX] - x0) / lineLen,  w2 = w * w,  w3 = w2 * w;
+	const Val	r1 = 2*w3 - 3*w2 + 1,
+				r2 = -2*w3 + 3*w2,
+				r3 = w3 - 2*w2 + w,
+				r4 = w3 - w2;
+	const Val	r5 = 6*w2 - 6*w,
+				r6 = -6*w2 + 6*w,
+				r7 = 3*w2 - 4*w + 1,
+				r8 = 3*w2 - 2*w;
+	vert[oY] = k0 * r1 + k1 * r2 + d0 * r3 + d1 * r4; // Центр цилиндра.
+	Val dy = k0 * r5 + k1 * r6 + d0 * r7 + d1 * r8; // Производная (за lineLen).
+	dy /= lineLen; // Приводим к обычной производной за 1.
+	// 1.2. По оси Z (Y при ZXY).
+	SetPlaneXZ(); // (При ZXY - это плоскость ZY.)
+	GetKD(); // Отрезок тот-же, просто берём переменные.
+	SetPlaneXY();
+	vert[oZ] = k0 * r1 + k1 * r2 + d0 * r3 + d1 * r4; // Центр цилиндра.
+	Val dz = k0 * r5 + k1 * r6 + d0 * r7 + d1 * r8;
+	dz /= lineLen;
+	if (bPrint) std::cout << "vert (center) = " << vert << std::endl;
+	// 2. Смещение на позицию вершины цилиндра (согласно направлению сплайна).
+	// 2.1. Нахождение оси X`.
+	Vec3 vOx;  vOx[oX] = 1;  vOx[oY] = dy;  vOx[oZ] = dz;
+	vOx = glm::normalize(vOx);
+	// 2.2. Нахождение оси Y`.
+	Vec2 vDxy(1, dy);
+	vDxy = glm::normalize(vDxy);
+	glm::Rotate90(vDxy);
+	Vec3 vOy;  vOy[oX] = vDxy.x;  vOy[oY] = vDxy.y;  vOy[oZ] = 0;
+	// 2.3. Нахождение оси Z`.
+	Vec3 vOz = glm::cross(vOx, vOy);
+	if (bPrint) std::cout << "vOx = " << vOx << "; vOy = " << vOy << "; vOz = " << vOz << std::endl;
+	// 2.4. Получение искомого вектора.
+	Vec3 vXy(vOy * v[oY]); // Вектор смещения по оси Y`.
+	Vec3 vXz(vOz * v[oZ]); // Вектор смещения по оси Z`.
+	if (bPrint) std::cout << "vXy = " << vXy << "; vXz = " << vXz << std::endl;
+	vert += vXy + vXz;
+	if (bPrint) std::cout << "vert (end) = " << vert << std::endl;
+}
 void SplineCalc::SetPlaneXY()
 {
 	bXZ = 0;
 	switch (oX)
-	{
-		case osX: oY = osY; break;
-		case osY: oY = osZ; break;
-		case osZ: oY = osX; break;
+	{	case osX:	oY = osY;	oZ = osZ;	break;
+		case osY:	oY = osZ;	oZ = osX;	break;
+		case osZ:	oY = osX;	oZ = osY;	break;
 	}
 }
 void SplineCalc::SetPlaneXZ()
@@ -111,15 +165,15 @@ void SplineCalc::SetPlaneXZ()
 	bXZ = 1;
 	switch (oX)
 	{
-		case osX: oY = osZ; break;
-		case osY: oY = osX; break;
-		case osZ: oY = osY; break;
+		case osX:	oY = osZ;	oZ = osY;	break;
+		case osY:	oY = osX;	oZ = osZ;	break;
+		case osZ:	oY = osY;	oZ = osX;	break;
 	}
 }
 void SplineCalc::CalcDer()
 {
 	vector<Val>& aDer = bXZ? aDerZ: aDerY;
-	if (bPrint) std::cout << "CalcDer oX = " << oX << ", oY = " << oY << std::endl;
+	if (bPrint) std::cout << "CalcDer oX = " << oX << ", oY = " << oY << ", oZ = " << oZ << std::endl;
 	// Производная №0 (самая первая).
 	const Vec2 k0( aKey[0][oX],	aKey[0][oY]	);
 	const Vec2 k1( aKey[1][oX],	aKey[1][oY]	);
