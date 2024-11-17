@@ -50,7 +50,6 @@ private:
 	bool bXZ = 0;				///< 0 - установлена плоскость XY, 1 - XZ. См. SetPlaneXY.
 	vector<Val> aDerY, aDerZ;	///< Производные в ключевых точках (в условных плоскостях "XY", "XZ").
 	size_t iKey = 0;			///< Текущая ключевая точка начала отрезка.
-	size_t iVert = 0;			///< Текущая вершина.
 	/// Переменные в текущем отрезке (для формулы сплайна).
 	Val x0, lineLen, k0, k1, d0, d1;
 	/// Дополнительная смена осей при переключении плоскостей. Чтобы функции работали только с XY.
@@ -99,6 +98,7 @@ void SplineCalc::Calc()
 		// Плоскость "XZ".
 	SetPlaneXZ();
 	CalcDer();
+	SetPlaneXY();
 }
 Val SplineCalc::GetLen()
 {
@@ -110,7 +110,7 @@ void SplineCalc::CalcPos(Pos& vert)
 	if (bPrint) std::cout << "vert (begin) = " << vert << std::endl;
 	// 1. Расчёт центра (и заодно производных).
 	// 1.1. По оси Y (при "XYZ" = ZXY это X).
-	SetPlaneXY(); // (При ZXY - это плоскость ZX.)
+	//SetPlaneXY(); // (При ZXY - это плоскость ZX.)
 	SelectLine(v[oX]); // Полный поиск отрезка.
 	const Val w = (v[oX] - x0) / lineLen,  w2 = w * w,  w3 = w2 * w;
 	const Val	r1 = 2*w3 - 3*w2 + 1,
