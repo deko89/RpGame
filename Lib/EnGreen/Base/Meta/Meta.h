@@ -86,6 +86,10 @@ std::ostream& operator<<(std::ostream& os, const Vec4& v);
 std::ostream& operator<<(std::ostream& os, const Mat4& m);
 
 // Константы.
+static_assert(std::numeric_limits<Val>::has_quiet_NaN);
+static_assert(std::numeric_limits<Val>::has_infinity);
+const Val vNaN = std::numeric_limits<Val>::quiet_NaN();
+const Val vInf = std::numeric_limits<Val>::infinity();
 const Val pi = (Val) M_PI, pi2 = (Val) M_PI_2, pi4 = (Val) M_PI_4;
 
 // Оси.
