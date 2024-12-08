@@ -39,11 +39,7 @@ int main()
 
 	// Spline
 	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {0.0,0.0,2}, {0.0,0.0,3}, {0.00,0.0,4}, {0.0,0.0,5} };
-	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetTexture(tex);
-
-	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetAngle( Angle(glm::radians(-30.0), glm::radians(90.0), glm::radians(45.0)) );
+	mod = view->world->models.Make<ModelStvol>(aVetv, true);
 	mod->SetTexture(tex);
 
 	eng.Execute();

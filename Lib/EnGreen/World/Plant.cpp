@@ -7,10 +7,10 @@ namespace EnG
 ValN ModelStvol::nSgmLen = 30;
 ValN ModelStvol::nSgmRad = nSgmLen * 2 * pi;
 const size_t iModifSpline = 1; // Позиция Modifs::Spline.
-ModelStvol::ModelStvol(const vector<Pos>& aKey)
+ModelStvol::ModelStvol(const vector<Pos>& aKey, bool bVertical)
 {
 	modif.Make<Modifs::Taper>(0.004 / rad);
-	modif.Make<Modifs::Spline>(aKey); // Соответствует iModifSpline.
+	modif.Make<Modifs::Spline>(aKey, bVertical? osZ: osX); // Соответствует iModifSpline.
 	Update();
 }
 void ModelStvol::Update()
