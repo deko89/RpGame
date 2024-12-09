@@ -25,7 +25,7 @@ void ModelStvol::Update()
 	}
 
 	// Расчёт данных.
-	height = aKey.back().z;
+	height = aKey.back().x;
 	rad = rRad * height;
 	sgmH = height * nSgmLen;
 	sgmC = rad * nSgmRad;

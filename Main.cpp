@@ -38,7 +38,7 @@ int main()
 	mod->Update();
 
 	// Spline
-	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {0.0,0.0,2}, {0.0,0.0,3}, {0.00,0.0,4}, {0.0,0.0,5} };
+	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
 	mod = view->world->models.Make<ModelStvol>(aVetv);
 	mod->SetTexture(tex);
 

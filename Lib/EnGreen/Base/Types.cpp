@@ -80,15 +80,15 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 	Val angle = 0;
 	for (; pVert < pEndC; ++pVert, angle += angleStep)
 	{	// Позиция внизу (на остальных уровнях будет аналогично).
-		pVert->x = cos(angle) * rad;
-		pVert->y = sin(angle) * rad;
-		pVert->z = 0;
+		pVert->y = cos(angle) * rad;
+		pVert->z = sin(angle) * rad;
+		pVert->x = 0;
 		// Устанавливаем данные по вертикали (на уровнях выше).
 		Val h = hStep;
 		for (Pos* pVertH = pVert + sgmC; pVertH < pEnd; pVertH += sgmC, h += hStep)
-		{	pVertH->x = pVert->x;
-			pVertH->y = pVert->y;
-			pVertH->z = h;
+		{	pVertH->y = pVert->y;
+			pVertH->z = pVert->z;
+			pVertH->x = h;
 		}
 	}
 	// Создание дна.
@@ -99,7 +99,7 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 	// Создание крышки.
 	if (bCloseUp)
 	{	pVert = data() + (size() - 1);
-		pVert->x = 0; pVert->y = 0; pVert->z = height;
+		pVert->x = height; pVert->y = 0; pVert->z = 0;
 	}
 }
 void Points::Rotate(const Angle& angle)
@@ -170,8 +170,8 @@ void Mesh::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBo
 	// Вычисление размера и выделение памяти для индексов.
 	aInd.resize(sgmC * sgmH * 6 + ((ValN)bCloseBottom + bCloseUp) * sgmC * 3);
 	Ind* pInd = aInd.data();
-	for (ValN y = 0; y < sgmH; ++y)
-	{	const Ind height  = sgmC * y,	   // Текущая высота.
+	for (ValN i = 0; i < sgmH; ++i)
+	{	const Ind height  = sgmC * i,	   // Текущая высота.
 				  heightN = height + sgmC; // Следующая высота.
 		for (ValN s = 0; s < sgmC; ++s)
 		{	const Ind n = (s + 1 == sgmC)? 0: s + 1; // Следующий сегмент.
