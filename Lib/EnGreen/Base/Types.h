@@ -63,7 +63,8 @@ class Points : public vector<Pos>
 		struct Spline : public Modif
 		{
 			vector<Pos> aKey; ///< Ключевые точки, через которые проходит линия.
-			Spline(const vector<Pos>& aKey);
+			Os osMain; ///< Основная ось, вдоль которой идёт "цилиндр" для сплайна.
+			Spline(const vector<Pos>& aKey, Os osMain = osX);
 			virtual void Set(Points::Data& pData) override;
 		};
 
@@ -93,15 +94,16 @@ class Points : public vector<Pos>
 	/// Поворот.
 	void Rotate(const Angle& angle);
 
-
-	/** Сплайн. Сделать из точек (цилиндра вдоль оси Z) плавную кривую линию, проходящую через заданные точки.
-		param[in] aPoint - точки через которые проходит кривая. */
-	void Spline(const vector<Pos>& aKey);
 	/** Заострение.
 		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное;
 		param[in] length - длина фигуры;
 		param[in] osMain - основная ось, вдоль которой идёт заострение. */
 	void Taper(Val t, Val length, Os osMain = osX);
+
+	/** Сплайн. Сделать из точек ("цилиндра") плавную кривую линию, проходящую через заданные точки.
+		param[in] aPoint - точки через которые проходит кривая;
+		param[in] osMain - основная ось, вдоль которой идёт "цилиндр" для сплайна. */
+	void Spline(const vector<Pos>& aKey, Os osMain = osX);
 };
 
 typedef Points::Modifs Modifs;
