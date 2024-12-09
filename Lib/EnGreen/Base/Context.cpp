@@ -37,6 +37,7 @@ void Context::Create(Wnd& wnd)
 
 	glEnable(GL_DEPTH_TEST);    // Включить тест глубины.
 	glDisable(GL_DEPTH_CLAMP);  // Включить отсечение по расстоянию от камеры.
+	glEnable(GL_CULL_FACE);		// Отсекать грани которые по часовой стрелки.
 }
 
 void Context::Clear()
