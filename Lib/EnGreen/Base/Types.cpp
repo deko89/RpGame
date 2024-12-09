@@ -17,12 +17,12 @@ void Points::Modifs::Rotate::Set(Points::Data& pData)
 	pData.aPoint->Rotate(angle);
 }
 		// Taper /////////////////////////////////////////////////////
-Points::Modifs::Taper::Taper(Val taper) :
-	taper(taper)
+Points::Modifs::Taper::Taper(Val taper, Os osMain) :
+	taper(taper), osMain(osMain)
 {}
 void Points::Modifs::Taper::Set(Points::Data& pData)
 {
-	pData.aPoint->Taper(taper, pData.size.z);
+	pData.aPoint->Taper(taper, pData.size[osMain], osMain);
 }
 		// Spline ////////////////////////////////////////////////////
 Points::Modifs::Spline::Spline(const vector<Pos>& aKey) :
@@ -112,15 +112,38 @@ void Points::Rotate(const Angle& angle)
 	for (Pos& point: *this)
 		point = mat * Vec4(point, 1.0);
 }
-void Points::Taper(Val t, Val height)
+void Points::Taper(Val t, Val length, Os osMain)
 {
 	Val dist = 1 - t; // Общая дистанция (на сколько всего уменьшаем).
-	for (Pos& point: *this)
+	switch (osMain)
 	{
-		Val m = point.z / height; // Пройденная дистанция (коэф.).
-		Val sz = 1 - m * dist; // Коэф. размера.
-		point.x *= sz;
-		point.y *= sz;
+		case osX:
+			for (Pos& point: *this)
+			{
+				Val m = point.x / length; // Пройденная дистанция (коэф.).
+				Val sz = 1 - m * dist; // Коэф. размера.
+				point.y *= sz;
+				point.z *= sz;
+			}
+			break;
+		case osY:
+			for (Pos& point: *this)
+			{
+				Val m = point.y / length; // Пройденная дистанция (коэф.).
+				Val sz = 1 - m * dist; // Коэф. размера.
+				point.z *= sz;
+				point.x *= sz;
+			}
+			break;
+		case osZ:
+			for (Pos& point: *this)
+			{
+				Val m = point.z / length; // Пройденная дистанция (коэф.).
+				Val sz = 1 - m * dist; // Коэф. размера.
+				point.x *= sz;
+				point.y *= sz;
+			}
+			break;
 	}
 }
 void Points::Spline(const vector<Pos>& aKey)

@@ -53,7 +53,8 @@ class Points : public vector<Pos>
 		struct Taper : public Modif
 		{
 			Val taper = 0; ///< Коэф. заострения. 1 - нет, 0 - максимальное.
-			Taper(Val taper);
+			Os osMain; ///< Основная ось, вдоль которой идёт заострение.
+			Taper(Val taper, Os osMain = osX);
 			virtual void Set(Points::Data& pData) override;
 		};
 
@@ -92,14 +93,15 @@ class Points : public vector<Pos>
 	/// Поворот.
 	void Rotate(const Angle& angle);
 
-	/** Заострение (по оси Z).
-		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное.
-		param[in] height - высота фигуры */
-	void Taper(Val t, Val height);
 
 	/** Сплайн. Сделать из точек (цилиндра вдоль оси Z) плавную кривую линию, проходящую через заданные точки.
 		param[in] aPoint - точки через которые проходит кривая. */
 	void Spline(const vector<Pos>& aKey);
+	/** Заострение.
+		param[in] t - коэф. размера. 1 - заострения нет, 0 - максимальное;
+		param[in] length - длина фигуры;
+		param[in] osMain - основная ось, вдоль которой идёт заострение. */
+	void Taper(Val t, Val length, Os osMain = osX);
 };
 
 typedef Points::Modifs Modifs;
