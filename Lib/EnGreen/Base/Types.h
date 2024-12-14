@@ -85,10 +85,10 @@ class Points : public vector<Pos>
 	void MakeCube(Val s);
 
 	/** Создать цилиндр
-		param[in] rad, len - радиус и длина;
+		param[in] d, len - диаметр и длина;
 		param[in] sgmC, sgmL - количество сегментов в круге, и по длине;
 		param[in] bCloseB, bCloseE - закрыть кругом начало, и конец. */
-	void MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
+	void MakeCylinder(Val d, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 
 	// Модификаторы. Собственно выполняют преобразование своих точек.
 	/// Поворот.
@@ -123,7 +123,7 @@ class Mesh
 	void MakeQuad(Val szX, Val szY);
 	void MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY);
 	void MakeCubeIn(Val s); ///< Создать куб, который виден изнутри.
-	void MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
+	void MakeCylinder(Val d, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 };
 
 /// Координаты текстуры. Предполагается что каждая координата будет соответствовать отдельной вершине.
