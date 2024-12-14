@@ -25,15 +25,15 @@ int main()
 	mod = view->world->models.Make<ModelCylinder>();
 	mod->d = 0.001;
 	mod->len = 2;
-	mod->SetPos( Pos(0, 0, -1) );
+	mod->SetPos( Pos(-1, 0, 0) );
 	mod->SetTexture(tex);
 	mod->Update();
 
 	mod = view->world->models.Make<ModelCylinder>();
 	mod->d = 0.001;
 	mod->len = 2;
-	mod->SetPos( Pos(-1, 0, 0) );
-	mod->SetAngle( Angle(0, glm::radians(90.0), 0) );
+	mod->SetPos( Pos(0, 0, 1) );
+	mod->SetAngle( Angle(0, pi2, 0) );
 	mod->SetTexture(tex);
 	mod->Update();
 
@@ -43,7 +43,7 @@ int main()
 	mod->SetTexture(tex);
 
 	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetAngle( Angle(glm::radians(-30.0), glm::radians(90.0), glm::radians(45.0)) );
+	mod->SetAngle( Angle(0, -pi2, 0) );
 	mod->SetTexture(tex);
 
 	eng.Execute();
