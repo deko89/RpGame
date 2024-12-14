@@ -26,7 +26,7 @@ class Points : public vector<Pos>
 	struct Data
 	{
 		Points* aPoint = nullptr;
-		Vec3 size; ///< Размер.
+		Vec3 sz; ///< Размер.
 		Data(Points& p);
 	};
 

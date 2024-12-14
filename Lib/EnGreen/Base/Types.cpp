@@ -22,7 +22,7 @@ Points::Modifs::Taper::Taper(Val taper, Os osMain) :
 {}
 void Points::Modifs::Taper::Set(Points::Data& pData)
 {
-	pData.aPoint->Taper(taper, pData.size[osMain], osMain);
+	pData.aPoint->Taper(taper, pData.sz[osMain], osMain);
 }
 		// Spline ////////////////////////////////////////////////////
 Points::Modifs::Spline::Spline(const vector<Pos>& aKey, Os osMain) :
