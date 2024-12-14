@@ -22,7 +22,7 @@ Points::Modifs::Taper::Taper(Val taper, Os osMain) :
 {}
 void Points::Modifs::Taper::Set(Points::Data& pData)
 {
-	pData.aPoint->Taper(taper, pData.size[osMain], osMain);
+	pData.aPoint->Taper(taper, pData.sz[osMain], osMain);
 }
 		// Spline ////////////////////////////////////////////////////
 Points::Modifs::Spline::Spline(const vector<Pos>& aKey, Os osMain) :
@@ -67,7 +67,7 @@ void Points::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 		}
 	}
 }
-void Points::MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
+void Points::MakeCylinder(Val d, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
 {	// Вычисление размера и выделение памяти.
 	const ValN nVertC = sgmC * (sgmL + 1);
 	resize(nVertC + bCloseB + bCloseE);
@@ -75,6 +75,7 @@ void Points::MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, 
 	const Pos *pEndC = pVert + sgmC,
 			  *pEnd  = pVert + nVertC;
 	// Цикл создания, по сегментам окружности.
+	const Val rad = d * 0.5;
 	const Val angleStep = 2 * pi / sgmC,	// Шаг угла.
 			  lStep = len / sgmL;			// Шаг длины.
 	Val angle = 0;
@@ -187,9 +188,9 @@ void Mesh::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 		}
 	}
 }
-void Mesh::MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
+void Mesh::MakeCylinder(Val d, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
 {	// Создание вершин.
-	aVert.MakeCylinder(rad, len, sgmC, sgmL, bCloseB, bCloseE);
+	aVert.MakeCylinder(d, len, sgmC, sgmL, bCloseB, bCloseE);
 	// Вычисление размера и выделение памяти для индексов.
 	aInd.resize(sgmC * sgmL * 6 + ((ValN)bCloseB + bCloseE) * sgmC * 3);
 	Ind* pInd = aInd.data();

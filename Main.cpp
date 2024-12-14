@@ -23,14 +23,14 @@ int main()
 	ModelCylinder* mod;
 
 	mod = view->world->models.Make<ModelCylinder>();
-	mod->rad = 0.001;
+	mod->d = 0.001;
 	mod->len = 2;
 	mod->SetPos( Pos(0, 0, -1) );
 	mod->SetTexture(tex);
 	mod->Update();
 
 	mod = view->world->models.Make<ModelCylinder>();
-	mod->rad = 0.001;
+	mod->d = 0.001;
 	mod->len = 2;
 	mod->SetPos( Pos(-1, 0, 0) );
 	mod->SetAngle( Angle(0, glm::radians(90.0), 0) );
