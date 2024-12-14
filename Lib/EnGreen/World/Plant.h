@@ -10,8 +10,8 @@ namespace EnG
 class ModelStvol : public ModelCylinder
 {	public:
 	static ValN	nSgmLen,	///< Число сегментов на 1 м длины.
-				nSgmRad;	///< Число сегментов на 1 м радиуса.
-	Val rRad = 0.02;		///< Коэффициент радиуса на 1 м длины.
+				nSgmD;		///< Число сегментов на 1 м диаметра.
+	Val rD = 0.04;			///< Коэффициент диаметра на 1 м длины.
 	/** Конструктор.
 		param[in] aKey - ключевые точки (через которые проходит). */
 	ModelStvol(const vector<Pos>& aKey);

@@ -5,11 +5,11 @@ namespace EnG
 
 // ModelStvol ////////////////////////////////////////////////////////
 ValN ModelStvol::nSgmLen = 30;
-ValN ModelStvol::nSgmRad = nSgmLen * 2 * pi;
+ValN ModelStvol::nSgmD = nSgmLen * pi;
 const size_t iModifSpline = 1; // Позиция Modifs::Spline.
 ModelStvol::ModelStvol(const vector<Pos>& aKey)
 {
-	modif.Make<Modifs::Taper>(0.004 / rad);
+	modif.Make<Modifs::Taper>(0.008 / d);
 	modif.Make<Modifs::Spline>(aKey); // Соответствует iModifSpline.
 	Update();
 }
@@ -26,9 +26,9 @@ void ModelStvol::Update()
 
 	// Расчёт данных.
 	len = aKey.back().x;
-	rad = rRad * len;
+	d = rD * len;
 	sgmL = len * nSgmLen;
-	sgmC = rad * nSgmRad;
+	sgmC = d * nSgmD;
 	if (sgmC < 2) sgmC = 2;
 	else if (sgmC % 2) ++sgmC; //TODO Снять ограничение цилиндра.
 
