@@ -35,14 +35,14 @@ protected:
 class ModelCylinder : public ModelStd
 {	public:
 	Val rad = 0.1;	///< Радиус.
-	Val height = 1;	///< Высота.
+	Val len = 1;	///< Длина.
 	ValN sgmC = 16;	///< Число сегментов в окружности.
-	ValN sgmH = 1;	///< Число сигментов по высоте.
-	bool bCloseBottom = 1;	///< Закрыто снизу.
-	bool bCloseUp = 1;		///< Закрыто сверху.
+	ValN sgmL = 1;	///< Число сигментов по длине.
+	bool bCloseB = 1;	///< Закрыто начало.
+	bool bCloseE = 1;	///< Закрыт конец.
 	Points::Modifs modif;	///< Модификаторы.
 	ModelCylinder() {}
-	ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
+	ModelCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 	void Update(); ///< Обновить модель (применить параметры, модификаторы).
 protected:
 };

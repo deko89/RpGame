@@ -25,9 +25,9 @@ void ModelStvol::Update()
 	}
 
 	// Расчёт данных.
-	height = aKey.back().x;
-	rad = rRad * height;
-	sgmH = height * nSgmLen;
+	len = aKey.back().x;
+	rad = rRad * len;
+	sgmL = len * nSgmLen;
 	sgmC = rad * nSgmRad;
 	if (sgmC < 2) sgmC = 2;
 	else if (sgmC % 2) ++sgmC; //TODO Снять ограничение цилиндра.

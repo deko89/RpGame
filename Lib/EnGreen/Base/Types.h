@@ -83,10 +83,10 @@ class Points : public vector<Pos>
 	void MakeCube(Val s);
 
 	/** Создать цилиндр
-		param[in] rad, height - радиус и высота;
-		param[in] sgmC, sgmH - количество сегментов в круге, и по высоте;
-		param[in] bCloseBottom, bCloseUp - закрыть кругом снизу, и сверху. */
-	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
+		param[in] rad, len - радиус и длина;
+		param[in] sgmC, sgmL - количество сегментов в круге, и по длине;
+		param[in] bCloseB, bCloseE - закрыть кругом начало, и конец. */
+	void MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 
 	// Модификаторы. Собственно выполняют преобразование своих точек.
 	/// Поворот.
@@ -119,7 +119,7 @@ class Mesh
 	void MakeQuad(Val szX, Val szY);
 	void MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY);
 	void MakeCubeIn(Val s); ///< Создать куб, который виден изнутри.
-	void MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom = 1, bool bCloseUp = 1);
+	void MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 };
 
 /// Координаты текстуры. Предполагается что каждая координата будет соответствовать отдельной вершине.
@@ -137,9 +137,9 @@ class PlaceTex: public vector<PosTex>
 
 	/** Цилиндр.
 		param[in] sgmC - количество сегментов в круге. Должен быть чётным.
-		param[in] sgmH - количество сегментов по высоте.
+		param[in] sgmL - количество сегментов по длине.
 		param[in] u, v - число повторений текстуры. */
-	void SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v);
+	void SetCylinder(ValN sgmC, ValN sgmL, Val u, Val v);
 };
 
 }

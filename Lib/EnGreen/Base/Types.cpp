@@ -67,16 +67,16 @@ void Points::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 		}
 	}
 }
-void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom, bool bCloseUp)
+void Points::MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
 {	// Вычисление размера и выделение памяти.
-	const ValN nVertC = sgmC * (sgmH + 1);
-	resize(nVertC + bCloseBottom + bCloseUp);
+	const ValN nVertC = sgmC * (sgmL + 1);
+	resize(nVertC + bCloseB + bCloseE);
 	Pos *pVert = data();
 	const Pos *pEndC = pVert + sgmC,
 			  *pEnd  = pVert + nVertC;
 	// Цикл создания, по сегментам окружности.
-	const Val angleStep = 2 * pi / sgmC,	// Текущий угол и шаг угла.
-			  hStep = height / sgmH;		// Текущая высота и шаг.
+	const Val angleStep = 2 * pi / sgmC,	// Шаг угла.
+			  lStep = len / sgmL;			// Шаг длины.
 	Val angle = 0;
 	for (; pVert < pEndC; ++pVert, angle += angleStep)
 	{	// Позиция внизу (на остальных уровнях будет аналогично).
@@ -84,22 +84,22 @@ void Points::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bClose
 		pVert->z = sin(angle) * rad;
 		pVert->x = 0;
 		// Устанавливаем данные по вертикали (на уровнях выше).
-		Val h = hStep;
-		for (Pos* pVertH = pVert + sgmC; pVertH < pEnd; pVertH += sgmC, h += hStep)
+		Val l = lStep;
+		for (Pos* pVertH = pVert + sgmC; pVertH < pEnd; pVertH += sgmC, l += lStep)
 		{	pVertH->y = pVert->y;
 			pVertH->z = pVert->z;
-			pVertH->x = h;
+			pVertH->x = l;
 		}
 	}
 	// Создание дна.
-	if (bCloseBottom)
-	{	pVert = data() + (size() - (bCloseUp? 2: 1));
+	if (bCloseB)
+	{	pVert = data() + (size() - (bCloseE? 2: 1));
 		pVert->x = 0; pVert->y = 0; pVert->z = 0;
 	}
 	// Создание крышки.
-	if (bCloseUp)
+	if (bCloseE)
 	{	pVert = data() + (size() - 1);
-		pVert->x = height; pVert->y = 0; pVert->z = 0;
+		pVert->x = len; pVert->y = 0; pVert->z = 0;
 	}
 }
 void Points::Rotate(const Angle& angle)
@@ -164,28 +164,28 @@ void Mesh::MakePlane(Val szX, Val szY, ValN sgmX, ValN sgmY)
 		}
 	}
 }
-void Mesh::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom, bool bCloseUp)
+void Mesh::MakeCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE)
 {	// Создание вершин.
-	aVert.MakeCylinder(rad, height, sgmC, sgmH, bCloseBottom, bCloseUp);
+	aVert.MakeCylinder(rad, len, sgmC, sgmL, bCloseB, bCloseE);
 	// Вычисление размера и выделение памяти для индексов.
-	aInd.resize(sgmC * sgmH * 6 + ((ValN)bCloseBottom + bCloseUp) * sgmC * 3);
+	aInd.resize(sgmC * sgmL * 6 + ((ValN)bCloseB + bCloseE) * sgmC * 3);
 	Ind* pInd = aInd.data();
-	for (ValN i = 0; i < sgmH; ++i)
-	{	const Ind height  = sgmC * i,	   // Текущая высота.
-				  heightN = height + sgmC; // Следующая высота.
+	for (ValN i = 0; i < sgmL; ++i)
+	{	const Ind len  = sgmC * i,		// Текущая длина.
+				  lenN = len + sgmC;	// Следующая длина.
 		for (ValN s = 0; s < sgmC; ++s)
 		{	const Ind n = (s + 1 == sgmC)? 0: s + 1; // Следующий сегмент.
-			*(pInd++) = height	+ s;
-			*(pInd++) = height	+ n;
-			*(pInd++) = heightN	+ s;
-			*(pInd++) = heightN	+ s;
-			*(pInd++) = height	+ n;
-			*(pInd++) = heightN	+ n;
+			*(pInd++) = len	+ s;
+			*(pInd++) = len	+ n;
+			*(pInd++) = lenN	+ s;
+			*(pInd++) = lenN	+ s;
+			*(pInd++) = len	+ n;
+			*(pInd++) = lenN	+ n;
 		}
 	}
 	// Создание дна.
-	if (bCloseBottom)
-	{	const Ind iV = aVert.size() - (bCloseUp? 2: 1);
+	if (bCloseB)
+	{	const Ind iV = aVert.size() - (bCloseE? 2: 1);
 		for (Ind x = 0; x < sgmC; ++x)
 		{	*(pInd++) = iV;
 			*(pInd++) = (x + 1 == sgmC)? 0: x + 1; // Следующий по x.
@@ -193,8 +193,8 @@ void Mesh::MakeCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBo
 		}
 	}
 	// Создание крышки.
-	if (bCloseUp)
-	{	const Ind iV = aVert.size() - 1, s = iV - bCloseBottom - sgmC, e = s + sgmC;
+	if (bCloseE)
+	{	const Ind iV = aVert.size() - 1, s = iV - bCloseB - sgmC, e = s + sgmC;
 		for (Ind x = s; x < e; ++x)
 		{	*(pInd++) = iV;
 			*(pInd++) = x;
@@ -227,16 +227,16 @@ void PlaceTex::SetPlane(ValN sgmX, ValN sgmY, Val u, Val v)
 		}
 	}
 }
-void PlaceTex::SetCylinder(ValN sgmC, ValN sgmH, Val u, Val v)
+void PlaceTex::SetCylinder(ValN sgmC, ValN sgmL, Val u, Val v)
 {	assert(sgmC % 2 == 0);
-	resize(sgmC * (sgmH + 1));
+	resize(sgmC * (sgmL + 1));
 	PosTex* pPos = data();
 	const PosTex *pEndC = pPos + sgmC,
 				 *pEndH = pPos + sgmC / 2,
 				 *pEnd  = pPos + size();
 	// Цикл по сегментам окружности.
 	const Val	uStep = u / sgmC, // Шаг u.
-				vStep = v / sgmH; // Шаг v.
+				vStep = v / sgmL; // Шаг v.
 	u = 0;
 	for (; pPos < pEndC; ++pPos)
 	{	// Позиция внизу (на остальных уровнях будет аналогично).

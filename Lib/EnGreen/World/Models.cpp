@@ -63,22 +63,22 @@ Mat4 ModelStd::GetMatTrans() const
 	return mat;
 }
 // ModelCylinder /////////////////////////////////////////////////////
-ModelCylinder::ModelCylinder(Val rad, Val height, ValN sgmC, ValN sgmH, bool bCloseBottom, bool bCloseUp) :
-	rad(rad), height(height), sgmC(sgmC), sgmH(sgmH), bCloseBottom(bCloseBottom), bCloseUp(bCloseUp)
+ModelCylinder::ModelCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB, bool bCloseE) :
+	rad(rad), len(len), sgmC(sgmC), sgmL(sgmL), bCloseB(bCloseB), bCloseE(bCloseE)
 {
     Update();
 }
 void ModelCylinder::Update()
 {
     Mesh mesh;
-    mesh.MakeCylinder(rad, height, sgmC, sgmH, bCloseBottom, bCloseUp);
+    mesh.MakeCylinder(rad, len, sgmC, sgmL, bCloseB, bCloseE);
 
     Points::Data pointsData(mesh.aVert);
-    pointsData.size = {height, rad, rad}; //TODO Должен быть размер диаметра.
+    pointsData.size = {len, rad, rad}; //TODO Должен быть размер диаметра.
     modif.Set(pointsData);
 
     PlaceTex plTex;
-    plTex.SetCylinder(sgmC, sgmH, 2, 1);
+    plTex.SetCylinder(sgmC, sgmL, 2, 1);
 
     ModelStd::Make(mesh, plTex);
 }
