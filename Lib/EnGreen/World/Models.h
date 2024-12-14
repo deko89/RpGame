@@ -34,7 +34,7 @@ protected:
 /// Модель цилинда.
 class ModelCylinder : public ModelStd
 {	public:
-	Val rad = 0.1;	///< Радиус.
+	Val d = 0.1;	///< Диаметр.
 	Val len = 1;	///< Длина.
 	ValN sgmC = 16;	///< Число сегментов в окружности.
 	ValN sgmL = 1;	///< Число сигментов по длине.
@@ -42,7 +42,7 @@ class ModelCylinder : public ModelStd
 	bool bCloseE = 1;	///< Закрыт конец.
 	Points::Modifs modif;	///< Модификаторы.
 	ModelCylinder() {}
-	ModelCylinder(Val rad, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
+	ModelCylinder(Val d, Val len, ValN sgmC, ValN sgmL, bool bCloseB = 1, bool bCloseE = 1);
 	void Update(); ///< Обновить модель (применить параметры, модификаторы).
 protected:
 };
