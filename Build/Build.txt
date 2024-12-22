@@ -38,7 +38,7 @@ C:\msys64\msys2_shell.cmd
 pacman --noconfirm -Su
 pacman --noconfirm -S scons mingw-w64-x86_64-{clang,SDL2,SDL2_image,freeglut,glew}
 
-7. Переименовать файл в проекте SConstruct_Windows в SConstruct.
+7. Переименовать и переместить файл из "Build/SConstruct_Windows" в "SConstruct" (в корень проекта).
 
 8. Запустить MSYS2 MINGW64 (из меню пуск). Ввести команду (указав в ней свой путь):
 cd "D:\ПутьДоПроекта\RpGame"

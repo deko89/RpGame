@@ -27,7 +27,7 @@
 
 
 ## Сборка
-Инструкции для Linux и Windows в файле Build.txt.
+Инструкции для Linux и Windows в файле Build/Build.txt.
 
 
 
