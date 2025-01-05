@@ -11,7 +11,7 @@ namespace EnG
 /// Стандартная модель.
 class ModelStd: public ModelVi
 {	public:
-	ModelStd(ShaderType shT = shPosTex, Texture& tex = gTex0);
+	ModelStd(ShaderType shT = shPosTex, Texture* tex = nullptr);
 	virtual Pos   GetPos() const override;					///< Получить позицию.
 	virtual void  SetPos(const Pos& p) override;			///< Установить позицию.
 	virtual void  Move(const Vec3& v) override;				///< Передвинуть.

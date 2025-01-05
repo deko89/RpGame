@@ -76,12 +76,12 @@ protected:
     Texture& operator=(const Texture& t) = delete;
 };
 
-extern Texture gTex0;
-
 /// Ссылка на текстуру.
 class TextureRef
 {	public:
-	TextureRef(Texture& texture = gTex0);
+	TextureRef() {}
+	TextureRef(Texture* texture);
+	TextureRef(Texture& texture);
 	/// Установить.
 	void Set(Texture& texture);
 	/// Сделать текстуру активной.

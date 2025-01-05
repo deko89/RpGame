@@ -4,7 +4,7 @@ namespace EnG
 {
 
 // ModelStd /////////////////////////////////////////////////////////
-ModelStd::ModelStd(ShaderType shT, Texture& tex) :
+ModelStd::ModelStd(ShaderType shT, Texture* tex) :
 	shader(shT),
 	texture(tex)
 {
