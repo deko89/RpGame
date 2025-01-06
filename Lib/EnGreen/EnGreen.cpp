@@ -87,9 +87,11 @@ int Engine::Execute()
 		{	wnd.ProcessEvent(event);
 			// Событие выхода.
 			if ( event.type == SDL_QUIT ||
-				 event.type == SDL_WINDOWEVENT &&
-				 event.window.event == SDL_WINDOWEVENT_CLOSE &&
-				 event.window.windowID == SDL_GetWindowID( wnd.NativeWnd() ) )
+				(	event.type == SDL_WINDOWEVENT &&
+					event.window.event == SDL_WINDOWEVENT_CLOSE &&
+					event.window.windowID == SDL_GetWindowID( wnd.NativeWnd() )
+				)
+			   )
 			{	bRun = false;
 			}
 		}
