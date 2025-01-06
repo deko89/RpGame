@@ -42,6 +42,7 @@ bool Engine::Init()
 {
     // Инициализация.
 	if ( !IsEnvironment() ) return false;
+	context.Init();
 	RectI posWnd {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gSzWndDef.x, gSzWndDef.y};
     wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	context.Create(wnd);
