@@ -1,5 +1,9 @@
 #include "EnGreen/EnGreen.h"
 #include <set>
+#ifdef __EMSCRIPTEN__
+	#include "imgui/examples/libs/emscripten/emscripten_mainloop_stub.h"
+#endif
+
 #define Include_cpp
 
 #ifdef One_Translation_Unit
