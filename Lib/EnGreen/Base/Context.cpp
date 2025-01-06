@@ -37,16 +37,24 @@ void Context::Init()
 	#endif
 }
 
-void Context::Create(Wnd& wnd)
+bool Context::Create(Wnd& wnd)
 {
 	SDL_Window* pWnd = wnd.NativeWnd();
 	gl_context = SDL_GL_CreateContext(pWnd);
 	//SDL_GL_MakeCurrent(pWnd, gl_context);
+	const GLubyte* version = glGetString(GL_VERSION);
+	if (version == 0)
+	{	printf( "Unable to get OpenGL ES version string: %d\n", glGetError() );
+		return 0;
+	}
+	printf("GL_VERSION: %s\n", version);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
 
 	glEnable(GL_DEPTH_TEST);    // Включить тест глубины.
 	glDisable(GL_DEPTH_CLAMP);  // Включить отсечение по расстоянию от камеры.
 	glEnable(GL_CULL_FACE);		// Отсекать грани которые по часовой стрелки.
+
+	return 1;
 }
 
 void Context::Clear()

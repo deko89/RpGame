@@ -33,7 +33,7 @@ class Context
 {	public:
 	~Context();
 	void Init();
-	void Create(Wnd& wnd);	///< Создание (требует окно).
+	bool Create(Wnd& wnd);	///< Создание (требует окно).
 	void Clear();
 	SDL_GLContext& NativeContext();
 private:

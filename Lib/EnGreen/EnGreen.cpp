@@ -44,8 +44,10 @@ bool Engine::Init()
 	if ( !IsEnvironment() ) return false;
 	context.Init();
 	RectI posWnd {SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gSzWndDef.x, gSzWndDef.y};
-    wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	context.Create(wnd);
+	if ( !wnd.Wnd::Create("RpGame", posWnd, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI) )
+		return false;
+	if ( !context.Create(wnd) )
+		return false;
 	shaders.Compile();
     // Создание окна.
 	wnd.CreateGui();
