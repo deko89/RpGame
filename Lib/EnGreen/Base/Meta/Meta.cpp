@@ -31,6 +31,7 @@ std::ostream& operator<<(std::ostream& os, const Mat4& m)
 
 void SetPolygonMode(PolygonMode mode)
 {
+#if !defined(IMGUI_IMPL_OPENGL_ES2) && !defined(IMGUI_IMPL_OPENGL_ES3)
 	GLenum m;
 	switch (mode)
 	{	case PolygonMode::Point:	m = GL_POINT;	break;
@@ -38,6 +39,7 @@ void SetPolygonMode(PolygonMode mode)
 		case PolygonMode::Fill:		m = GL_FILL;	break;
 	}
 	glPolygonMode(GL_FRONT_AND_BACK, m);
+#endif
 }
 
 }

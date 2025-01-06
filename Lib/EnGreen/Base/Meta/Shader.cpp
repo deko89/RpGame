@@ -54,8 +54,10 @@ bool Shader::CompileShader(StrCG pCode, GLenum const typeShader)
 	return iRes != 0;
 }
 // Shaders //////////////////////////////////////////////////////////
-const char* codePosTexVert = R"(
-#version 330 core
+const char* codePosTexVert =
+M_GlslVer
+"\nprecision highp float;"
+R"(
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec2 posTexIn;
 layout (std140) uniform uCam
@@ -69,8 +71,10 @@ void main()
 }
 )";
 
-const char* codePosTexFrag = R"(
-#version 330 core
+const char* codePosTexFrag =
+M_GlslVer
+"\nprecision mediump float;"
+R"(
 uniform sampler2D tex;
 in vec2 posTex;
 out vec4 color;
@@ -79,8 +83,10 @@ void main()
 }
 )";
 
-const char* codePosTexFragA = R"(
-#version 330 core
+const char* codePosTexFragA =
+M_GlslVer
+"\nprecision mediump float;"
+R"(
 uniform sampler2D tex;
 in vec2 posTex;
 out vec4 color;
@@ -91,8 +97,10 @@ void main()
 }
 )";
 
-const char* codeCubeInVert = R"(
-#version 330 core
+const char* codeCubeInVert =
+M_GlslVer
+"\nprecision highp float;"
+R"(
 layout (location = 0) in vec3 vPos;
 layout (std140) uniform uCam
 {	mat4 mCamera;
@@ -104,8 +112,10 @@ void main()
 }
 )";
 
-const char* codeCubeInFrag = R"(
-#version 330 core
+const char* codeCubeInFrag =
+M_GlslVer
+"\nprecision mediump float;"
+R"(
 uniform samplerCube tex;
 in vec3 posTex;
 out vec4 color;
