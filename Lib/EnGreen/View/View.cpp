@@ -27,6 +27,18 @@ void View::Draw()
     world->sky.Draw();
     world->models.Draw();
 }
+void View::ProcessEvent(SDL_Event& event)
+{
+	if (event.type == SDL_WINDOWEVENT)
+	{
+		if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+		{
+			pos.w = event.window.data1; //tmp Пока 1 вид на весь экран. #View1
+			pos.h = event.window.data2;
+			cam.fAspect = (Val)pos.w / pos.h;
+		}
+	}
+}
 void View::ProcessEventInput(SDL_Event& event)
 {
     cam.ProcessEventInput(event);

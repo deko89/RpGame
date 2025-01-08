@@ -17,6 +17,7 @@ class View
 	void SetPos(const RectI& r);
 	void Update(Val timeDelta); ///< Обновить.
 	void Draw();
+	void ProcessEvent(SDL_Event& event); ///< Обработка события.
 	void ProcessEventInput(SDL_Event& event); ///< Обработка события клавиатуры / мыши.
 	void ProcessStateInput(Val timeDelta); ///< Обработка состояния клавиатуры / мыши.
 private:
