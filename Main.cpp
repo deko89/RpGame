@@ -13,6 +13,7 @@ int main()
 
     // Настройка.
     View* view = eng.CreateViewWorld();
+	view->world->sky = make_unique<SkyBox>("SkyBox/clouds1_%zu.jpg");
     // Установка камеры.
     view->cam.pos = {1, -2, 0};
     view->cam.angle = {0, 0, pi/2};

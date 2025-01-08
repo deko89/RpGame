@@ -1,17 +1,21 @@
 #ifndef World_H
 #define World_H
 
+#include <memory>
 #include "Models.h"
 #include "SkyBox.h"
 
 namespace EnG
 {
 
+using std::unique_ptr;
+using std::make_unique;
+
 /// Мир.
 class World
 {	public:
     Models models; ///< Модели.
-    SkyBox sky;    ///< Небо.
+    unique_ptr<SkyBox> sky;    ///< Небо.
 };
 
 }

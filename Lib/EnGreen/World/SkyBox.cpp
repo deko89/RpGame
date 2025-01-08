@@ -4,7 +4,7 @@ namespace EnG
 {
 
 // SkyBox ///////////////////////////////////////////////////////////
-void SkyBox::Create(const Str& path)
+SkyBox::SkyBox(const Str& path)
 {
     Mesh mesh;  mesh.MakeCubeIn(1);
     model.Make(mesh);

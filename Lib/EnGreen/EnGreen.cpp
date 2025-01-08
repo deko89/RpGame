@@ -62,7 +62,6 @@ View* Engine::CreateViewWorld()
 {
     // Создание мира.
     World* world = aWorld.Add();
-    world->sky.Create("SkyBox/clouds1_%zu.jpg");
     // Создание вида.
     RectI posView {0, 0, gSzWndDef.x, gSzWndDef.y};
     wnd.view = wnd.aView.Make(world, posView);

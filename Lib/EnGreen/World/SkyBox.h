@@ -12,7 +12,7 @@ class SkyBox
     /** Создать.
         param[in] path - шаблон пути до текстур. Формат: "Path/Name%zu.Ext".
     */
-    void Create(const Str& path);
+    SkyBox(const Str& path);
     void Draw() const;
 private:
     ModelVi model;  ///< Модель.
