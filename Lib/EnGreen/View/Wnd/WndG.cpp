@@ -6,7 +6,7 @@ namespace EnG
 WndG::WndG()
 {
     timePrev = system_clock::now();
-    SDL_SetRelativeMouseMode(SDL_TRUE);
+    //SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
 void WndG::ProcessEvent(SDL_Event& event)
