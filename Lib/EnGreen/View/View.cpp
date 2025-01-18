@@ -24,9 +24,12 @@ void View::Draw()
 	shaders.memCam.Copy( cam.GetMatrix() );
 	// Рисование.
     shaders[shCubeIn].Use();
-    if (world->sky)
-    	world->sky->Draw();
-    world->models.Draw();
+    if (world)
+    {
+		if (world->sky)
+			world->sky->Draw();
+		world->models.Draw();
+    }
 }
 void View::ProcessEvent(SDL_Event& event)
 {
