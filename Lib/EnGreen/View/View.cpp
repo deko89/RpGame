@@ -30,6 +30,12 @@ void View::Draw()
 			world->sky->Draw();
 		world->models.Draw();
     }
+	if (aShape.empty() == false)
+	{
+		ImGui::Begin("_");
+		aShape.Draw();
+		ImGui::End();
+	}
 }
 void View::ProcessEvent(SDL_Event& event)
 {

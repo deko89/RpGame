@@ -21,6 +21,7 @@
 	#include "World/Plant.cpp"
 	#include "World/World.cpp"
 	#include "World/SkyBox.cpp"
+	#include "World/Shapes.cpp"
 	#include "View/Wnd/Wnd.cpp"
 	#include "View/Camera.cpp"
 	#include "View/View.cpp"
