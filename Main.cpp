@@ -21,8 +21,8 @@ int main()
 	const Val s = 50;
 	const Color col = 0xff00aa00;
 	const Val w = 4.0f;
-	view->aShape.Add( new Line({0, s}, {s*2, s}, w, col) );
-	view->aShape.Add( new Line({s, s},   {s,   s*7}, w, col) );
+	view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
+	view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
     static Texture tex;
