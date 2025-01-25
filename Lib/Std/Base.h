@@ -17,6 +17,7 @@
 
 // Строки.
 typedef std::string Str;
+typedef const Str& StrR;
 typedef char Sym;
 
 // Константы.
