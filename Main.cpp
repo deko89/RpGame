@@ -17,6 +17,13 @@ int main()
     // Установка камеры.
     view->cam.pos = {1, -2, 0};
     view->cam.angle = {0, 0, pi/2};
+	// Интерфейс.
+	const Val s = 50;
+	const Color col = 0xff00aa00;
+	const Val w = 4.0f;
+	view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
+	view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
+	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
     static Texture tex;
     tex.Load("SkyBox/clouds1_0.jpg");

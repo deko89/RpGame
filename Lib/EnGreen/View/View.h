@@ -3,6 +3,7 @@
 
 #include "EnGreen/World/World.h"
 #include "EnGreen/View/Camera.h"
+#include "EnGreen/World/Shapes.h"
 
 namespace EnG
 {
@@ -12,6 +13,7 @@ class View
 {	public:
 	World* world = nullptr; ///< Отображаемый мир.
 	Camera cam;             ///< Камера.
+	Shapes aShape;			///< Интерфейс и 2d фигуры.
 	View(World* w, const RectI& pos);
 	const RectI& GetPos() const;
 	void SetPos(const RectI& r);
