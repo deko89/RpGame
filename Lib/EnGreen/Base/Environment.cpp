@@ -6,6 +6,8 @@
 namespace EnG
 {
 
+Str gAppPathS;
+
 Environment::Environment()
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)

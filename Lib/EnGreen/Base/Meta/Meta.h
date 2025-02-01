@@ -32,11 +32,11 @@ using namespace std::chrono;
 
 // Системные константы.
 #ifdef __linux__
-	const char* cPathFont = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
+	const char* const cPathFont = "/usr/share/fonts/truetype/ubuntu/Ubuntu-R.ttf";
 #elif __WINDOWS__
-	const char* cPathFont = "C:\\Windows\\Fonts\\Arial.ttf";
+	const char* const cPathFont = "C:\\Windows\\Fonts\\Arial.ttf";
 #elif __EMSCRIPTEN__
-	const char* cPathFont = "fonts/DroidSans.ttf";
+	const char* const cPathFont = "fonts/DroidSans.ttf";
 #endif
 
 // Простейшие типы.
