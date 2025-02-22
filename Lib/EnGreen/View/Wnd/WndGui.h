@@ -1,7 +1,6 @@
 #ifndef WNDGUI_H
 #define WNDGUI_H
 
-#define IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 #include "EnGreen/View/Wnd/WndG.h"
 
 namespace EnG

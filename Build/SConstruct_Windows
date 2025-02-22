@@ -1,6 +1,14 @@
 # Переменные.
 env = Environment(CC='clang', CXX='clang++', CXXFLAGS='-std=c++20 -O2 -fPIC')
-env.Append(CPPDEFINES=['One_Translation_Unit', 'SDL_MAIN_HANDLED', '__WINDOWS__'])
+env.Append(
+	CPPDEFINES = [
+		'One_Translation_Unit',
+		'IMGUI_IMPL_OPENGL_LOADER_CUSTOM',
+		'IMGUI_DEFINE_MATH_OPERATORS',
+		'SDL_MAIN_HANDLED',
+		'__WINDOWS__'
+	]
+)
 
 # Пути системных библиотек.
 dirsIncLibSys = [

@@ -2,7 +2,6 @@
 #define Shapes_H
 
 #include "EnGreen/Base/Meta/Meta.h"
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui.h"
 #include "Std/MassivPtr.h"
 
