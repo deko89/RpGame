@@ -81,6 +81,7 @@ typedef glm::vec3 Angle;	///< Угол (по локальным осям объ�
 typedef glm::vec3 Scale;	///< Масштаб.
 typedef glm::vec3 Vec3;		///< Вектор с 3 числами.
 typedef glm::vec4 Vec4;		///< Вектор с 4 числами.
+typedef glm::mat3 Mat3;		///< Матрица 3х3.
 typedef glm::mat4 Mat4;		///< Матрица 4х4.
 typedef glm::vec3::length_type OsType;	///< Тип индекса оси (X, Y, Z).
 
