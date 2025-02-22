@@ -14,6 +14,8 @@
 
 #pragma once
 
+#include "EnGreen/Base/Meta/Meta.h"
+
 //---- Define assertion handler. Defaults to calling assert().
 // If your macro uses multiple statements, make sure is enclosed in a 'do { .. } while (0)' block so it can be used as a single statement.
 //#define IM_ASSERT(_EXPR)  MyAssert(_EXPR)
@@ -101,11 +103,11 @@
 
 //---- Define constructor and implicit cast operators to convert back<>forth between your math types and ImVec2/ImVec4.
 // This will be inlined as part of ImVec2 and ImVec4 class declarations.
-/*
 #define IM_VEC2_CLASS_EXTRA                                                     \
-        constexpr ImVec2(const MyVec2& f) : x(f.x), y(f.y) {}                   \
-        operator MyVec2() const { return MyVec2(x,y); }
-
+        constexpr ImVec2(const EnG::Vec2& f) : x(f.x), y(f.y) {}                   \
+        constexpr ImVec2(const EnG::Vec3& f) : x(f.x), y(f.y) {}                   \
+        operator EnG::Vec2() const { return EnG::Vec2(x,y); }
+/*
 #define IM_VEC4_CLASS_EXTRA                                                     \
         constexpr ImVec4(const MyVec4& f) : x(f.x), y(f.y), z(f.z), w(f.w) {}   \
         operator MyVec4() const { return MyVec4(x,y,z,w); }
