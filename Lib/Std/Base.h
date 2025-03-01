@@ -18,6 +18,7 @@
 #define ToStr(x) std::to_string(x)
 
 // Строки.
+using std::string;
 typedef std::string Str;
 typedef const Str& StrR;
 typedef std::string_view StrV;
