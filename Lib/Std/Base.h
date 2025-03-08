@@ -6,7 +6,9 @@
 #ifndef BASE_H
 #define BASE_H
 
+#include <string_view>
 #include <string>
+#include <sstream>
 #include <cstdio>
 
 /// Макрос для перевода текста.
@@ -18,6 +20,7 @@
 // Строки.
 typedef std::string Str;
 typedef const Str& StrR;
+typedef std::string_view StrV;
 typedef char Sym;
 
 // Константы.
@@ -33,6 +36,9 @@ template<class C> void Limit(C& cVal, const C cMin, const C cMax)
 template<class C> C Max(C a, C b)
 {   return a > b ? a : b;
 }
+
+template<typename V> V ToVal(StrR s) {std::istringstream ss(s);  V v;  ss >> v;  return v;}
+template<typename V> V ToVal(StrV s) {Str a(s);  return ToVal<V>(a);}
 
 /// Печать в строку (обёртка printf).
 template<typename... Arg> Str PrintF(const Str& fmt, Arg... arg)
