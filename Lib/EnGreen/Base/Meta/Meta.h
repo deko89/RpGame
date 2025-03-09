@@ -54,7 +54,19 @@ const GLenum ValId = GL_FLOAT;			///< Код типа чисел (для ком�
 const GLenum IndId = GL_UNSIGNED_SHORT;	///< Код типа индексов вершин (для команд рисования).
 
 // Общие типы.
-typedef uint32_t Color;			///< Цвет.
+/// Цвет.
+struct Color
+{
+	union
+	{
+		struct {uint8_t r, g, b, a;};
+		uint8_t m[4];
+		uint32_t col;
+	};
+	Color() {}
+	Color(uint32_t c) : col(c) {}
+	operator uint32_t() const {return col;}
+};
 
 // Простые 2d типы.
     /// Вектор 2d целочисленный.
