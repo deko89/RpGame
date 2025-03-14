@@ -56,6 +56,7 @@ bool SvgRead(FilePath path, FunReadShape f);
 #include <algorithm>
 #include <sstream>
 #include "pugixml/src/pugixml.hpp"
+#include "Std/TextRead.h"
 
 namespace Svg
 {
@@ -63,6 +64,35 @@ namespace Svg
 using namespace pugi;
 
 FunReadShape funRead; ///< Функция чтения фигуры.
+
+/// Чтение из строки для Svg.
+struct TextReadSvg : public TextRead
+{
+	using TextRead::TextRead;
+	Color ReadColor()
+	{	Color col = 0xff000000;
+		if ( Cmp("rgb") )
+		{
+			SkipD('(');
+			col.r = ReadColorPart(',');
+			col.g = ReadColorPart(',');
+			col.b = ReadColorPart(')');
+		} else if ( Cmp("none") )
+		{	return col;
+		} else
+			std::cout << "Unknown color: " << s.substr(pos, 16) << std::endl;
+		return col;
+	}
+protected:
+	uint8_t ReadColorPart(Sym d)
+	{
+		StrV s;  s = ReadD(d);
+		if ( s.empty() ) return 0;
+		Val v = ToVal<Val>(s);
+		if (s.back() == '%') v = 255.0 * v / 100.0;
+		return v;
+	}
+};
 
 struct SvgReadNode
 {
