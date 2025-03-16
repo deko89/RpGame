@@ -33,6 +33,7 @@ struct ShapeStyle
 {
 	Val w = 1.0;
 	Color col = 0xff000000;
+	Color colStroke = 0xff000000;
 };
 
 /// Данные фигуры.
@@ -121,6 +122,7 @@ struct SvgReadNode
 	}
 	void ReadNode()
 	{
+		ReadStyle();
 		const Str name = ndXml.name();
 		if (name == "path")
 		{	ReadPath();
@@ -213,6 +215,25 @@ struct SvgReadNode
 				std::cout << "Unknown transform: " << type << std::endl;
 		}
 		return mat;
+	}
+private:
+	void ReadStyle()
+	{
+		if (parent)
+			shape.style = parent->shape.style;
+		xml_attribute a = ndXml.attribute("style");
+		if ( a.empty() ) return;
+		TextReadSvg r = a.value();
+		while (r)
+		{
+			StrV name = r.ReadD(':');
+			if (name == "fill")
+			{	shape.style.col = r.ReadColor();
+			} else if (name == "stroke")
+			{	shape.style.colStroke = r.ReadColor();
+			}
+			r.SkipD(';');
+		}
 	}
 };
 
