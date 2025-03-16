@@ -29,6 +29,13 @@ enum ShapeType : uint8_t
 };
 
 /// Данные фигуры.
+struct ShapeStyle
+{
+	Val w = 1.0;
+	Color col = 0xff000000;
+};
+
+/// Данные фигуры.
 struct ShapeData
 {
 	ShapeType type;
@@ -36,8 +43,7 @@ struct ShapeData
 		 b = Vec3(0, 0, 1),
 		 c = Vec3(0, 0, 1),
 		 d = Vec3(0, 0, 1);
-	Val w = 1.0;
-	Color col = 0xff000000;
+	ShapeStyle style;
 };
 
 typedef std::function<void(const ShapeData&)> FunReadShape;
