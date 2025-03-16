@@ -109,28 +109,33 @@ struct SvgReadNode
 	SvgReadNode(xml_node ndXml, SvgReadNode* parent = nullptr) :
 		ndXml(ndXml), parent(parent)
 	{
-		for (xml_attribute attr: ndXml.attributes())
+	}
+	void ReadChilds()
+	{
+		for ( SvgReadNode n(ndXml.first_child(), this);
+			  n.ndXml;
+			  n.ndXml = n.ndXml.next_sibling() )
 		{
-			//std::cout << " " << attr.name() << "=" << attr.value();
-		}
-		for (xml_node nd : ndXml.children())
-		{
-			const Str name = nd.name();
-			if (name == "path")
-			{	ReadPath(nd);
-			} else if (name == "g")
-			{	SvgReadNode r(nd);
-			} else if (name == "defs")
-			{	continue;
-			}
+			n.ReadNode();
 		}
 	}
-	void ReadPath(xml_node ndPath)
+	void ReadNode()
+	{
+		const Str name = ndXml.name();
+		if (name == "path")
+		{	ReadPath();
+		} else if (name == "g")
+		{	ReadChilds();
+		} else if (name == "defs")
+		{
+		}
+	}
+	void ReadPath()
 	{
 		Vec3 posSubPath(0, 0, 1); // Начальная позиция подпути.
 		char cmd; // Текущая команда.
-		Mat3 mTrans = ReadTransform(ndPath);
-		std::istringstream ss( ndPath.attribute("d").value() );
+		Mat3 mTrans = ReadTransform(ndXml);
+		std::istringstream ss( ndXml.attribute("d").value() );
 		ss >> cmd;
 		if (cmd == 'M')
 		{
@@ -221,7 +226,8 @@ bool SvgRead(FilePath path, FunReadShape f)
 		return 0;
 	}
 	funRead = f;
-	SvgReadNode( doc.child("svg") );
+	SvgReadNode r( doc.child("svg") );
+	r.ReadChilds();
 	return 1;
 }
 
