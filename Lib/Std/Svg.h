@@ -103,9 +103,11 @@ protected:
 struct SvgReadNode
 {
 	xml_node ndXml; ///< Читаемый узел.
+	SvgReadNode* parent = nullptr; ///< Родительский узел.
 	ShapeData shape; ///< Итоговые данные фигуры.
 
-	SvgReadNode(xml_node ndXml) : ndXml(ndXml)
+	SvgReadNode(xml_node ndXml, SvgReadNode* parent = nullptr) :
+		ndXml(ndXml), parent(parent)
 	{
 		for (xml_attribute attr: ndXml.attributes())
 		{
