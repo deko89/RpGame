@@ -106,6 +106,7 @@ struct SvgReadNode
 	xml_node ndXml; ///< Читаемый узел.
 	SvgReadNode* parent = nullptr; ///< Родительский узел.
 	ShapeData shape; ///< Итоговые данные фигуры.
+	Mat3 mTrans = Mat3(1); ///< Итоговая трансформация.
 
 	SvgReadNode(xml_node ndXml, SvgReadNode* parent = nullptr) :
 		ndXml(ndXml), parent(parent)
@@ -122,6 +123,7 @@ struct SvgReadNode
 	}
 	void ReadNode()
 	{
+		ReadTransform();
 		ReadStyle();
 		const Str name = ndXml.name();
 		if (name == "path")
@@ -136,7 +138,6 @@ struct SvgReadNode
 	{
 		Vec3 posSubPath(0, 0, 1); // Начальная позиция подпути.
 		char cmd; // Текущая команда.
-		Mat3 mTrans = ReadTransform(ndXml);
 		std::istringstream ss( ndXml.attribute("d").value() );
 		ss >> cmd;
 		if (cmd == 'M')
@@ -193,10 +194,11 @@ struct SvgReadNode
 			}
 		}
 	}
-	Mat3 ReadTransform(xml_node nd)
+private:
+	void ReadTransform()
 	{
-		Mat3 mat(1);
-		xml_attribute a = nd.attribute("transform");
+		mTrans = parent? parent->mTrans : Mat3(1);
+		xml_attribute a = ndXml.attribute("transform");
 		std::istringstream ss( a.value() );
 		while (ss)
 		{
@@ -208,15 +210,15 @@ struct SvgReadNode
 			if (type == "matrix")
 			{
 				std::istringstream ss(sTrans);
+				Mat3 mat(1);
 				ss >> mat[0][0];  ss >> mat[0][1];
 				ss >> mat[1][0];  ss >> mat[1][1];
 				ss >> mat[2][0];  ss >> mat[2][1];
+				mTrans *= mat;
 			} else
 				std::cout << "Unknown transform: " << type << std::endl;
 		}
-		return mat;
 	}
-private:
 	void ReadStyle()
 	{
 		if (parent)
