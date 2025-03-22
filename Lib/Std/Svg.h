@@ -225,7 +225,7 @@ private:
 			shape.style = parent->shape.style;
 		xml_attribute a = ndXml.attribute("style");
 		if ( a.empty() ) return;
-		TextReadSvg r = a.value();
+		TextReadSvg r( a.value() );
 		while (r)
 		{
 			StrV name = r.ReadD(':');
