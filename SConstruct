@@ -47,6 +47,7 @@ filesSrcLibProj =	Glob(	'Lib/imgui/*.cpp') + \
 					Split("""
 						Lib/imgui/backends/imgui_impl_opengl3.cpp
 						Lib/imgui/backends/imgui_impl_sdl2.cpp
+						Lib/pugixml/src/pugixml.cpp
 					""")
 dirsIncLibProj  = [
     'Lib',
