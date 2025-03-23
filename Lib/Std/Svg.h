@@ -137,64 +137,58 @@ struct SvgReadNode
 	void ReadPath()
 	{
 		Vec3 posSubPath(0, 0, 1); // Начальная позиция подпути.
-		char cmd; // Текущая команда.
-		std::istringstream ss( ndXml.attribute("d").value() );
-		ss >> cmd;
-		if (cmd == 'M')
+		textRead.Set( ndXml.attribute("d").value() );
+		for (Sym cmd; textRead;)
 		{
-			ss >> posSubPath.x;  ss >> posSubPath.y;
-			shape.a = posSubPath = mTrans * posSubPath;
-		} else
-			std::cout << "path: first no M -" << cmd << std::endl;
-		while (ss)
-		{
-			char cmd = 0;
-			ss >> cmd;
-			switch (cmd)
+			// Начало подпути.
+			cmd = textRead.ReadSym();
+			if (cmd == 0) break;
+			if (cmd == 'M')
+			{	ReadPos(posSubPath);
+			} else
+				textRead.UnReadSym();
+			shape.a = posSubPath;
+			// Чтение подпути.
+			for (bool bReadSubPath = 1; bReadSubPath && textRead;)
 			{
-				case 0: // Конец у Path.
-					break;
-				case 'M':
-				{	ss >> shape.a.x;  ss >> shape.a.y;
-					shape.a = mTrans * shape.a;
-				}	break;
-				case 'L':
-				{	shape.type = stLine;
-					ss >> shape.b.x;  ss >> shape.b.y;
-					shape.b = mTrans * shape.b;
-					funRead(shape); // Чтение.
-					shape.a = shape.b;
-				}	break;
-				case 'C':
+				cmd = textRead.ReadSym();
+				switch (cmd)
 				{
-					ss >> shape.b.x;  ss >> shape.b.y;
-					ss >> shape.c.x;  ss >> shape.c.y;
-					ss >> shape.d.x;  ss >> shape.d.y;
-				}	break;
-				case 'z': case 'Z':
-				{	if (shape.a != posSubPath)
+					case 0: // Конец у Path.
+						break;
+					case 'M':
+					{	ReadPos(shape.a);
+					}	break;
+					case 'L':
+					{	shape.type = stLine;
+						ReadPos(shape.b);
+						funRead(shape); // Чтение.
+						shape.a = shape.b;
+					}	break;
+					case 'C':
 					{
-						shape.type = stLine; //tmp
-						shape.b = posSubPath;
-						funRead(shape);
-					}
-					ss >> cmd;
-					if (cmd == 'M')
-					{
-						ss >> posSubPath.x;  ss >> posSubPath.y;
-						posSubPath = mTrans * posSubPath;
-					} else
-					{
-						ss.unget();
-					}
-					shape.a = posSubPath;
-				}	break;
-				default:
-					std::cout << "Unknown path command: " << cmd << std::endl;
+						ReadPos(shape.b);
+						ReadPos(shape.c);
+						ReadPos(shape.d);
+					}	break;
+					case 'z': case 'Z':
+					{	if (shape.a != posSubPath)
+						{
+							shape.type = stLine; //tmp
+							shape.b = posSubPath;
+							funRead(shape);
+						}
+						bReadSubPath = 0;
+					}	break;
+					default:
+						std::cout << "Unknown path command: " << cmd << std::endl;
+						textRead.End();
+				}
 			}
 		}
 	}
 private:
+	TextReadSvg textRead;
 	void ReadTransform()
 	{
 		mTrans = parent? parent->mTrans : Mat3(1);
@@ -236,6 +230,12 @@ private:
 			}
 			r.SkipD(';');
 		}
+	}
+	void ReadPos(Vec3& v)
+	{
+		v.x = textRead.ReadD<Val>();
+		v.y = textRead.ReadD<Val>();
+		v = mTrans * v;
 	}
 };
 
