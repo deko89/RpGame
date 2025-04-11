@@ -21,16 +21,6 @@ namespace Svg
 	typedef uint32_t Color;
 #endif
 
-/// Тип фигуры.
-enum ShapeType : uint8_t
-{
-	stLine,
-	//stRect,
-	//stCircle,
-	//stBezier, ///< Кривая Безье.
-	stPath,
-};
-
 /// Данные фигуры.
 struct ShapeStyle
 {
@@ -62,6 +52,16 @@ class ShapePath
 	struct CmdZ {};
 	///Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
 	ArDif aCmd;
+};
+
+/// Тип фигуры.
+enum ShapeType : uint8_t
+{
+	stLine,
+	//stRect,
+	//stCircle,
+	//stBezier, ///< Кривая Безье.
+	stPath,
 };
 
 /// Данные фигуры.
