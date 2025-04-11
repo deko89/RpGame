@@ -1,9 +1,11 @@
 #ifndef Svg_H
 #define Svg_H
 
+#include <variant>
 #include <functional>
 #include "Base.h"
 #include "File.h"
+#include "ArDif.h"
 
 constexpr auto streamSizeMax = std::numeric_limits<std::streamsize>::max();
 
@@ -23,9 +25,10 @@ namespace Svg
 enum ShapeType : uint8_t
 {
 	stLine,
-	stRect,
+	//stRect,
 	//stCircle,
 	//stBezier, ///< Кривая Безье.
+	stPath,
 };
 
 /// Данные фигуры.
@@ -36,14 +39,35 @@ struct ShapeStyle
 	Color colStroke = 0xff000000;
 };
 
+class ShapeLine
+{	public:
+	Pos2 a, b;
+};
+
+class ShapePath
+{	public:
+	/// Типы команд.
+	enum CmdType : uint8_t
+	{	cmdM, cmdL, cmdZ,
+	};
+	/// Команды.
+	struct CmdM
+	{	Pos2 p;
+		CmdM(Pos2 p) : p(p) {}
+	};
+	struct CmdL
+	{	Pos2 p;
+		CmdL(Pos2 p) : p(p) {}
+	};
+	struct CmdZ {};
+	///Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
+	ArDif aCmd;
+};
+
 /// Данные фигуры.
 struct ShapeData
-{
-	ShapeType type;
-	Vec3 a = Vec3(0, 0, 1),
-		 b = Vec3(0, 0, 1),
-		 c = Vec3(0, 0, 1),
-		 d = Vec3(0, 0, 1);
+{	/// Вариант фигуры. Совпадает с ShapeType.
+	std::variant<ShapeLine, ShapePath> vShape;
 	ShapeStyle style;
 };
 
