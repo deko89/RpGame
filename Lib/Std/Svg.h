@@ -32,7 +32,7 @@ enum ShapeType : uint8_t
 struct ShapeStyle
 {
 	Val w = 1.0;
-	Color col = 0xff000000;
+	Color col = 0;
 	Color colStroke = 0xff000000;
 };
 
@@ -85,7 +85,7 @@ struct TextReadSvg : public TextRead
 			col.g = ReadColorPart(',');
 			col.b = ReadColorPart(')');
 		} else if ( Cmp("none") )
-		{	return col;
+		{	return 0;
 		} else
 			std::cout << "Unknown color: " << s.substr(pos, 16) << std::endl;
 		return col;
