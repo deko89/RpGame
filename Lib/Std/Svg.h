@@ -21,14 +21,6 @@ namespace Svg
 	typedef uint32_t Color;
 #endif
 
-/// Данные фигуры.
-struct ShapeStyle
-{
-	Val w = 1.0;
-	Color col = 0;
-	Color colStroke = 0xff000000;
-};
-
 class ShapeLine
 {	public:
 	Pos2 a, b;
@@ -52,6 +44,14 @@ class ShapePath
 	struct CmdZ {};
 	///Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
 	ArDif aCmd;
+};
+
+/// Стиль фигуры.
+struct ShapeStyle
+{
+	Val w = 1.0;					///< Толщина линий.
+	Color col = 0;					///< Цвет заливки.
+	Color colStroke = 0xff000000;	///< Цвет линий.
 };
 
 /// Тип фигуры.
