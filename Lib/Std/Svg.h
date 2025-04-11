@@ -160,7 +160,7 @@ struct SvgReadNode
 	}
 	void ReadPath()
 	{
-		Vec3 posSubPath(0, 0, 1); // Начальная позиция подпути.
+		Vec2 posSubPath(0, 0); // Начальная позиция подпути.
 		textRead.Set( ndXml.attribute("d").value() );
 		for (Sym cmd; textRead;)
 		{
@@ -168,7 +168,7 @@ struct SvgReadNode
 			cmd = textRead.ReadSym();
 			if (cmd == 0) break;
 			if (cmd == 'M')
-			{	ReadPos(posSubPath);
+			{	posSubPath = ReadPos();
 			} else
 				textRead.UnReadSym();
 			shape.a = posSubPath;
@@ -255,11 +255,13 @@ private:
 			r.SkipD(';');
 		}
 	}
-	void ReadPos(Vec3& v)
-	{
+	Vec2 ReadPos()
+	{	Vec3 v;
 		v.x = textRead.ReadD<Val>();
 		v.y = textRead.ReadD<Val>();
+		v.z = 1;
 		v = mTrans * v;
+		return Vec2(v.x, v.y);
 	}
 };
 
