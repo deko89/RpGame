@@ -28,9 +28,15 @@ class ShapeLine
 
 class ShapePath
 {	public:
+	static const size_t nCmd = 3; ///< Число команд.
 	/// Типы команд.
 	enum CmdType : uint8_t
 	{	cmdM, cmdL, cmdZ,
+	};
+	/// Информация о команде.
+	struct CmdInf
+	{	size_t size; ///< Размер в байтах.
+		bool bMean; ///< Имеет ли смысл сама по себе (без других команд).
 	};
 	/// Команды.
 	struct CmdM
@@ -42,8 +48,31 @@ class ShapePath
 		CmdL(Pos2 p) : p(p) {}
 	};
 	struct CmdZ {};
-	///Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
+	static CmdInf aCmdInf[nCmd]; ///< Информация о командах.
+	/// Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
 	ArDif aCmd;
+	/// Имеет ли смысл (не пустой и т.п.).
+	bool IsMean() const
+	{	for (size_t i = 0; i < aCmd.size();)
+		{	const CmdType c = (CmdType) aCmd[i];
+			const CmdInf& inf = aCmdInf[c];
+			if (inf.bMean) return 1;
+			i += sizeof(CmdType) + inf.size;
+		}
+		return 0;
+	}
+	/// Добавить команду M (move).
+	void M(Vec2 p)
+	{	aCmd.Add<CmdType>(cmdM);
+		aCmd.Add<CmdM>(p);
+	}
+	/// Добавить команду L (line to).
+	void L(Vec2 p)
+	{	aCmd.Add<CmdType>(cmdL);
+		aCmd.Add<CmdL>(p);
+	}
+	/// Добавить команду Z (close path).
+	void Z() { aCmd.Add<CmdType>(cmdZ); }
 };
 
 /// Стиль фигуры.
@@ -95,6 +124,12 @@ namespace Svg
 using namespace pugi;
 
 FunReadShape funRead; ///< Функция чтения фигуры.
+
+ShapePath::CmdInf ShapePath::aCmdInf[ShapePath::nCmd]
+{	{sizeof(ShapePath::CmdM), false},
+	{sizeof(ShapePath::CmdL), true},
+	{0, false}, // CmdZ
+}
 
 /// Чтение из строки для Svg.
 struct TextReadSvg : public TextRead
@@ -160,6 +195,7 @@ struct SvgReadNode
 	}
 	void ReadPath()
 	{
+		ShapePath& shPath = shape.vShape.emplace<ShapePath>();
 		Vec2 posSubPath(0, 0); // Начальная позиция подпути.
 		textRead.Set( ndXml.attribute("d").value() );
 		for (Sym cmd; textRead;)
@@ -169,9 +205,9 @@ struct SvgReadNode
 			if (cmd == 0) break;
 			if (cmd == 'M')
 			{	posSubPath = ReadPos();
+				shPath.M(posSubPath);
 			} else
 				textRead.UnReadSym();
-			shape.a = posSubPath;
 			// Чтение подпути.
 			for (bool bReadSubPath = 1; bReadSubPath && textRead;)
 			{
@@ -180,28 +216,15 @@ struct SvgReadNode
 				{
 					case 0: // Конец у Path.
 						break;
-					case 'M':
-					{	ReadPos(shape.a);
-					}	break;
-					case 'L':
-					{	shape.type = stLine;
-						ReadPos(shape.b);
-						funRead(shape); // Чтение.
-						shape.a = shape.b;
-					}	break;
+					case 'M':	shPath.M( ReadPos() );	break;
+					case 'L':	shPath.L( ReadPos() );	break;
 					case 'C':
-					{
-						ReadPos(shape.b);
-						ReadPos(shape.c);
-						ReadPos(shape.d);
+					{	Vec2 a = ReadPos();
+						Vec2 b = ReadPos();
+						Vec2 c = ReadPos();
 					}	break;
 					case 'z': case 'Z':
-					{	if (shape.a != posSubPath)
-						{
-							shape.type = stLine; //tmp
-							shape.b = posSubPath;
-							funRead(shape);
-						}
+					{	shPath.Z();
 						bReadSubPath = 0;
 					}	break;
 					default:
@@ -209,6 +232,9 @@ struct SvgReadNode
 						textRead.End();
 				}
 			}
+			// Чтение.
+			if ( shape.IsMean() ) funRead(shape);
+			shPath.aCmd.clear();
 		}
 	}
 private:
