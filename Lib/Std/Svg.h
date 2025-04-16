@@ -26,28 +26,29 @@ class ShapeLine
 	Pos2 a, b;
 };
 
+/// Типы команд Path.
+enum CmdType : uint8_t
+{	cmdM, cmdL, cmdZ,
+};
+/// Информация о команде Path.
+struct CmdInf
+{	size_t size; ///< Размер в байтах.
+	bool bMean; ///< Имеет ли смысл сама по себе (без других команд).
+};
+/// Команды Path.
+struct CmdM
+{	Pos2 p;
+	CmdM(Pos2 p) : p(p) {}
+};
+struct CmdL
+{	Pos2 p;
+	CmdL(Pos2 p) : p(p) {}
+};
+struct CmdZ {};
+
 class ShapePath
 {	public:
 	static const size_t nCmd = 3; ///< Число команд.
-	/// Типы команд.
-	enum CmdType : uint8_t
-	{	cmdM, cmdL, cmdZ,
-	};
-	/// Информация о команде.
-	struct CmdInf
-	{	size_t size; ///< Размер в байтах.
-		bool bMean; ///< Имеет ли смысл сама по себе (без других команд).
-	};
-	/// Команды.
-	struct CmdM
-	{	Pos2 p;
-		CmdM(Pos2 p) : p(p) {}
-	};
-	struct CmdL
-	{	Pos2 p;
-		CmdL(Pos2 p) : p(p) {}
-	};
-	struct CmdZ {};
 	static CmdInf aCmdInf[nCmd]; ///< Информация о командах.
 	/// Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
 	ArDif aCmd;
@@ -125,9 +126,9 @@ using namespace pugi;
 
 FunReadShape funRead; ///< Функция чтения фигуры.
 
-ShapePath::CmdInf ShapePath::aCmdInf[ShapePath::nCmd]
-{	{sizeof(ShapePath::CmdM), false},
-	{sizeof(ShapePath::CmdL), true},
+CmdInf ShapePath::aCmdInf[ShapePath::nCmd]
+{	{sizeof(CmdM), false},
+	{sizeof(CmdL), true},
 	{0, false}, // CmdZ
 }
 
