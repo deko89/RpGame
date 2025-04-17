@@ -116,6 +116,7 @@ bool SvgRead(FilePath path, FunReadShape f);
 #ifdef M_IncludeCpp
 #include <algorithm>
 #include <sstream>
+#include <iostream>
 #include "pugixml/src/pugixml.hpp"
 #include "Std/TextRead.h"
 
@@ -130,7 +131,7 @@ CmdInf ShapePath::aCmdInf[ShapePath::nCmd]
 {	{sizeof(CmdM), false},
 	{sizeof(CmdL), true},
 	{0, false}, // CmdZ
-}
+};
 
 /// Чтение из строки для Svg.
 struct TextReadSvg : public TextRead
@@ -234,7 +235,7 @@ struct SvgReadNode
 				}
 			}
 			// Чтение.
-			if ( shape.IsMean() ) funRead(shape);
+			if ( shPath.IsMean() ) funRead(shape);
 			shPath.aCmd.clear();
 		}
 	}
