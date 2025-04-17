@@ -4,7 +4,7 @@
 	#include "imgui/examples/libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
-#define Include_cpp
+#define M_IncludeCpp
 
 #ifdef One_Translation_Unit
 	#include "Std/File.cpp"

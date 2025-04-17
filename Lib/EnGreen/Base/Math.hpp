@@ -70,7 +70,7 @@ private:
 
 
 
-#ifdef Include_cpp
+#ifdef M_IncludeCpp
 
 #include <cmath>
 
