@@ -18,6 +18,33 @@ void Line::Draw() const
 {
 	gDrawL->AddLine(ToGlobC(a), ToGlobC(b), c, w);
 }
+// ShPath ////////////////////////////////////////////////////////////
+void ShPath::Draw() const
+{
+	using namespace Svg;
+	int flag = 0;
+	for (size_t pos = 0; pos < aCmd.size();)
+	{	CmdType type = aCmd.Read<CmdType>(pos);
+		switch (type)
+		{
+			case CmdType::cmdM:
+			{	CmdM& c = aCmd.Read<CmdM>(pos);
+				gDrawL->PathLineTo( ToGlobC(c.p) );
+			}	break;
+			case CmdType::cmdL:
+			{	CmdL& c = aCmd.Read<CmdL>(pos);
+				gDrawL->PathLineTo( ToGlobC(c.p) );
+			}	break;
+			case CmdType::cmdZ:
+			{	flag = ImDrawFlags_Closed;
+			}	break;
+		}
+	}
+	if (style.col)
+		gDrawL->PathFillConvex(style.col);
+	else
+		gDrawL->PathStroke(style.colStroke, flag, style.w);
+}
 // Shapes ////////////////////////////////////////////////////////////
 void Shapes::Draw() const
 {
