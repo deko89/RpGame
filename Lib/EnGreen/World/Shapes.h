@@ -4,11 +4,13 @@
 #include "EnGreen/Base/Meta/Meta.h"
 #include "imgui.h"
 #include "Std/MassivPtr.h"
+#define M_Svg_OwnTypes
+namespace EnG {typedef ImVec2 Pos2;}
+namespace Svg {using namespace EnG;}
+#include "Std/Svg.h"
 
 namespace EnG
 {
-
-typedef ImVec2 Pos2;	///< Позиция.
 
 /// Базовая 2d фигура.
 class Shape
@@ -25,6 +27,15 @@ class Line : public Shape
 	Color c;		///< Цвет.
 	Line() {}
 	Line(Pos2 a, Pos2 b, Val w, Color c) : a(a), b(b), w(w), c(c) {}
+	virtual void Draw() const override;
+};
+
+/** Путь (svg).
+	\details Фигура - многоугольник, полилиния, сплайн.
+	\note Сейчас поддерживается 1 подпуть. И сплошная линия, без разрывов. */
+class ShPath : public Shape, public Svg::ShapePath
+{	public:
+	Svg::ShapeStyle style;
 	virtual void Draw() const override;
 };
 

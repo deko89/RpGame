@@ -1,9 +1,11 @@
 #ifndef Svg_H
 #define Svg_H
 
+#include <variant>
 #include <functional>
 #include "Base.h"
 #include "File.h"
+#include "ArDif.h"
 
 constexpr auto streamSizeMax = std::numeric_limits<std::streamsize>::max();
 
@@ -19,31 +21,83 @@ namespace Svg
 	typedef uint32_t Color;
 #endif
 
+class ShapeLine
+{	public:
+	Pos2 a, b;
+};
+
+/// Типы команд Path.
+enum CmdType : uint8_t
+{	cmdM, cmdL, cmdZ,
+};
+/// Информация о команде Path.
+struct CmdInf
+{	size_t size; ///< Размер в байтах.
+	bool bMean; ///< Имеет ли смысл сама по себе (без других команд).
+};
+/// Команды Path.
+struct CmdM
+{	Pos2 p;
+	CmdM(Pos2 p) : p(p) {}
+};
+struct CmdL
+{	Pos2 p;
+	CmdL(Pos2 p) : p(p) {}
+};
+struct CmdZ {};
+
+class ShapePath
+{	public:
+	static const size_t nCmd = 3; ///< Число команд.
+	static CmdInf aCmdInf[nCmd]; ///< Информация о командах.
+	/// Набор команд (CmdType, CmdM, CmdType, CmdL, ...).
+	ArDif aCmd;
+	/// Имеет ли смысл (не пустой и т.п.).
+	bool IsMean() const
+	{	for (size_t i = 0; i < aCmd.size();)
+		{	const CmdType c = (CmdType) aCmd[i];
+			const CmdInf& inf = aCmdInf[c];
+			if (inf.bMean) return 1;
+			i += sizeof(CmdType) + inf.size;
+		}
+		return 0;
+	}
+	/// Добавить команду M (move).
+	void M(Vec2 p)
+	{	aCmd.Add<CmdType>(cmdM);
+		aCmd.Add<CmdM>(p);
+	}
+	/// Добавить команду L (line to).
+	void L(Vec2 p)
+	{	aCmd.Add<CmdType>(cmdL);
+		aCmd.Add<CmdL>(p);
+	}
+	/// Добавить команду Z (close path).
+	void Z() { aCmd.Add<CmdType>(cmdZ); }
+};
+
+/// Стиль фигуры.
+struct ShapeStyle
+{
+	Val w = 1.0;					///< Толщина линий.
+	Color col = 0;					///< Цвет заливки.
+	Color colStroke = 0xff000000;	///< Цвет линий.
+};
+
 /// Тип фигуры.
 enum ShapeType : uint8_t
 {
 	stLine,
-	stRect,
+	//stRect,
 	//stCircle,
 	//stBezier, ///< Кривая Безье.
-};
-
-/// Данные фигуры.
-struct ShapeStyle
-{
-	Val w = 1.0;
-	Color col = 0;
-	Color colStroke = 0xff000000;
+	stPath,
 };
 
 /// Данные фигуры.
 struct ShapeData
-{
-	ShapeType type;
-	Vec3 a = Vec3(0, 0, 1),
-		 b = Vec3(0, 0, 1),
-		 c = Vec3(0, 0, 1),
-		 d = Vec3(0, 0, 1);
+{	/// Вариант фигуры. Совпадает с ShapeType.
+	std::variant<ShapeLine, ShapePath> vShape;
 	ShapeStyle style;
 };
 
@@ -62,6 +116,7 @@ bool SvgRead(FilePath path, FunReadShape f);
 #ifdef M_IncludeCpp
 #include <algorithm>
 #include <sstream>
+#include <iostream>
 #include "pugixml/src/pugixml.hpp"
 #include "Std/TextRead.h"
 
@@ -71,6 +126,12 @@ namespace Svg
 using namespace pugi;
 
 FunReadShape funRead; ///< Функция чтения фигуры.
+
+CmdInf ShapePath::aCmdInf[ShapePath::nCmd]
+{	{sizeof(CmdM), false},
+	{sizeof(CmdL), true},
+	{0, false}, // CmdZ
+};
 
 /// Чтение из строки для Svg.
 struct TextReadSvg : public TextRead
@@ -136,7 +197,8 @@ struct SvgReadNode
 	}
 	void ReadPath()
 	{
-		Vec3 posSubPath(0, 0, 1); // Начальная позиция подпути.
+		ShapePath& shPath = shape.vShape.emplace<ShapePath>();
+		Vec2 posSubPath(0, 0); // Начальная позиция подпути.
 		textRead.Set( ndXml.attribute("d").value() );
 		for (Sym cmd; textRead;)
 		{
@@ -144,10 +206,10 @@ struct SvgReadNode
 			cmd = textRead.ReadSym();
 			if (cmd == 0) break;
 			if (cmd == 'M')
-			{	ReadPos(posSubPath);
+			{	posSubPath = ReadPos();
+				shPath.M(posSubPath);
 			} else
 				textRead.UnReadSym();
-			shape.a = posSubPath;
 			// Чтение подпути.
 			for (bool bReadSubPath = 1; bReadSubPath && textRead;)
 			{
@@ -156,28 +218,15 @@ struct SvgReadNode
 				{
 					case 0: // Конец у Path.
 						break;
-					case 'M':
-					{	ReadPos(shape.a);
-					}	break;
-					case 'L':
-					{	shape.type = stLine;
-						ReadPos(shape.b);
-						funRead(shape); // Чтение.
-						shape.a = shape.b;
-					}	break;
+					case 'M':	shPath.M( ReadPos() );	break;
+					case 'L':	shPath.L( ReadPos() );	break;
 					case 'C':
-					{
-						ReadPos(shape.b);
-						ReadPos(shape.c);
-						ReadPos(shape.d);
+					{	Vec2 a = ReadPos();
+						Vec2 b = ReadPos();
+						Vec2 c = ReadPos();
 					}	break;
 					case 'z': case 'Z':
-					{	if (shape.a != posSubPath)
-						{
-							shape.type = stLine; //tmp
-							shape.b = posSubPath;
-							funRead(shape);
-						}
+					{	shPath.Z();
 						bReadSubPath = 0;
 					}	break;
 					default:
@@ -185,6 +234,9 @@ struct SvgReadNode
 						textRead.End();
 				}
 			}
+			// Чтение.
+			if ( shPath.IsMean() ) funRead(shape);
+			shPath.aCmd.clear();
 		}
 	}
 private:
@@ -231,11 +283,13 @@ private:
 			r.SkipD(';');
 		}
 	}
-	void ReadPos(Vec3& v)
-	{
+	Vec2 ReadPos()
+	{	Vec3 v;
 		v.x = textRead.ReadD<Val>();
 		v.y = textRead.ReadD<Val>();
+		v.z = 1;
 		v = mTrans * v;
+		return Vec2(v.x, v.y);
 	}
 };
 
