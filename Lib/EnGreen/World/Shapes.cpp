@@ -35,6 +35,12 @@ void ShPath::Draw() const
 			{	CmdL& c = aCmd.Read<CmdL>(pos);
 				gDrawL->PathLineTo( ToGlobC(c.p) );
 			}	break;
+			case CmdType::cmdC:
+			{	CmdC& c = aCmd.Read<CmdC>(pos);
+				gDrawL->PathBezierCubicCurveTo( ToGlobC(c.a),
+												ToGlobC(c.b),
+												ToGlobC(c.c) );
+			}	break;
 			case CmdType::cmdZ:
 			{	flag = ImDrawFlags_Closed;
 			}	break;

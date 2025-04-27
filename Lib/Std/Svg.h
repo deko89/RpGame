@@ -28,7 +28,7 @@ class ShapeLine
 
 /// Типы команд Path.
 enum CmdType : uint8_t
-{	cmdM, cmdL, cmdZ,
+{	cmdM, cmdL, cmdC, cmdZ,
 };
 /// Информация о команде Path.
 struct CmdInf
@@ -43,6 +43,10 @@ struct CmdM
 struct CmdL
 {	Pos2 p;
 	CmdL(Pos2 p) : p(p) {}
+};
+struct CmdC
+{	Pos2 a, b, c;
+	CmdC(Vec2 a, Vec2 b, Vec2 c) : a(a), b(b), c(c) {}
 };
 struct CmdZ {};
 
@@ -71,6 +75,11 @@ class ShapePath
 	void L(Vec2 p)
 	{	aCmd.Add<CmdType>(cmdL);
 		aCmd.Add<CmdL>(p);
+	}
+	/// Добавить команду C (cubic Bézier).
+	void C(Vec2 a, Vec2 b, Vec2 c)
+	{	aCmd.Add<CmdType>(cmdC);
+		aCmd.Add<CmdC>(a, b, c);
 	}
 	/// Добавить команду Z (close path).
 	void Z() { aCmd.Add<CmdType>(cmdZ); }
@@ -221,9 +230,7 @@ struct SvgReadNode
 					case 'M':	shPath.M( ReadPos() );	break;
 					case 'L':	shPath.L( ReadPos() );	break;
 					case 'C':
-					{	Vec2 a = ReadPos();
-						Vec2 b = ReadPos();
-						Vec2 c = ReadPos();
+					{	shPath.C( ReadPos(), ReadPos(), ReadPos() );
 					}	break;
 					case 'z': case 'Z':
 					{	shPath.Z();
