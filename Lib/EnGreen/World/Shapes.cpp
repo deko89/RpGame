@@ -22,13 +22,19 @@ void Line::Draw() const
 void ShPath::Draw() const
 {
 	using namespace Svg;
-	int flag = 0;
+	auto Draw = [=](int flag = 0)
+	{	if (style.col)
+		{	gDrawL->PathFillConvex(style.col);
+		} else
+			gDrawL->PathStroke(style.colStroke, flag, style.w);
+	};
 	for (size_t pos = 0; pos < aCmd.size();)
 	{	CmdType type = aCmd.Read<CmdType>(pos);
 		switch (type)
 		{
 			case CmdType::cmdM:
-			{	CmdM& c = aCmd.Read<CmdM>(pos);
+			{	Draw();
+				CmdM& c = aCmd.Read<CmdM>(pos);
 				gDrawL->PathLineTo( ToGlobC(c.p) );
 			}	break;
 			case CmdType::cmdL:
@@ -42,14 +48,11 @@ void ShPath::Draw() const
 												ToGlobC(c.c) );
 			}	break;
 			case CmdType::cmdZ:
-			{	flag = ImDrawFlags_Closed;
+			{	Draw(ImDrawFlags_Closed);
 			}	break;
 		}
 	}
-	if (style.col)
-		gDrawL->PathFillConvex(style.col);
-	else
-		gDrawL->PathStroke(style.colStroke, flag, style.w);
+	Draw();
 }
 // Shapes ////////////////////////////////////////////////////////////
 void Shapes::Draw() const

@@ -31,8 +31,7 @@ class Line : public Shape
 };
 
 /** Путь (svg).
-	\details Фигура - многоугольник, полилиния, сплайн.
-	\note Сейчас поддерживается 1 подпуть. И сплошная линия, без разрывов. */
+	\details Фигура - многоугольник, полилиния, сплайн. */
 class ShPath : public Shape, public Svg::ShapePath
 {	public:
 	Svg::ShapeStyle style;
