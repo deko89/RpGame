@@ -55,6 +55,27 @@ void ShPath::Draw() const
 	Draw();
 }
 // Shapes ////////////////////////////////////////////////////////////
+void Shapes::LoadSvg(FilePath path)
+{
+	using namespace Svg;
+	auto ReadShape = [=](const ShapeData& d)
+	{	switch ( d.vShape.index() )
+		{
+			case stLine:
+			{
+				//Add( new Line(d.a, d.b, d.style.w, d.style.colStroke) );
+			}	break;
+			case stPath:
+			{
+				ShPath* p = new ShPath;
+				p->ShapePath::operator=( std::get<ShapePath>(d.vShape) );
+				p->style = d.style;
+				Add(p);
+			}	break;
+		}
+	};
+	SvgRead(path, ReadShape);
+}
 void Shapes::Draw() const
 {
 	gDrawL = ImGui::GetWindowDrawList();

@@ -42,6 +42,7 @@ class ShPath : public Shape, public Svg::ShapePath
 class Shapes : public MassivPtr<Shape>
 {	public:
 	typedef MassivPtr<Shape> Base;
+	void LoadSvg(FilePath path); ///< Загрузить из svg файла.
 	void Draw() const;
 };
 
