@@ -3,9 +3,9 @@
 
 #include <variant>
 #include <functional>
-#include "Base.h"
-#include "File.h"
-#include "ArDif.h"
+#include "Std/Base.h"
+#include "Std/File.h"
+#include "Std/ArDif.h"
 
 constexpr auto streamSizeMax = std::numeric_limits<std::streamsize>::max();
 

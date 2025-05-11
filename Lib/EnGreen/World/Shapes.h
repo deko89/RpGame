@@ -6,7 +6,7 @@
 #include "Std/MassivPtr.h"
 #define M_Svg_OwnTypes
 namespace Svg {using namespace EnG;}
-#include "Std/Svg.h"
+#include "Std/Media/Svg.h"
 
 namespace EnG
 {

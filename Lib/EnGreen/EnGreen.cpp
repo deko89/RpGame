@@ -8,8 +8,8 @@
 
 #ifdef One_Translation_Unit
 	#include "Std/File.cpp"
-	#include "Std/Svg.h"
     #include "Std/Media/Image.cpp"
+	#include "Std/Media/Svg.h"
     #include "Base/Meta/Meta.cpp"
 	#include "Base/Meta/Shader.cpp"
 	#include "Base/Meta/MemG.cpp"
