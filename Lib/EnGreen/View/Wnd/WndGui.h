@@ -1,6 +1,7 @@
 #ifndef WNDGUI_H
 #define WNDGUI_H
 
+#include "imgui.h"
 #include "EnGreen/View/Wnd/WndG.h"
 
 namespace EnG

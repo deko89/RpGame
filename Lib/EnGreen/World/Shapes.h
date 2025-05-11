@@ -2,7 +2,6 @@
 #define Shapes_H
 
 #include "EnGreen/Base/Meta/Meta.h"
-#include "imgui.h"
 #include "Std/MassivPtr.h"
 #define M_Svg_OwnTypes
 namespace Svg {using namespace EnG;}
