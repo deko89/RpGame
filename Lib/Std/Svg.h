@@ -15,7 +15,7 @@ namespace Svg
 #ifndef M_Svg_OwnTypes
 	#include "glm/glm.hpp"
 	typedef float Val;
-	typedef glm::vec2 Pos2;
+	typedef glm::vec2 Vec2;
 	typedef glm::vec3 Vec3;
 	typedef glm::mat3 Mat3;
 	typedef uint32_t Color;
@@ -23,7 +23,7 @@ namespace Svg
 
 class ShapeLine
 {	public:
-	Pos2 a, b;
+	Vec2 a, b;
 };
 
 /// Типы команд Path.
@@ -37,15 +37,15 @@ struct CmdInf
 };
 /// Команды Path.
 struct CmdM
-{	Pos2 p;
-	CmdM(Pos2 p) : p(p) {}
+{	Vec2 p;
+	CmdM(Vec2 p) : p(p) {}
 };
 struct CmdL
-{	Pos2 p;
-	CmdL(Pos2 p) : p(p) {}
+{	Vec2 p;
+	CmdL(Vec2 p) : p(p) {}
 };
 struct CmdC
-{	Pos2 a, b, c;
+{	Vec2 a, b, c;
 	CmdC(Vec2 a, Vec2 b, Vec2 c) : a(a), b(b), c(c) {}
 };
 struct CmdZ {};

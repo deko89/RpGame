@@ -5,10 +5,10 @@ namespace EnG
 
 ImDrawList* gDrawL;
 /// Позиция начала View (0,0 - с учётом полей и т.п.). Глобальные координаты.
-Pos2 gViewBegPos;
+Vec2 gViewBegPos;
 
 /// Координаты из логических в глобальные.
-Pos2 ToGlobC(const Pos2& p)
+Vec2 ToGlobC(const Vec2& p)
 {
 	return gViewBegPos + p;
 }

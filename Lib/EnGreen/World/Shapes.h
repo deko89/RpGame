@@ -5,7 +5,6 @@
 #include "imgui.h"
 #include "Std/MassivPtr.h"
 #define M_Svg_OwnTypes
-namespace EnG {typedef ImVec2 Pos2;}
 namespace Svg {using namespace EnG;}
 #include "Std/Svg.h"
 
@@ -22,11 +21,11 @@ class Shape
 /// Линия.
 class Line : public Shape
 {	public:
-	Pos2 a, b;		///< Позиция.
+	Vec2 a, b;		///< Позиция.
 	Val w;			///< Ширина.
 	Color c;		///< Цвет.
 	Line() {}
-	Line(Pos2 a, Pos2 b, Val w, Color c) : a(a), b(b), w(w), c(c) {}
+	Line(Vec2 a, Vec2 b, Val w, Color c) : a(a), b(b), w(w), c(c) {}
 	virtual void Draw() const override;
 };
 
