@@ -1,6 +1,6 @@
 #include "Context.h"
 
-namespace EnG
+namespace GEng
 {
 
 Context::~Context()

@@ -4,7 +4,7 @@
 #include "SDL.h"
 #include "Std/Base.h"
 
-namespace EnG
+namespace GEng
 {
 
 // Константы.

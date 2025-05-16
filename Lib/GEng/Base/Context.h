@@ -9,7 +9,7 @@
 #include "GEng/Base/Meta/Meta.h"
 #include "GEng/View/Wnd/Wnd.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Версия.

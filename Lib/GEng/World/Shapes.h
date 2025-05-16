@@ -4,10 +4,10 @@
 #include "GEng/Base/Meta/Meta.h"
 #include "Std/MassivPtr.h"
 #define M_Svg_OwnTypes
-namespace Svg {using namespace EnG;}
+namespace Svg {using namespace GEng;}
 #include "Std/Media/Svg.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Базовая 2d фигура.

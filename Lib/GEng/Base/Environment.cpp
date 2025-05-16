@@ -3,7 +3,7 @@
 #include "Std/Media/Image.h"
 
 // Environment //////////////////////////////////////////////////////
-namespace EnG
+namespace GEng
 {
 
 Str gAppPathS;

@@ -1,6 +1,6 @@
 #include "Wnd.h"
 
-namespace EnG
+namespace GEng
 {
 
 Wnd::~Wnd()

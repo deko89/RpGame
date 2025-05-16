@@ -16,7 +16,7 @@ namespace glm
 	}
 }
 
-namespace EnG
+namespace GEng
 {
 
 using std::vector;
@@ -74,7 +74,7 @@ private:
 
 #include <cmath>
 
-namespace EnG
+namespace GEng
 {
 
 // SplineCalc ////////////////////////////////////////////////////////

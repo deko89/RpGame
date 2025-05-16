@@ -1,6 +1,6 @@
 #include "WndG.h"
 
-namespace EnG
+namespace GEng
 {
 
 WndG::WndG()

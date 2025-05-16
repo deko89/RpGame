@@ -2,7 +2,7 @@
 #include <iostream> // Потоковый вывод (cout).
 #include "glm/gtc/type_ptr.hpp"
 
-namespace EnG
+namespace GEng
 {
 
 // Shader ///////////////////////////////////////////////////////////

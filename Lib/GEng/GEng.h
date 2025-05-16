@@ -6,7 +6,7 @@
 #include "GEng/View/Wnd/WndGui.h"
 #include "GEng/World/World.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Движок.

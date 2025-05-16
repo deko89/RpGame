@@ -5,7 +5,7 @@
 #include "Models.h"
 #include "SkyBox.h"
 
-namespace EnG
+namespace GEng
 {
 
 using std::unique_ptr;

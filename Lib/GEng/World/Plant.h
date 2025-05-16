@@ -3,7 +3,7 @@
 
 #include "Models.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Модель ствола (или ветки).

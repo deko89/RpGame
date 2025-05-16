@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include "Std/Media/Image.h"
 
-namespace EnG
+namespace GEng
 {
 
 const GLenum typeGl[]

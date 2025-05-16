@@ -5,7 +5,7 @@
 #include "GEng/Base/Meta/Texture.h"
 #include "GEng/Base/Meta/Model.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Стандартная модель.

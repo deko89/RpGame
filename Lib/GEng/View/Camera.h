@@ -3,7 +3,7 @@
 
 #include "GEng/Base/Meta/MemG.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Камера.

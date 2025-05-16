@@ -3,7 +3,7 @@
 
 #include "GEng/Base/Meta/Texture.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Задний план (небо).

@@ -1,6 +1,6 @@
 #include "World.h"
 
-namespace EnG
+namespace GEng
 {
 
 }

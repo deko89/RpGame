@@ -2,7 +2,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/gtx/string_cast.hpp"
 
-namespace EnG
+namespace GEng
 {
 
 Val Vec2I::Ratio() const

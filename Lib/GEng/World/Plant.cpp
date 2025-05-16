@@ -1,6 +1,6 @@
 #include "Plant.h"
 
-namespace EnG
+namespace GEng
 {
 
 // ModelStvol ////////////////////////////////////////////////////////

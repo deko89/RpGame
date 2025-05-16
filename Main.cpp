@@ -4,7 +4,7 @@
 	#include "GEng/GEng.cpp"
 #endif
 
-using namespace EnG;
+using namespace GEng;
 
 int main()
 {

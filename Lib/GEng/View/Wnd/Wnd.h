@@ -3,7 +3,7 @@
 
 #include "GEng/Base/Environment.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Размер окна по умолчанию.

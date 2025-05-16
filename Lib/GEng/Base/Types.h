@@ -12,7 +12,7 @@
 #include "GEng/Base/Meta/Meta.h"
 #include "GEng/Base/Math.hpp"
 
-namespace EnG
+namespace GEng
 {
 
 using std::vector;

@@ -5,7 +5,7 @@
 #include "GEng/View/Camera.h"
 #include "GEng/World/Shapes.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Вид. Область в окне показывающая мир.

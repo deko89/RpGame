@@ -3,7 +3,7 @@
 
 #include "GEng/Base/Types.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Базовый 3d объект.

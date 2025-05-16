@@ -25,7 +25,7 @@
 
 #include "glm/glm.hpp"
 
-namespace EnG
+namespace GEng
 {
 
 using namespace std::chrono;

@@ -3,7 +3,7 @@
 #include "imgui_impl_opengl3.h"
 #include "GEng/Base/Context.h"
 
-namespace EnG
+namespace GEng
 {
 
 WndGui::~WndGui()

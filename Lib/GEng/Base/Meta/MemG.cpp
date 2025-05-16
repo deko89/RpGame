@@ -1,6 +1,6 @@
 #include "MemG.h"
 
-namespace EnG
+namespace GEng
 {
 
 void MemG::Create(size_t size)

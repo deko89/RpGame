@@ -1,7 +1,7 @@
 #include "View.h"
 #include "imgui.h"
 
-namespace EnG
+namespace GEng
 {
 
 View::View(World* w, const RectI& pos) :

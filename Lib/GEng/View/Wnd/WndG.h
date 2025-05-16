@@ -5,7 +5,7 @@
 #include "GEng/View/Wnd/Wnd.h"
 #include "GEng/View/View.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Окно с графикой.

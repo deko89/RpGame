@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include "GEng/View/Wnd/WndG.h"
 
-namespace EnG
+namespace GEng
 {
 
 class WndGui : public WndG

@@ -4,7 +4,7 @@
 #include <array>
 #include "GEng/Base/Meta/MemG.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Программа рисования для видеокарты.

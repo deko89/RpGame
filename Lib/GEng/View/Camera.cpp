@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-namespace EnG
+namespace GEng
 {
 
 GLfloat sensitivityMouse = 0.005f;

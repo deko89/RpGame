@@ -1,6 +1,6 @@
 #include "Models.h"
 
-namespace EnG
+namespace GEng
 {
 
 // ModelStd /////////////////////////////////////////////////////////

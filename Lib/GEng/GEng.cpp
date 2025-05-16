@@ -31,7 +31,7 @@
 	#include "View/Wnd/WndGui.cpp"
 #endif
 
-namespace EnG
+namespace GEng
 {
 
 Engine eng;

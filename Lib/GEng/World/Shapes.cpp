@@ -1,7 +1,7 @@
 #include "Shapes.h"
 #include "imgui.h"
 
-namespace EnG
+namespace GEng
 {
 
 ImDrawList* gDrawL;

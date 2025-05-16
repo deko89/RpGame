@@ -3,7 +3,7 @@
 
 #include "GEng/Base/Meta/Meta.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Тип.

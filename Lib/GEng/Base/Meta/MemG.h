@@ -3,7 +3,7 @@
 
 #include "Meta.h"
 
-namespace EnG
+namespace GEng
 {
 
 /// Глобальная видео память (uniform буфер в OpenGl).
