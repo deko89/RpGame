@@ -1,7 +1,7 @@
-#include "GEng/EnGreen.h"
+#include "GEng/GEng.h"
 
 #ifdef One_Translation_Unit
-	#include "GEng/EnGreen.cpp"
+	#include "GEng/GEng.cpp"
 #endif
 
 using namespace EnG;
