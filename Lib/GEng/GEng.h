@@ -1,5 +1,5 @@
-#ifndef EnGreen_H
-#define EnGreen_H
+#ifndef GEng_H
+#define GEng_H
 
 #include "GEng/Base/Meta/Shader.h"
 #include "GEng/Base/Context.h"
