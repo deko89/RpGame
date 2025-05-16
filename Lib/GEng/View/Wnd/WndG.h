@@ -2,8 +2,8 @@
 #define WndG_H
 
 #include "Std/MassivPtr.h"
-#include "EnGreen/View/Wnd/Wnd.h"
-#include "EnGreen/View/View.h"
+#include "GEng/View/Wnd/Wnd.h"
+#include "GEng/View/View.h"
 
 namespace EnG
 {

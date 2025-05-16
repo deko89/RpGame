@@ -1,9 +1,9 @@
 #ifndef View_H
 #define View_H
 
-#include "EnGreen/World/World.h"
-#include "EnGreen/View/Camera.h"
-#include "EnGreen/World/Shapes.h"
+#include "GEng/World/World.h"
+#include "GEng/View/Camera.h"
+#include "GEng/World/Shapes.h"
 
 namespace EnG
 {

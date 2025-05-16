@@ -1,10 +1,10 @@
 #ifndef EnGreen_H
 #define EnGreen_H
 
-#include "EnGreen/Base/Meta/Shader.h"
-#include "EnGreen/Base/Context.h"
-#include "EnGreen/View/Wnd/WndGui.h"
-#include "EnGreen/World/World.h"
+#include "GEng/Base/Meta/Shader.h"
+#include "GEng/Base/Context.h"
+#include "GEng/View/Wnd/WndGui.h"
+#include "GEng/World/World.h"
 
 namespace EnG
 {

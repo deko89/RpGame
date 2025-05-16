@@ -1,7 +1,7 @@
 #ifndef Shapes_H
 #define Shapes_H
 
-#include "EnGreen/Base/Meta/Meta.h"
+#include "GEng/Base/Meta/Meta.h"
 #include "Std/MassivPtr.h"
 #define M_Svg_OwnTypes
 namespace Svg {using namespace EnG;}

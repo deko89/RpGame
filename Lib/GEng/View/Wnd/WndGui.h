@@ -2,7 +2,7 @@
 #define WNDGUI_H
 
 #include "imgui.h"
-#include "EnGreen/View/Wnd/WndG.h"
+#include "GEng/View/Wnd/WndG.h"
 
 namespace EnG
 {
