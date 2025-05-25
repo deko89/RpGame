@@ -1,0 +1,3 @@
+[submodule "Lib/GEng"]
+	path = Lib/GEng
+	url = https://github.com/deko89/GEng.git
