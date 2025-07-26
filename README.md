@@ -21,7 +21,7 @@
 
 
 ## Сборка
-Инструкции для Linux и Windows в файле Doc/Build.txt.
+Инструкции в файле Doc/Build.txt.
 
 
 
