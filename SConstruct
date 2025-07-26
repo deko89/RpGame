@@ -12,7 +12,7 @@ dirsLibProj = [
 
 # Исполняемые библиотеки.
 libsProj = [
-    'libGEng.a',
+    'GEng',
 ]
 
 # Пути поиска заголовочных файлов.
@@ -42,5 +42,5 @@ envGEng.Program(
 	LIBPATH = dirsLibProj,
 
 	# Исполнямые библотеки.
-	LIBS = libsGEng + libsProj
+	LIBS = libsProj + libsGEng
 )
