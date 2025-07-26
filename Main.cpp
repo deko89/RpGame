@@ -1,8 +1,5 @@
 #include "GEng/GEng.h"
-
-#ifdef One_Translation_Unit
-	#include "GEng/GEng.cpp"
-#endif
+#include "GEng/World/Plant.h"
 
 using namespace GEng;
 
