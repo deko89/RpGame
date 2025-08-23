@@ -23,7 +23,7 @@ int main()
 	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
     static Texture tex;
-    tex.Load("SkyBox/clouds1_0.jpg");
+    tex.Load("Res/Birch.png", TexPar{.alpha = true});
 
 	ModelCylinder* mod;
 
@@ -42,10 +42,15 @@ int main()
 	mod->SetTexture(tex);
 	mod->Update();
 
+	// Plant
+	Model2d* modPlant = view->world->models.Make<Model2d>(shPosTexA);
+	modPlant->SetTexture(tex);
+	modPlant->SetScale( Scale(0, 1.268*7, 1.981*7) );
+
 	// Spline
 	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
-	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetTexture(tex);
+	//mod = view->world->models.Make<ModelStvol>(aVetv);
+	//mod->SetTexture(tex);
 
 	mod = view->world->models.Make<ModelStvol>(aVetv);
 	mod->SetAngle( Angle(0, -pi2, 0) );
