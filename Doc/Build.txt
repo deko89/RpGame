@@ -3,7 +3,7 @@ Cборка в Linux.
 В терминале перейти в каталог с исходниками, и выполнить:
 
 1. Установка зависимостей (в Linux Mint 22).
-sudo apt install scons clang libc++-dev libsdl2-dev libsdl2-image-dev
+sudo apt install scons clang libsdl2-dev libsdl2-image-dev
 
 2. Сборка.
 scons

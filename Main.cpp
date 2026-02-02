@@ -24,6 +24,7 @@ int main()
     // Создание текстуры.
     static Texture tex;
     tex.Load("Res/Birch.png", TexPar{.alpha = true});
+    //texNull.Load("Res/Img.png", TexPar{.alpha = true});
 
 	ModelCylinder* mod;
 
@@ -45,16 +46,21 @@ int main()
 	// Plant
 	Model2d* modPlant = view->world->models.Make<Model2d>(shPosTexA);
 	modPlant->SetTexture(tex);
-	modPlant->SetSize(1.268*7, 1.981*7);
+	modPlant->SetSize(1.268*5, 1.981*5);
+
+	modPlant = view->world->models.Make<Model2d>(shPosTexA);
+	modPlant->SetTexture(tex);
+	modPlant->SetSize(1.268*5, 1.981*5);
+	modPlant->SetPos( Pos(10, 0, 0) );
 
 	// Spline
 	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
 	//mod = view->world->models.Make<ModelStvol>(aVetv);
 	//mod->SetTexture(tex);
 
-	mod = view->world->models.Make<ModelStvol>(aVetv);
-	mod->SetAngle( Angle(0, -pi2, 0) );
-	mod->SetTexture(tex);
+	//mod = view->world->models.Make<ModelStvol>(aVetv);
+	//mod->SetAngle( Angle(0, -pi2, 0) );
+	//mod->SetTexture(tex);
 
 	eng.Execute();
 
