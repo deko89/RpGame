@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GEng/GEng.h"
 #include "GEng/World/Plant.h"
 
@@ -15,6 +16,33 @@ int main()
     view->cam.pos = {1, -2, 0};
     view->cam.angle = {0, 0, pi/2};
 	// Интерфейс.
+		// Меню.
+	Menu* menu = new Menu;
+	Menu::Fold& mFile = menu->Add( _("Файл") );
+	mFile.aItem.push_back( Menu::Item
+	{	.name = _("Открыть"),
+		.key = "Ctrl+O",
+		.action = []() {std::cout << "Открыть" << std::endl;}
+	} );
+	mFile.aItem.push_back( Menu::Item
+	{	.name = _("Сохранить"),
+		.key = "Ctrl+S"
+	} );
+	mFile.aItem.push_back( Menu::Separator() );
+	mFile.aItem.push_back( Menu::Item
+	{	.name = _("Выход")
+	} );
+	Menu::Fold& mEdit = menu->Add( _("Правка") );
+	mEdit.aItem.push_back( Menu::Item
+	{	.name = _("Добавить"),
+		.key = "Insert",
+	} );
+	mEdit.aItem.push_back( Menu::Item
+	{	.name = _("Удалить"),
+		.key = "Delete",
+	} );
+	view->aShape.Add(menu);
+		//
 	const Val s = 50;
 	const Color col = 0xff00aa00;
 	const Val w = 4.0f;
