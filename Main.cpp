@@ -51,7 +51,7 @@ int main()
 	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
     static Texture tex;
-    tex.Load("Res/Birch.png", TexPar{.alpha = true});
+    tex.Load("Plants/Birch/img.png", TexPar{.alpha = true});
     //texNull.Load("Res/Img.png", TexPar{.alpha = true});
 
 	ModelCylinder* mod;
