@@ -33,10 +33,7 @@ int main()
 	{	.name = _("Выход")
 	} );
 	Menu::Fold& mEdit = menu->Add( _("Правка") );
-	mEdit.aItem.push_back( Menu::Item
-	{	.name = _("Добавить"),
-		.key = "Insert",
-	} );
+	Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
 	mEdit.aItem.push_back( Menu::Item
 	{	.name = _("Удалить"),
 		.key = "Delete",
