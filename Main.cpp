@@ -50,8 +50,8 @@ int main()
 	view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
-    static Texture tex;
-    tex.Load("Plants/Birch/img.png", TexPar{.alpha = true});
+	eng.aClass.Load("Plants");
+    Texture& tex = ( (ClassModel2d*) eng.aClass[0] )->tex;
     //texNull.Load("Res/Img.png", TexPar{.alpha = true});
 
 	ModelCylinder* mod;
