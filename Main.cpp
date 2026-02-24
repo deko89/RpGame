@@ -11,7 +11,10 @@ int main()
 
     // Настройка.
     View* view = eng.CreateViewWorld();
+	Models& models = view->world->models;
 	view->world->sky = make_unique<SkyBox>("SkyBox/clouds1_%zu.jpg");
+	// Загрузка растений.
+	eng.aClass.Load("Plants");
     // Установка камеры.
     view->cam.pos = {1, -2, 0};
     view->cam.angle = {0, 0, pi/2};
@@ -34,6 +37,12 @@ int main()
 	} );
 	Menu::Fold& mEdit = menu->Add( _("Правка") );
 	Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
+	for (ClassModel* c : eng.aClass)
+	{	mAdd.aItem.push_back( Menu::Item
+		{	.name = c->Name(),
+			.action = [c, &models]() {c->Instance(models);}
+		} );
+	}
 	mEdit.aItem.push_back( Menu::Item
 	{	.name = _("Удалить"),
 		.key = "Delete",
@@ -47,7 +56,6 @@ int main()
 	view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
-	eng.aClass.Load("Plants");
     Texture& tex = ( (ClassModel2d*) eng.aClass[0] )->tex;
     //texNull.Load("Res/Img.png", TexPar{.alpha = true});
 
