@@ -76,16 +76,6 @@ int main()
 	mod->SetTexture(tex);
 	mod->Update();
 
-	// Plant
-	Model2d* modPlant = view->world->models.Make<Model2d>(shPosTexA);
-	modPlant->SetTexture(tex);
-	modPlant->SetSize(1.268*5, 1.981*5);
-
-	modPlant = view->world->models.Make<Model2d>(shPosTexA);
-	modPlant->SetTexture(tex);
-	modPlant->SetSize(1.268*5, 1.981*5);
-	modPlant->SetPos( Pos(10, 0, 0) );
-
 	// Spline
 	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
 	//mod = view->world->models.Make<ModelStvol>(aVetv);
