@@ -11,6 +11,8 @@ int main()
 
     // Настройка.
     View* view = eng.CreateViewWorld();
+	World& world = *view->world;
+	world.path = "world.xml";
 	Models& models = view->world->models;
 	view->world->sky = make_unique<SkyBox>("SkyBox/clouds1_%zu.jpg");
 	// Загрузка растений.
@@ -25,11 +27,12 @@ int main()
 	mFile.aItem.push_back( Menu::Item
 	{	.name = _("Открыть"),
 		.key = "Ctrl+O",
-		.action = []() {std::cout << "Открыть" << std::endl;}
+		.action = [&world]() {world.Load();}
 	} );
 	mFile.aItem.push_back( Menu::Item
 	{	.name = _("Сохранить"),
-		.key = "Ctrl+S"
+		.key = "Ctrl+S",
+		.action = [&world]() {world.Save();}
 	} );
 	mFile.aItem.push_back( Menu::Separator() );
 	mFile.aItem.push_back( Menu::Item
@@ -49,35 +52,28 @@ int main()
 	} );
 	view->aShape.Add(menu);
 		//
-	const Val s = 50;
-	const Color col = 0xff00aa00;
-	const Val w = 4.0f;
-	view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
-	view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
-	view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
+	// const Val s = 50;
+	// const Color col = 0xff00aa00;
+	// const Val w = 4.0f;
+	// view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
+	// view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
+	// view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
     // Создание текстуры.
-    Texture& tex = ( (ClassModel2d*) eng.aClass[0] )->tex;
+    //Texture& tex = ( (ClassModel2d*) eng.aClass[0] )->tex;
     //texNull.Load("Res/Img.png", TexPar{.alpha = true});
 
-	ModelCylinder* mod;
+	// ModelCylinder* mod;
 
-	mod = view->world->models.Make<ModelCylinder>();
-	mod->d = 0.001;
-	mod->len = 2;
-	mod->SetPos( Pos(-1, 0, 0) );
-	mod->SetTexture(tex);
-	mod->Update();
-
-	mod = view->world->models.Make<ModelCylinder>();
-	mod->d = 0.001;
-	mod->len = 2;
-	mod->SetPos( Pos(0, 0, 1) );
-	mod->SetAngle( Angle(0, pi2, 0) );
-	mod->SetTexture(tex);
-	mod->Update();
+	// mod = view->world->models.Make<ModelCylinder>();
+	// mod->d = 0.001;
+	// mod->len = 2;
+	// mod->SetPos( Pos(0, 0, 1) );
+	// mod->SetAngle( Angle(0, pi2, 0) );
+	// mod->SetTexture(tex);
+	// mod->Update();
 
 	// Spline
-	vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
+	//vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
 	//mod = view->world->models.Make<ModelStvol>(aVetv);
 	//mod->SetTexture(tex);
 
