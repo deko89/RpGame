@@ -77,19 +77,17 @@ int main()
 	// view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
 	// view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	// view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
+
     // Создание текстуры.
-    //Texture& tex = ( (ClassModel2d*) eng.aClass[0] )->tex;
-    //texNull.Load("Res/Img.png", TexPar{.alpha = true});
+    static Texture texGrass;
+    texGrass.Load("Res/Grass001.jpg");
 
-	// ModelCylinder* mod;
-
-	// mod = view->world->models.Make<ModelCylinder>();
-	// mod->d = 0.001;
-	// mod->len = 2;
-	// mod->SetPos( Pos(0, 0, 1) );
-	// mod->SetAngle( Angle(0, pi2, 0) );
-	// mod->SetTexture(tex);
-	// mod->Update();
+	ModelPlane* ground = models.Make<ModelPlane>();
+	ground->size = {10000, 10000};
+	ground->texN = {10000, 10000};
+	ground->SetTexture(texGrass);
+	ground->SetPos({-5000, -5000, 0});
+	ground->Update();
 
 	// Spline
 	//vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
