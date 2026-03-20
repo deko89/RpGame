@@ -68,7 +68,10 @@ int main()
 	} );
 	mFile.aItem.push_back( Menu::Separator() );
 	mFile.aItem.push_back( Menu::Item
-	{	.name = _("Выход")
+	{	.name = _("Выход"),
+		.action = []()
+		{	GetEng().Exit();
+		}
 	} );
 	Menu::Fold& mEdit = menu->Add( _("Правка") );
 	Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
