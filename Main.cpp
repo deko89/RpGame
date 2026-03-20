@@ -31,7 +31,7 @@ int main()
 	// Загрузка растений.
 	eng.aClass.Load("Plants");
     // Установка камеры.
-    view->cam.pos = {1, -2, 0};
+    view->cam.pos = {0, -3, 5};
     view->cam.angle = {0, 0, pi/2};
 	// Интерфейс.
 		// Меню.
