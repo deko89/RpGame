@@ -68,6 +68,9 @@ int main()
 	mEdit.aItem.push_back( Menu::Item
 	{	.name = _("Удалить"),
 		.key = "Delete",
+		.action = [&world]()
+		{	world.Delete();
+		}
 	} );
 	view->aShape.Add(menu);
 		//
