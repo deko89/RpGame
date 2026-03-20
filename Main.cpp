@@ -15,6 +15,19 @@ int main()
 	World& world = *view->world;
 	Models& models = view->world->models;
 	view->world->sky = make_unique<SkyBox>("SkyBox/clouds1_%zu.jpg");
+
+	// Создание текстуры.
+    static Texture texGrass;
+    texGrass.Load("Res/Grass001.jpg");
+
+	ModelPlane* ground = new ModelPlane;
+	ground->size = {10000, 10000};
+	ground->texN = {10000, 10000};
+	ground->SetTexture(texGrass);
+	ground->SetPos({-5000, -5000, 0});
+	ground->Update();
+	world.ground.reset(ground);
+
 	// Загрузка растений.
 	eng.aClass.Load("Plants");
     // Установка камеры.
@@ -80,17 +93,6 @@ int main()
 	// view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
 	// view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	// view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
-
-    // Создание текстуры.
-    static Texture texGrass;
-    texGrass.Load("Res/Grass001.jpg");
-
-	ModelPlane* ground = models.Make<ModelPlane>();
-	ground->size = {10000, 10000};
-	ground->texN = {10000, 10000};
-	ground->SetTexture(texGrass);
-	ground->SetPos({-5000, -5000, 0});
-	ground->Update();
 
 	// Spline
 	//vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
