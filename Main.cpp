@@ -1,7 +1,6 @@
 #include <iostream>
 #include "GEng/GEng.h"
 #include "GEng/World/Plant.h"
-#include "GEng/View/Wnd/Dialog/DlgFile.h"
 
 using namespace GEng;
 
@@ -40,31 +39,16 @@ int main()
 	mFile.aItem.push_back( Menu::Item
 	{	.name = _("Открыть"),
 		.key = "Ctrl+O",
-		.action = [&world]()
-		{	DlgFile d{.path = world.path, .filter = "xml"};
-			if ( d.Open() )
-			{	world.path = d.path;
-				world.Load();
-			}
-		}
+		.action = []() {GetEng().proj.Load();},
 	} );
-	auto SaveAs = [&world]()
-	{	DlgFile d{.path = world.path, .filter = "xml"};
-		if ( d.Save() )
-		{	world.path = d.path;
-			world.Save();
-		}
-	};
 	mFile.aItem.push_back( Menu::Item
 	{	.name = _("Сохранить"),
 		.key = "Ctrl+S",
-		.action = [&world, SaveAs]()
-		{	if ( world.path.empty() ) SaveAs(); else world.Save();
-		}
+		.action = []() {GetEng().proj.Save();},
 	} );
 	mFile.aItem.push_back( Menu::Item
 	{	.name = _("Сохранить как"),
-		.action = SaveAs
+		.action = []() {GetEng().proj.SaveAs();},
 	} );
 	mFile.aItem.push_back( Menu::Separator() );
 	mFile.aItem.push_back( Menu::Item
