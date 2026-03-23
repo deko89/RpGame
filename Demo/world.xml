@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<wnd>
+	<view>
+		<camera>
+			<pos x="0" y="-3" z="5" />
+			<angle x="-0.0549999736" y="0" z="1.11079681" />
+		</camera>
+	</view>
+</wnd>
 <world>
 	<models>
 		<Akacia>
