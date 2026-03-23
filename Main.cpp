@@ -17,7 +17,9 @@ int main()
 
 	// Создание текстуры.
     static Texture texGrass;
-    texGrass.Load("Res/Grass001.jpg");
+    texGrass.Load("Res/Grass001.jpg", TexPar{
+		.wX = TexWrap::Mirror,
+		.wY = TexWrap::Mirror,});
 
 	ModelPlane* ground = new ModelPlane;
 	ground->size = {10000, 10000};
