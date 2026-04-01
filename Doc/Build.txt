@@ -18,6 +18,13 @@ scons -c
 
 
 
+Сборка для Windows из Linux.
+Смотри: Lib/GEng/Doc/Build.txt
+
+
+
+
+
 Cборка в Windows.
 
 1. Скачать и установить msys2:

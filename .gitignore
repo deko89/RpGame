@@ -2,6 +2,7 @@
 *.ini
 *.o
 *.tmp
+*.exe
 
 # Имена.
 RpGame

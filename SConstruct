@@ -3,7 +3,7 @@ SConscript([
 	'Lib/GEng/SConscript',
 ])
 
-Import('envGEng', 'dirsIncLibGEng', 'libsGEng')
+Import('envGEng', 'dirsIncLibGEng', 'dirsLibGEng', 'libsGEng')
 
 # Пути поиска исполняемых библиотек.
 dirsLibProj = [
@@ -39,7 +39,7 @@ envGEng.Program(
 	CPPPATH = dirsIncLibGEng + dirsIncProj,
 
 	# Пути поиска исполняемых библиотек.
-	LIBPATH = dirsLibProj,
+	LIBPATH = dirsLibGEng + dirsLibProj,
 
 	# Исполнямые библотеки.
 	LIBS = libsProj + libsGEng
