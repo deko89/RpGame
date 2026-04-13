@@ -23,7 +23,7 @@ int main()
 
 	ModelPlane* ground = new ModelPlane;
 	ground->size = {10000, 10000};
-	ground->texN = {10000, 10000};
+	ground->texN = {2000, 2000};
 	ground->SetTexture(texGrass);
 	ground->SetPos({-5000, -5000, 0});
 	ground->Update();
