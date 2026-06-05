@@ -68,6 +68,10 @@ int main()
 		} );
 	}
 	mEdit.aItem.push_back( Menu::Item
+	{	.name = _("Добавить линию"),
+		.action = []() {GetEng().proj.AddGroupLine();}
+	} );
+	mEdit.aItem.push_back( Menu::Item
 	{	.name = _("Удалить"),
 		.key = "Delete",
 		.action = [&world]()
