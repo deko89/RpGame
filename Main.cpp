@@ -60,13 +60,11 @@ int main()
 		}
 	} );
 	Menu::Fold& mEdit = menu->Add( _("Правка") );
-	Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
-	for (ClassModel* c : eng.aClass)
-	{	mAdd.aItem.push_back( Menu::Item
-		{	.name = c->Name(),
-			.action = [c, &models]() {c->Instance(models);}
-		} );
-	}
+	//Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
+	mEdit.aItem.push_back( Menu::Item
+	{	.name = _("Добавить растение"),
+		.action = []() {GetEng().proj.AddModel();}
+	} );
 	mEdit.aItem.push_back( Menu::Item
 	{	.name = _("Добавить линию"),
 		.action = []() {GetEng().proj.AddGroupLine();}
