@@ -4,6 +4,10 @@
 
 using namespace GEng;
 
+#ifdef M_TreeGen
+	#include "GEng/World/TreeGen.h"
+#endif
+
 int main()
 {
 	if (eng.Init() == false)
@@ -29,54 +33,60 @@ int main()
 	ground->Update();
 	world.ground.reset(ground);
 
-	// Загрузка растений.
-	eng.aClass.Load("Plants");
-    // Установка камеры.
-    view->cam.pos = {0, -3, 5};
-    view->cam.angle = {0, 0, pi/2};
-	// Интерфейс.
-		// Меню.
-	Menu* menu = new Menu;
-	Menu::Fold& mFile = menu->Add( _("Файл") );
-	mFile.aItem.push_back( Menu::Item
-	{	.name = _("Открыть"),
-		.key = "Ctrl+O",
-		.action = []() {GetEng().proj.Load();},
-	} );
-	mFile.aItem.push_back( Menu::Item
-	{	.name = _("Сохранить"),
-		.key = "Ctrl+S",
-		.action = []() {GetEng().proj.Save();},
-	} );
-	mFile.aItem.push_back( Menu::Item
-	{	.name = _("Сохранить как"),
-		.action = []() {GetEng().proj.SaveAs();},
-	} );
-	mFile.aItem.push_back( Menu::Separator() );
-	mFile.aItem.push_back( Menu::Item
-	{	.name = _("Выход"),
-		.action = []()
-		{	GetEng().Exit();
-		}
-	} );
-	Menu::Fold& mEdit = menu->Add( _("Правка") );
-	//Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
-	mEdit.aItem.push_back( Menu::Item
-	{	.name = _("Добавить растение"),
-		.action = []() {GetEng().proj.AddModel();}
-	} );
-	mEdit.aItem.push_back( Menu::Item
-	{	.name = _("Добавить линию"),
-		.action = []() {GetEng().proj.AddGroupLine();}
-	} );
-	mEdit.aItem.push_back( Menu::Item
-	{	.name = _("Удалить"),
-		.key = "Delete",
-		.action = [&world]()
-		{	world.Delete();
-		}
-	} );
+	// Установка камеры.
+	view->cam.pos = {0, -3, 5};
+	view->cam.angle = {0, 0, pi/2};
+
+	#ifdef M_TreeGen
+		Menu* menu = TreeGen::CreateMenu();
+	#else
+		// Загрузка растений.
+		eng.aClass.Load("Plants");
+		// Интерфейс.
+			// Меню.
+		Menu* menu = new Menu;
+		Menu::Fold& mFile = menu->Add( _("Файл") );
+		mFile.aItem.push_back( Menu::Item
+		{	.name = _("Открыть"),
+			.key = "Ctrl+O",
+			.action = []() {GetEng().proj.Load();},
+		} );
+		mFile.aItem.push_back( Menu::Item
+		{	.name = _("Сохранить"),
+			.key = "Ctrl+S",
+			.action = []() {GetEng().proj.Save();},
+		} );
+		mFile.aItem.push_back( Menu::Item
+		{	.name = _("Сохранить как"),
+			.action = []() {GetEng().proj.SaveAs();},
+		} );
+		mFile.aItem.push_back( Menu::Separator() );
+		mFile.aItem.push_back( Menu::Item
+		{	.name = _("Выход"),
+			.action = []()
+			{	GetEng().Exit();
+			}
+		} );
+		Menu::Fold& mEdit = menu->Add( _("Правка") );
+		//Menu::Fold& mAdd = mEdit.AddFold(_("Добавить"));
+		mEdit.aItem.push_back( Menu::Item
+		{	.name = _("Добавить растение"),
+			.action = []() {GetEng().proj.AddModel();}
+		} );
+		mEdit.aItem.push_back( Menu::Item
+		{	.name = _("Добавить линию"),
+			.action = []() {GetEng().proj.AddGroupLine();}
+		} );
+		mEdit.aItem.push_back( Menu::Item
+		{	.name = _("Удалить"),
+			.key = "Delete",
+			.action = [&world]()
+			{	world.Delete();
+			}
+		} );
+	#endif
 	view->aShape.Add(menu);
+
 		//
 	// const Val s = 50;
 	// const Color col = 0xff00aa00;
