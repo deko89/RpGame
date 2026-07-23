@@ -16,7 +16,6 @@ int main()
     // Настройка.
     View* view = eng.CreateViewWorld();
 	World& world = *view->world;
-	Models& models = view->world->models;
 	view->world->sky = make_unique<SkyBox>("SkyBox/clouds1_%zu.jpg");
 
 	// Создание текстуры.
@@ -94,15 +93,6 @@ int main()
 	// view->aShape.Add( new Line({0, 0},	 {s*2, 0},   w, col) );
 	// view->aShape.Add( new Line({s, 0},	 {s,   s*7}, w, col) );
 	// view->aShape.Add( new Line({s, s*7}, {s*2, s*7}, w, col) );
-
-	// Spline
-	//vector<Pos> aVetv { {0,0,0}, {1,1,1}, {2,0.0,0}, {3,0.0,0}, {4,0.0,0}, {5,0.0,0} };
-	//mod = view->world->models.Make<ModelStvol>(aVetv);
-	//mod->SetTexture(tex);
-
-	//mod = view->world->models.Make<ModelStvol>(aVetv);
-	//mod->SetAngle( Angle(0, -pi2, 0) );
-	//mod->SetTexture(tex);
 
 	eng.Execute();
 
