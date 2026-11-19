@@ -10,6 +10,9 @@ using namespace GEng;
 
 int main()
 {
+    std::cerr.setf(std::ios::fixed, std::ios::floatfield);
+    std::cerr.precision(10);
+
 	if (eng.Init() == false)
 		return -1;
 
